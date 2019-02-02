@@ -1,0 +1,70 @@
+<html>
+  <head>
+    <link rel="stylesheet" href= "{{ url_for('static', filename = 'signin.css') }}">
+    <link rel = "stylesheet" href = "{{ url_for('static', filename = 'bootstrap.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename = 'main.js') }}"></script>
+  </head>
+    <body>
+      <h1 align = "center" class="h1">Post Job</h1>
+      <form class="form-signin" method = "POST" action = "">
+        <h2 align = "left" class = "h2">
+        {% for row in results %}
+          {{row[0]}}
+          {{row[1]}}
+        {% endfor %}
+        </h2>
+        <label for="inputTitle" class = "">Title:</label>
+        <input type="text" id="inputTitle" name =  "inputTitle" class="form-control" placeholder="" required autofocus>
+        <br>
+        <label for="description" class = "">Description:</label>
+        <textarea rows="8" cols="40" id = "description" name="description" type = "text" class = "form-control"></textarea>
+        <br>
+        <label for="hours" class = "">Hours:</label>
+        <input type="number" name="hours" id = "hours" class = "form-control" min = "0" max = "10">
+        <br>
+        <label for="pay" class = "">Pay:</label>
+        <input type="number" name="pay" id = "pay" class = "form-control" min = "0" max = "500">
+        <br>
+        <label for="catagory" class = "">Catagory:</label>
+        <select class = "form-control" name = "catagory" id = "catagory">
+            <option value="home" class = "form-control">Home</option>
+            <option value="garden" class = "form-control">Gardening</option>
+            <option value="babysitting" class = "form-control">Babysitting</option>
+            <option value="computing" class = "form-control">Computing</option>
+            <option value="partiesAndevents" class = "form-control">Parties and Events</option>
+        </select>
+        <br>
+        <label for="resourcesProvided" class = "">Resources Provided:</label><br>
+        <textarea rows="5" id = "resourcesProvided" cols="40" name="resourcesProvided" type = "text" class = "form-control"></textarea>
+        <br>
+        <label for="resourcesRequired" class = "">Resources Required:</label><br>
+        <textarea rows="5" id = "resourcesRequired" cols="40" name="resourcesRequired" type = "text" class = "form-control"></textarea>
+        <br>
+        <label for="differentContacts" >Use different contact details?</label><br>
+        <input type="checkbox" name = "differentContacts" id = "differentContacts" onclick="myFunction()">
+
+        <div id = "fields" style = "display:none">
+            <label for="email">Email:</label>
+            <input type="email" id="email" class="form-control" placeholder="" autofocus>
+            <label for="phone">Phone Number:</label>
+            <input type="number" id="phone" class="form-control" placeholder="" autofocus>
+        </div>
+        <br><br>
+
+        <label for="differentAddress" >Use different address?</label><br>
+        <input type="checkbox" name = "differentAddress" id = "differentAddress" onclick = "myFunction2()">
+
+        <div id = "address" style = "display:none">
+            <label for="street" class = "">Street:</label>
+            <input type="text" name = "street" id="street" class="form-control" autofocus>
+            <label for="town" class = "">Town:</label>
+            <input type="text" id="town" name = "phone" class="form-control" autofocus>
+            <label for="county" class = "">County:</label>
+            <input type="text" id="county" name = "county" class="form-control" autofocus>
+        </div>
+      <br><br>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Post Job</button>
+        <p class="mt-5 mb-3 text-muted">&copy; 2019</p>
+      </form>
+    </body>
+<html>
