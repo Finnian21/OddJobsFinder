@@ -5,10 +5,33 @@
   text-align: left;
 }
 
+.two-col 
+{
+  overflow: hidden;
+}
+
+.two-col .col1,
+.two-col .col2 {
+  width:  154px;
+}
+
+.two-col .col1 {
+  float: left;
+  padding-right: 0px
+}
+
+.two-col .col2 {
+  float: right;
+}
+
+.two-col label {
+  display: block;
+}
+
 .form-signin {
   width: 100%;
   max-width: 330px;
-  padding: 15px;
+  padding-right: 15px;
   margin: auto;
 }
 .form-signin .checkbox {
@@ -34,5 +57,3 @@
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
-
-

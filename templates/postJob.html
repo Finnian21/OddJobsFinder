@@ -5,62 +5,71 @@
     <script type="text/javascript" src="{{ url_for('static', filename = 'main.js') }}"></script>
   </head>
     <body>
-      <h1 align = "center" class="h1">Post Job</h1>
-      <form class="form-signin" method = "POST" action = "">
-        <h2 align = "left" class = "h2">
+      <h1  class="h1">Post Job</h1>
+      <form class="form-signin" method = "POST" action = "" class = "form-control"><br>
+        <h2 class = "h2">
         {% for row in results %}
           {{row[0]}}
           {{row[1]}}
         {% endfor %}
         </h2>
-        <label for="inputTitle" class = "">Title:</label>
-        <input type="text" id="inputTitle" name =  "inputTitle" class="form-control" placeholder="" required autofocus>
+        <div class="two-col">
+          <div class="col1">
+            <label for="inputTitle">Title:</label>
+            <input type="text" id="inputTitle" name =  "inputTitle" class="form-control" required autofocus>
+            <br>
+            <label for="pay" class = "">Pay(Euro):</label>
+              <input type="number" name="pay" id = "pay" class = "form-control" min = "1" max = "500"><br>
+              <label for="resourcesProvided" class = "">Resources Provided:</label>
+              <textarea rows="5" id = "resourcesProvided" cols="40" name="resourcesProvided" type = "text" class = "form-control"></textarea>
+          </div>
+          <div class="col2">
+            <label for="catagory" >Catagory:</label>
+            <select class = "form-control" name = "catagory" id = "catagory">
+                <option value="home" class = "form-control">Home</option>
+                <option value="garden" class = "form-control">Gardening</option>
+                <option value="babysitting" class = "form-control">Babysitting</option>
+                <option value="computing" class = "form-control">Computing</option>
+                <option value="partiesAndevents" class = "form-control">Parties and Events</option>
+            </select>
+            <br>
+            <label for="hours">Hours:</label>
+            <input type="number" name="hours" id = "hours" class = "form-control" min = "1" max = "10"><br>
+            <label for="resourcesRequired" class = "">Resources Required:</label>
+            <textarea rows="5" id = "resourcesRequired" cols="40" name="resourcesRequired" type = "text" class = "form-control"></textarea>
+          </div>
+        </div>
         <br>
-        <label for="description" class = "">Description:</label>
+        <label for="description">Description:</label>
         <textarea rows="8" cols="40" id = "description" name="description" type = "text" class = "form-control"></textarea>
-        <br>
-        <label for="hours" class = "">Hours:</label>
-        <input type="number" name="hours" id = "hours" class = "form-control" min = "0" max = "10">
-        <br>
-        <label for="pay" class = "">Pay:</label>
-        <input type="number" name="pay" id = "pay" class = "form-control" min = "0" max = "500">
-        <br>
-        <label for="catagory" class = "">Catagory:</label>
-        <select class = "form-control" name = "catagory" id = "catagory">
-            <option value="home" class = "form-control">Home</option>
-            <option value="garden" class = "form-control">Gardening</option>
-            <option value="babysitting" class = "form-control">Babysitting</option>
-            <option value="computing" class = "form-control">Computing</option>
-            <option value="partiesAndevents" class = "form-control">Parties and Events</option>
-        </select>
-        <br>
-        <label for="resourcesProvided" class = "">Resources Provided:</label><br>
-        <textarea rows="5" id = "resourcesProvided" cols="40" name="resourcesProvided" type = "text" class = "form-control"></textarea>
-        <br>
-        <label for="resourcesRequired" class = "">Resources Required:</label><br>
-        <textarea rows="5" id = "resourcesRequired" cols="40" name="resourcesRequired" type = "text" class = "form-control"></textarea>
         <br>
         <label for="differentContacts" >Use different contact details?</label><br>
         <input type="checkbox" name = "differentContacts" id = "differentContacts" onclick="myFunction()">
-
         <div id = "fields" style = "display:none">
-            <label for="email">Email:</label>
-            <input type="email" id="email" class="form-control" placeholder="" autofocus>
-            <label for="phone">Phone Number:</label>
-            <input type="number" id="phone" class="form-control" placeholder="" autofocus>
+              <label for="email">Email:</label>
+              <input type="email"  name = "email" id="email" class="form-control" autofocus>
+              <label for="phone">Phone Number:</label>
+              <input type="number" name = "phone" id="phone" class="form-control" autofocus>
         </div>
         <br><br>
-
         <label for="differentAddress" >Use different address?</label><br>
         <input type="checkbox" name = "differentAddress" id = "differentAddress" onclick = "myFunction2()">
-
         <div id = "address" style = "display:none">
-            <label for="street" class = "">Street:</label>
+            <label for="street">Street:</label>
             <input type="text" name = "street" id="street" class="form-control" autofocus>
-            <label for="town" class = "">Town:</label>
-            <input type="text" id="town" name = "phone" class="form-control" autofocus>
-            <label for="county" class = "">County:</label>
-            <input type="text" id="county" name = "county" class="form-control" autofocus>
+            <label for="town">Town:</label>
+            <input type="text" id="town" name = "town" class="form-control" autofocus>
+            <label for="county">County:</label>
+            <select class = "form-control" name = "county" id = "catagory">
+                <option value="antirm" class = "form-control">Antrim</option>
+                <option value="Armagh" class = "form-control">Armagh</option>
+                <option value="carlow" class = "form-control">Carlow</option>
+                <option value="cavan" class = "form-control">Cavan</option>
+                <option value="clare" class = "form-control">Clare</option>
+                <option value="cork" class = "form-control">Cork</option>
+                <option value="Derry" class = "form-control">Derry</option>
+                <option value="Donegal" class = "form-control">Donegal</option>
+            </select>
         </div>
       <br><br>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Post Job</button>
