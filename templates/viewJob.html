@@ -1,47 +1,43 @@
-<html>
-  <head>
-    <link rel="stylesheet" href= "{{ url_for('static', filename = 'album.css') }}">
-    <link rel = "stylesheet" href = "{{ url_for('static', filename = 'bootstrap.css') }}">
-  </head>
-  <main role="main">
-  <h1  class="h1">View Jobs</h1>
-  <a href="/post_job">Post Job</a>
-  <div class="album py-5 bg-light">
-    <div class="container">
-      <div class="row">
-      {%for row in results2%}
-        <div class="col-md-4">
-          <div class="card mb-4 shadow-sm">
-          <img src ="{{ url_for('static', filename = 'image.png') }}" width="100%" height="200">
-            <div class="card-body">
-              <p class="card-text">
-                <b>Title:</b> {{row[1]}}<br>
-                <b>User Name:</b> {{row[15]}} {{row[16]}}<br>
-                <b>User ID:</b> {{row[2]}}<br>
-                <b>Pay(€):</b> {{row[5]}}<br>
-                <b>Duration:</b> {{row[4]}}<br>
-                <b>Catagory:</b> {{row[6]}}<br>
-              </p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
+{% extends 'base.html' %}
+{% block content %}
+{% include "nav.html" %}
+{% block content2 %}
+  <title>View Jobs</title>
+    <main role="main">
+    <br><br>
+    <div class="album py-5 bg-light">
+    <h2  class="h2">View Jobs</h2><br>
+      <div class="container">
+        <div class="row">
+        {%for row in results2%}
+          <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+            <img src ="{{ url_for('static', filename = 'image.png') }}" width="100%" height="200">
+              <div class="card-body">
+                <p class="card-text">
+                  <b>Title:</b> {{row[1]}}<br>
+                  <b>User Name:</b> {{row[16]}} {{row[17]}}<br>
+                  <b>Pay(€):</b> {{row[5]}}<br>
+                  <b>Duration:</b> {{row[4]}}<br>
+                  <b>Catagory:</b> {{row[6]}}<br>
+                </p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                  </div>
                 <small class="text-muted">9 mins</small>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        {% endfor %}
+          {% endfor %}
+          </div>
         </div>
       </div>
-    </div>
-  </main>
-  <footer class="text-muted">
-    <div class="container">
-      <p class="float-right">
-        <a href="#">Back to top</a><br>
-      </p>
-    </div>
-  </footer>
-</html>
+    </main>
+    <footer>
+      <a href="#">Back to top</a><br>
+    </footer>
+{% endblock %}
+{% endblock %}

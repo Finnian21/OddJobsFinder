@@ -1,11 +1,12 @@
 from flask import Flask, render_template, url_for, escape, request, redirect
+import datetime
 import pymysql
 
 db = pymysql.connect(host='localhost', user='root', passwd='', db = 'casualJobs3')
 app = Flask(__name__)
 cursor = db.cursor()
 
-user_id = "2"
+user_id = "3"
 
 @app.route('/post_job', methods = ['GET', 'POST'])
 def post_job():
@@ -58,8 +59,10 @@ def post_job():
                 street = row[0]
                 town = row[1]
                 county = row[2]
+        
+        time_stamp_posted = datetime.datetime.now()
 
-        cursor.execute("INSERT INTO jobs (title, UserID, description, duration, pay, catagory, resourcesProvided, resourcesRequired, email, phone, street, town, county) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (title, user_id, description, duration, pay, catagory, resources_provided, resources_required, email, phone, street, town, county))
+        cursor.execute("INSERT INTO jobs (title, UserID, description, duration, pay, catagory, timeStampPosted, resourcesProvided, resourcesRequired, email, phone, street, town, county) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (title, user_id, description, duration, pay, catagory, time_stamp_posted, resources_provided, resources_required, email, phone, street, town, county))
         db.commit()
 
         cursor.execute("UPDATE users SET JobsPosted = JobsPosted + 1 WHERE userID = %s", (user_id))
@@ -69,14 +72,22 @@ def post_job():
 
     return render_template('postJob.html', results=results)
 
-@app.route('/view_job', methods = ['GET', 'POST'])
+@app.route('/view_jobs', methods = ['GET', 'POST'])
 def view_job():
         rowCount = '9'
-
-        sql2 = "SELECT * FROM jobs INNER JOIN users ON jobs.UserID=users.userId WHERE JobID <=" + rowCount
+        sql2 = "SELECT * FROM jobs INNER JOIN users ON jobs.UserID=users.userId ORDER BY timeStampPosted DESC"
         cursor.execute(sql2)
         results2 = cursor.fetchall()
+        selected_animal = request.args.get('type')
         return render_template('viewJob.html', results2 = results2)
+
+@app.route('/home', methods = ['GET', 'POST'])
+def home():
+        return render_template('home.html')
+
+@app.route('/login', methods = ['GET', 'POST'])
+def login():
+        return render_template('login.html')
 
 if __name__ == '__main__':
    app.run(debug = True)
