@@ -186,3 +186,8 @@ footer p {
 .dropdown:hover .dropbtn {
   background-color: #3e8e41;
 }
+
+.error
+{
+  color: rgb(218, 17, 17);
+}
