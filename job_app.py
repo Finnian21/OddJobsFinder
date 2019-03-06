@@ -30,15 +30,16 @@ def login():
 @app.route('/post_job', methods = ['GET', 'POST'])
 def post_job():
     
-    if 'username' in session:
-        username = session['username']
-    
+    if 'username' not in session:
+        return redirect("/", code=302)
+
+    username = session['username']
     the_username = username.split()
-    
+
     sql = "SELECT * FROM users where firstName ='" + the_username[0]  + "' and lastName='" + the_username[1] + "'"
     cursor.execute(sql)
     results = cursor.fetchall()
-    
+
     user_Id = ''
 
     for row in results:
@@ -80,7 +81,7 @@ def post_job():
             street = request.form["street"]
             town = request.form["town"]
             county = request.form["county"] 
- 
+
         else:
             sql2 = "SELECT street, town, county FROM users where userId =" + the_user_Id
             cursor.execute(sql2)
@@ -90,7 +91,7 @@ def post_job():
                 street = row[0]
                 town = row[1]
                 county = row[2]
-        
+
         time_stamp_posted = datetime.datetime.now()
 
         cursor.execute("INSERT INTO jobs (title, UserID, description, duration, pay, catagory, timeStampPosted, resourcesProvided, resourcesRequired, email, phone, street, town, county) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (title, the_user_Id, description, duration, pay, catagory, time_stamp_posted, resources_provided, resources_required, email, phone, street, town, county))
@@ -105,31 +106,51 @@ def post_job():
 
 @app.route('/view_jobs', methods = ['GET', 'POST'])
 def view_jobs():
-        if 'username' in session:
-            username = session['username']
+    if 'username' not in session:
+        return redirect("/", code=302)
     
-        the_username = username.split()
+    username = session['username']
+
+    the_username = username.split()
+
+    sql = "SELECT * FROM users where firstName ='" + the_username[0]  + "' and lastName='" + the_username[1] + "'"
+    cursor.execute(sql)
+    results = cursor.fetchall()
+
+    for row in results:
+        the_user_Id = row[0]
+
+    sql2 = "SELECT * FROM jobs INNER JOIN users ON jobs.UserID=users.userId ORDER BY timeStampPosted DESC"
+    cursor.execute(sql2)
+    results2 = cursor.fetchall()
+
+    for row in results2:
+        session['job_id'] = row[2]
+    return render_template('viewJobs.html', results2 = results2, the_user_Id = the_user_Id)
+
+@app.route('/view_job', methods = ['GET', 'POST'])
+def view_job():
+    if 'username' not in session:
+        return redirect("/", code=302)
     
-        sql = "SELECT * FROM users where firstName ='" + the_username[0]  + "' and lastName='" + the_username[1] + "'"
+    if request.method == 'POST':
+        job_id = request.form['view_button']
+    
+        sql = "SELECT * FROM jobs INNER JOIN users ON jobs.UserID=users.userId WHERE jobId = " + job_id
         cursor.execute(sql)
         results = cursor.fetchall()
-    
-        user_Id = ''
 
-        for row in results:
-            the_user_Id = row[0]
-
-        sql2 = "SELECT * FROM jobs INNER JOIN users ON jobs.UserID=users.userId ORDER BY timeStampPosted DESC"
-        cursor.execute(sql2)
-        results2 = cursor.fetchall()
-
-        return render_template('viewJob.html', results2 = results2, the_user_Id = the_user_Id)
+        return render_template('viewJob.html' , results = results)
+    return render_template('viewJob.html')
 
 @app.route('/home', methods = ['GET', 'POST'])
 def home():
-        if 'username' in session:
-            username = session['username']
-        return render_template('home.html', username = username)
+    if 'username' not in session:
+        return redirect("/", code=302)
+        
+    username = session['username']
+        
+    return render_template('home.html', username = username)
 
 @app.route('/log_out', methods = ['GET', 'POST'])
 def log_out():
