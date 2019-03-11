@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+{% include "nav.html" %}
    <h2  class="h2">Login</h2>
       <form class="form-signin" method = "POST" action = "" class = "form-control"><br>
         {% if error %}
@@ -21,4 +22,6 @@
         <a href="#">Register</a><br>
         <p class="mt-5 mb-3 text-muted">&copy; 2019</p>
       </form>
+{% block content2 %}
+{% endblock %}
 {% endblock %}

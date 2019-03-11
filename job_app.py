@@ -6,7 +6,7 @@ db = pymysql.connect(host='localhost', user='root', passwd='', db = 'casualJobs3
 app = Flask(__name__)
 cursor = db.cursor()
 
-@app.route('/', methods = ['GET', 'POST'])
+@app.route('/login', methods = ['GET', 'POST'])
 def login():
     error = None
 
@@ -23,7 +23,7 @@ def login():
             error = 'Invalid Credentials. Please try again.'
         else:
             session['username'] = request.form['firstName'] + " " + request.form['lastName']
-            return redirect("/home", code=302)
+            return redirect("/", code=302)
 
     return render_template('login.html', error=error)
 
@@ -31,7 +31,7 @@ def login():
 def post_job():
     
     if 'username' not in session:
-        return redirect("/", code=302)
+        return redirect("/login", code=302)
 
     username = session['username']
     the_username = username.split()
@@ -106,32 +106,31 @@ def post_job():
 
 @app.route('/view_jobs', methods = ['GET', 'POST'])
 def view_jobs():
-    if 'username' not in session:
-        return redirect("/", code=302)
-    
-    username = session['username']
+    if 'username' in session: 
+        username = session['username']
+        the_username = username.split()
 
-    the_username = username.split()
+        sql = "SELECT * FROM users where firstName ='" + the_username[0]  + "' and lastName='" + the_username[1] + "'"
+        cursor.execute(sql)
+        results = cursor.fetchall()
 
-    sql = "SELECT * FROM users where firstName ='" + the_username[0]  + "' and lastName='" + the_username[1] + "'"
-    cursor.execute(sql)
-    results = cursor.fetchall()
-
-    for row in results:
-        the_user_Id = row[0]
+        for row in results:
+            the_user_Id = row[0]
+    else:
+        username = ''
+        the_user_Id = 0
 
     sql2 = "SELECT * FROM jobs INNER JOIN users ON jobs.UserID=users.userId ORDER BY timeStampPosted DESC"
     cursor.execute(sql2)
     results2 = cursor.fetchall()
-
+    current_time = datetime.datetime.now()
     for row in results2:
         session['job_id'] = row[2]
-    return render_template('viewJobs.html', results2 = results2, the_user_Id = the_user_Id)
+        elapsed_time = current_time - row[7]
+    return render_template('viewJobs.html', results2 = results2, the_user_Id = the_user_Id, current_time = current_time)
 
 @app.route('/view_job', methods = ['GET', 'POST'])
 def view_job():
-    if 'username' not in session:
-        return redirect("/", code=302)
     
     if request.method == 'POST':
         job_id = request.form['view_button']
@@ -143,12 +142,12 @@ def view_job():
         return render_template('viewJob.html' , results = results)
     return render_template('viewJob.html')
 
-@app.route('/home', methods = ['GET', 'POST'])
+@app.route('/', methods = ['GET', 'POST'])
 def home():
-    if 'username' not in session:
-        return redirect("/", code=302)
-        
-    username = session['username']
+    if 'username' in session: 
+        username = session['username']
+    else:
+        username = ''
         
     return render_template('home.html', username = username)
 
