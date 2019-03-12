@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
-{% include "nav.html" %}
+{%if user_type == "Job Poster"%}
+  {% include "nav.html" %}
+{%else%}
+  {% include "nav2.html" %}
+{%endif%}
 {% block content2 %}
 <h2 class = "h2">Welcome {{username}}</h2><br>
 <div class = "a">

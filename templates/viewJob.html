@@ -1,12 +1,17 @@
 {% extends 'base.html' %}
 {% block content %}
-{% include "nav.html" %}
+{%if user_type == "Job Poster"%}
+  {% include "nav.html" %}
+{%else%}
+  {% include "nav2.html" %}
+{%endif%}
+{% block content2 %}
 {%for row in results%}
 <div class="album py-5 bg-light">
     <div class = "a">
         <h3>Job Details</h3>
         <b>Title:</b> {{row[1]}}<br>
-        <b>User Name:</b> {{row[16]}} {{row[17]}}<br>
+        <b>User Name:</b> {{row[18]}} {{row[19]}}<br>
         <b>Pay(€):</b> {{row[5]}}<br>
         <b>Duration:</b> {{row[4]}}<br>
         <b>Catagory:</b> {{row[6]}}<br>
@@ -20,9 +25,14 @@
         <br>
         <h3>Address</h3>
         {{row[12]}}, {{row[13]}}, Co. {{row[14]}}<br>
+        <br>
+        {%if user_type == "Job Searcher"%}
+            <form method = "POST" action = "/take_job">
+                <button class="btn btn-sm btn-outline-secondary" type="submit">Take Job</button>
+            </form>
+        {%endif%}
     </div>
 </div>
 {%endfor%}
-{% block content2 %}
 {% endblock %}
 {% endblock %}

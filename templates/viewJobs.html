@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
-{% include "nav.html" %}
+{%if user_type == "Job Poster"%}
+  {% include "nav.html" %}
+{%else%}
+  {% include "nav2.html" %}
+{%endif%}
 {% block content2 %}
   <title>View Jobs</title>
     <main role="main">
@@ -16,7 +20,7 @@
               <div class="card-body">
                 <p class="card-text">
                   <b>Title:</b> {{row[1]}}<br>
-                  <b>User Name:</b> {{row[16]}} {{row[17]}}<br>
+                  <b>User Name:</b> {{row[18]}} {{row[19]}}<br>
                   <b>Pay(€):</b> {{row[5]}}<br>
                   <b>Duration:</b> {{row[4]}}<br>
                   <b>Catagory:</b> {{row[6]}}<br>

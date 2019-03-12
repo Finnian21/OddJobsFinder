@@ -12,18 +12,24 @@ def login():
 
     if request.method == 'POST':
 
-        first_name = request.form['firstName']
-        last_name = request.form['lastName']
+        username = request.form['username']
         password = request.form['password']
-        sql = "SELECT * from users where firstName='" + first_name + "' and lastName='" + last_name + "" + "' and password='" + password + "'"
+        sql = "SELECT * from users where username='" + username + "' and password='" + password + "'"
 
         cursor.execute(sql)
 
         if cursor.fetchone() is None:
             error = 'Invalid Credentials. Please try again.'
         else:
-            session['username'] = request.form['firstName'] + " " + request.form['lastName']
+            session['username'] = username
+            sql2 = "SELECT userType from users where username='" + username + "'"
+            cursor.execute(sql2)
+            results = cursor.fetchall()
+            
+            for row in results:
+                session['user_type'] = row[0]
             return redirect("/", code=302)
+
 
     return render_template('login.html', error=error)
 
@@ -34,9 +40,8 @@ def post_job():
         return redirect("/login", code=302)
 
     username = session['username']
-    the_username = username.split()
 
-    sql = "SELECT * FROM users where firstName ='" + the_username[0]  + "' and lastName='" + the_username[1] + "'"
+    sql = "SELECT * FROM users where username = '" + username + "'"
     cursor.execute(sql)
     results = cursor.fetchall()
 
@@ -69,13 +74,15 @@ def post_job():
             phone = request.form["phone"]
             email = request.form["email"]    
         else:
-            sql1 = "SELECT phone, email FROM users where userId =" + the_user_Id
+            sql1 = "SELECT * FROM users where userId =" + the_user_Id
             cursor.execute(sql)
             results2 = cursor.fetchall()
             
             for row in results2:
-                phone = row[0]
-                email = row[1]
+                phone = row[7]
+                email = row[8]
+            
+            print(phone, email)
 
         if checked2 == ['on']:
             street = request.form["street"]
@@ -108,9 +115,9 @@ def post_job():
 def view_jobs():
     if 'username' in session: 
         username = session['username']
-        the_username = username.split()
+        user_type = session['user_type']
 
-        sql = "SELECT * FROM users where firstName ='" + the_username[0]  + "' and lastName='" + the_username[1] + "'"
+        sql = "SELECT * FROM users where username ='" + username + "'"
         cursor.execute(sql)
         results = cursor.fetchall()
 
@@ -119,6 +126,9 @@ def view_jobs():
     else:
         username = ''
         the_user_Id = 0
+        user_type = ''
+    
+    session['user_id'] = the_user_Id
 
     sql2 = "SELECT * FROM jobs INNER JOIN users ON jobs.UserID=users.userId ORDER BY timeStampPosted DESC"
     cursor.execute(sql2)
@@ -127,11 +137,10 @@ def view_jobs():
     for row in results2:
         session['job_id'] = row[2]
         elapsed_time = current_time - row[7]
-    return render_template('viewJobs.html', results2 = results2, the_user_Id = the_user_Id, current_time = current_time)
+    return render_template('viewJobs.html', results2 = results2, the_user_Id = the_user_Id, current_time = current_time, user_type = user_type)
 
 @app.route('/view_job', methods = ['GET', 'POST'])
 def view_job():
-    
     if request.method == 'POST':
         job_id = request.form['view_button']
     
@@ -139,17 +148,33 @@ def view_job():
         cursor.execute(sql)
         results = cursor.fetchall()
 
-        return render_template('viewJob.html' , results = results)
+        if 'username' in session:
+            user_Id = session['user_id']
+            user_type = session['user_type']
+        else:
+            user_Id = 0
+            user_type = ""
+
+        return render_template('viewJob.html' , results = results, user_type = user_type)
     return render_template('viewJob.html')
 
 @app.route('/', methods = ['GET', 'POST'])
 def home():
     if 'username' in session: 
         username = session['username']
+        user_type = session['user_type']
     else:
         username = ''
+        user_type = ''
         
-    return render_template('home.html', username = username)
+    return render_template('home.html', username = username, user_type = user_type)
+
+@app.route('/take_job', methods = ['GET', 'POST'])
+def take_job():
+    if 'username' not in session:
+        return redirect("/login", code=302)
+
+    return render_template('takeJob.html')
 
 @app.route('/log_out', methods = ['GET', 'POST'])
 def log_out():
