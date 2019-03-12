@@ -19,17 +19,11 @@
         <b>Resources Required:</b> {{row[8]}}<br>
         <b>Resources Provided:</b> {{row[9]}}<br>
         <br>
-        <h3>Contact Details</h3>
-        <b>Phone:</b> {{row[11]}}<br>
-        <b>Email:</b> {{row[10]}}<br>
-        <br>
         <h3>Address</h3>
         {{row[12]}}, {{row[13]}}, Co. {{row[14]}}<br>
         <br>
         {%if user_type == "Job Searcher"%}
-            <form method = "POST" action = "/take_job">
-                <button class="btn btn-sm btn-outline-secondary" type="submit">Take Job</button>
-            </form>
+            <a href = "/take_job"><button class="btn btn-sm btn-outline-secondary" type="submit" value = "{{row[0]}}">Take Job</button></a>
         {%endif%}
     </div>
 </div>

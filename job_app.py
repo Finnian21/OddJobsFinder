@@ -1,10 +1,20 @@
 from flask import Flask, render_template, url_for, escape, request, redirect, session
+from flask_mail import Mail, Message
 import datetime
 import pymysql
 
 db = pymysql.connect(host='localhost', user='root', passwd='', db = 'casualJobs3')
 app = Flask(__name__)
+mail=Mail(app)
 cursor = db.cursor()
+
+app.config['MAIL_SERVER']= 'localhost'
+app.config['MAIL_PORT'] = 25
+app.config['MAIL_USERNAME'] = None
+app.config['MAIL_PASSWORD'] = None
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = False
+mail = Mail(app)
 
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
@@ -130,7 +140,7 @@ def view_jobs():
     
     session['user_id'] = the_user_Id
 
-    sql2 = "SELECT * FROM jobs INNER JOIN users ON jobs.UserID=users.userId ORDER BY timeStampPosted DESC"
+    sql2 = "SELECT * FROM jobs INNER JOIN users ON jobs.UserID=users.userId WHERE takenFlag != '1' ORDER BY timeStampPosted DESC"
     cursor.execute(sql2)
     results2 = cursor.fetchall()
     current_time = datetime.datetime.now()
@@ -143,10 +153,14 @@ def view_jobs():
 def view_job():
     if request.method == 'POST':
         job_id = request.form['view_button']
+
+        session['job_id'] = job_id
     
         sql = "SELECT * FROM jobs INNER JOIN users ON jobs.UserID=users.userId WHERE jobId = " + job_id
         cursor.execute(sql)
         results = cursor.fetchall()
+
+        session['results'] = results
 
         if 'username' in session:
             user_Id = session['user_id']
@@ -171,10 +185,20 @@ def home():
 
 @app.route('/take_job', methods = ['GET', 'POST'])
 def take_job():
-    if 'username' not in session:
+    if 'username' in  session:
+        results = session['results']
+        job_id = session['job_id']
+        user_id = str(session['user_id'])
+        cursor.execute("UPDATE jobs SET takenFlag = 1, takerId = '" + user_id + "'" + " WHERE JobId = %s", (job_id))
+        db.commit()
+
+        msg = Message('Hello', sender = 'yourId@gmail.com', recipients = ['bobbyb2106@gmail.com'])
+        msg.body = "Hello Flask message sent from Flask-Mail"
+        mail.send(msg)
+    else:
         return redirect("/login", code=302)
 
-    return render_template('takeJob.html')
+    return render_template('takeJob.html', results = results)
 
 @app.route('/log_out', methods = ['GET', 'POST'])
 def log_out():
