@@ -1,9 +1,9 @@
 from flask import Flask, render_template, url_for, escape, request, redirect, session
 #from flask_mail import Mail, Message
 import datetime
-import mysql
+import pymysql
 
-db = mysql.connect(host='localhost', user='root', passwd='', db = 'default')
+db = pymysql.connect(host='localhost', user='root', passwd='', db = 'default')
 app = Flask(__name__)
 #mail=Mail(app)
 cursor = db.cursor()
