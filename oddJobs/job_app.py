@@ -1,11 +1,11 @@
 from flask import Flask, render_template, url_for, escape, request, redirect, session
-#from flask_mail import Mail, Message
+from flask_mail import Mail, Message
 import datetime
 import pymysql
 
 db = pymysql.connect(host='localhost', user='root', passwd='', db = 'casualJobs3')
 app = Flask(__name__)
-#mail=Mail(app)
+mail=Mail(app)
 cursor = db.cursor()
 """
 app.config['MAIL_SERVER']= 'smtp.live.com'
