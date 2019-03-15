@@ -3,7 +3,7 @@ from flask import Flask, render_template, url_for, escape, request, redirect, se
 import datetime
 import pymysql
 
-db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'default')
+db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')
 app = Flask(__name__)
 #mail=Mail(app)
 cursor = db.cursor()
