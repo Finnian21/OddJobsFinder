@@ -189,7 +189,7 @@ def take_job():
         results = session['results']
         job_id = session['job_id']
         user_id = str(session['user_id'])
-        cursor.execute("UPDATE jobs SET takenFlag = 1, takerId = '" + user_id + "'" + " WHERE JobId = %s", (job_id))
+        cursor.execute("UPDATE jobs SET takerId = '" + user_id + "'" + " WHERE JobId = %s", (job_id))
         db.commit()
         """
         msg = Message('Hello', sender = 'finnian2010@hotmail.com', recipients = ['finnian2010@hotmail.com'])

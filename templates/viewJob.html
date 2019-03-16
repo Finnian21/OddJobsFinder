@@ -22,7 +22,7 @@
         <h3>Address</h3>
         {{row[12]}}, {{row[13]}}, Co. {{row[14]}}<br>
         <br>
-        {%if user_type == "Job Searcher"%}
+        {%if user_type != "Job Poster"%}
             <a href = "/take_job"><button class="btn btn-sm btn-outline-secondary" type="submit" value = "{{row[0]}}">Take Job</button></a>
         {%endif%}
     </div>
