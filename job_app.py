@@ -50,6 +50,10 @@ def post_job():
         return redirect("/login", code=302)
 
     username = session['username']
+    user_type = session['user_type']
+
+    if user_type != 'Job Poster':
+        return redirect("/login", code=302)
 
     sql = "SELECT * FROM users where username = '" + username + "'"
     cursor.execute(sql)
