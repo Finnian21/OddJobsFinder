@@ -1,21 +1,19 @@
 from flask import Flask, render_template, url_for, escape, request, redirect, session
-#from flask_mail import Mail, Message
+from flask_mail import Mail, Message
 import datetime
 import pymysql
 
 db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')
 app = Flask(__name__)
-#mail=Mail(app)
+mail=Mail(app)
+
 cursor = db.cursor()
-"""
-app.config['MAIL_SERVER']= 'smtp.live.com'
-app.config['MAIL_PORT'] = 25
-app.config['MAIL_USERNAME'] = 'finnian2010@hotmail.com'
-app.config['MAIL_PASSWORD'] = 'Rathdrum21'
-app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USE_SSL'] = False
-mail = Mail(app)
-"""
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST_USER = "finnian2010@hotmail.com"
+EMAIL_HOST_PASSWORD = 'Rathdrum21'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = Trueail(app)
+
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
     error = None
