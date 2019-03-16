@@ -12,7 +12,7 @@ EMAIL_HOST = "smtp.gmail.com"
 EMAIL_HOST_USER = "finnian2010@hotmail.com"
 EMAIL_HOST_PASSWORD = 'Rathdrum21'
 EMAIL_PORT = 587
-EMAIL_USE_TLS = Trueail(app)
+EMAIL_USE_TLS = True
 
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
