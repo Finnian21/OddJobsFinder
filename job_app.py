@@ -20,6 +20,9 @@ mail = Mail(app)
 def login():
     error = None
 
+    if 'username' in session:
+        return redirect("/", code=302)
+
     if request.method == 'POST':
 
         username = request.form['username']
@@ -53,7 +56,7 @@ def post_job():
     user_type = session['user_type']
 
     if user_type != 'Job Poster':
-        return redirect("/login", code=302)
+        return redirect("/", code=302)
 
     sql = "SELECT * FROM users where username = '" + username + "'"
     cursor.execute(sql)
