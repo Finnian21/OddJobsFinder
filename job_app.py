@@ -235,7 +235,7 @@ def register():
 
         return redirect("/", code=302)
 
-    return render_template('register.html', results=results)
+    return render_template('register.html')
 
 app.secret_key = 'super secret key'
 if __name__ == '__main__':
