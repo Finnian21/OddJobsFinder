@@ -214,17 +214,6 @@ def log_out():
 @app.route('/register', methods = ['GET', 'POST'])
 def register():
 
-    sql = "SELECT * FROM users where username = '" + username + "'"
-    cursor.execute(sql)
-    results = cursor.fetchall()
-
-    user_Id = ''
-
-    for row in results:
-        user_Id = row[0]
-
-    the_user_Id = str(user_Id)
-
     if request.method == 'POST':
         firstname =  request.form["firstname"]
         lastname =  request.form["lastname"]
@@ -238,6 +227,8 @@ def register():
         town = request.form["town"]
         county = request.form["county"]
         password = request.form["password"]
+
+        session['username'] = username
 
         cursor.execute("INSERT INTO jobs (title, UserID, description, duration, pay, catagory, timeStampPosted, resourcesProvided, resourcesRequired, email, phone, street, town, county) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (title, the_user_Id, description, duration, pay, catagory, time_stamp_posted, resources_provided, resources_required, email, phone, street, town, county))
         db.commit()
