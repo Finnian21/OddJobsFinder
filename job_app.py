@@ -211,6 +211,41 @@ def log_out():
         session.pop('username', None)
         return redirect("/", code=302)
 
+@app.route('/register', methods = ['GET', 'POST'])
+def register():
+
+    sql = "SELECT * FROM users where username = '" + username + "'"
+    cursor.execute(sql)
+    results = cursor.fetchall()
+
+    user_Id = ''
+
+    for row in results:
+        user_Id = row[0]
+
+    the_user_Id = str(user_Id)
+
+    if request.method == 'POST':
+        firstname =  request.form["firstname"]
+        lastname =  request.form["lastname"]
+        username =  request.form["username"]
+        user_type =  request.form["userType"]
+        description = request.form['description']
+        age =  request.form["age"]
+        phoee =  request.form["phone"]
+        email =  request.form["email"]
+        street = request.form["street"]
+        town = request.form["town"]
+        county = request.form["county"]
+        password = request.form["password"]
+
+        cursor.execute("INSERT INTO jobs (title, UserID, description, duration, pay, catagory, timeStampPosted, resourcesProvided, resourcesRequired, email, phone, street, town, county) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (title, the_user_Id, description, duration, pay, catagory, time_stamp_posted, resources_provided, resources_required, email, phone, street, town, county))
+        db.commit()
+
+        return redirect("/", code=302)
+
+    return render_template('register.html', results=results)
+
 app.secret_key = 'super secret key'
 if __name__ == '__main__':
    app.run(debug = True)
