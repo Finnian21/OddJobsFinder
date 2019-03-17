@@ -196,10 +196,11 @@ def take_job():
         user_id = str(session['user_id'])
         cursor.execute("UPDATE jobs SET takerId = '" + user_id + "'" + " WHERE JobId = %s", (job_id))
         db.commit()
-        
+        """
         msg = Message('Hello', sender = 'finnian2010@hotmail.com', recipients = ['finnian2010@hotmail.com'])
         msg.body = "Hello Flask message sent from Flask-Mail"
         mail.send(msg)
+        """
     else:
         return redirect("/login", code=302)
 
