@@ -179,6 +179,7 @@ def home():
     if 'username' in session: 
         username = session['username']
         user_type = session['user_type']
+        print(user_type)
     else:
         username = ''
         user_type = ''
@@ -210,7 +211,7 @@ def log_out():
 
 @app.route('/register', methods = ['GET', 'POST'])
 def register():
-    
+
     if request.method == 'POST':
         firstname =  request.form["firstname"]
         lastname =  request.form["lastname"]
