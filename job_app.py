@@ -229,8 +229,9 @@ def register():
         password = request.form["password"]
 
         session['username'] = username
-
-        cursor.execute("INSERT INTO users (firstName, lastName, username, userType, description, age, phone, email, street, town, county password) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (firstname, lastname, username, user_type, description, age, phone, email, street, town, county, password))
+        sql = "INSERT INTO users (firstName, lastName, username, userType, description, age, phone, email, street, town, county password) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (firstname, lastname, username, user_type, description, age, phone, email, street, town, county, password)
+        print(sql)
+        cursor.execute(sql)
         db.commit()
 
         return redirect("/", code=302)
