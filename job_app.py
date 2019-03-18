@@ -212,6 +212,8 @@ def log_out():
 
 @app.route('/register', methods = ['GET', 'POST'])
 def register():
+    if username in session:
+        return redirect("/", code=302)
 
     if request.method == 'POST':
         firstname =  request.form["firstname"]
@@ -229,8 +231,6 @@ def register():
 
         session['username'] = username
         session['userType'] = user_type
-
-        print(user_type)
 
         cursor.execute("INSERT INTO users (firstName, lastName, username, userType, description, age, phone, email, street, town, county, password) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (firstname, lastname, username, user_type, description, age, phone, email, street, town, county, password))
         db.commit()
