@@ -157,7 +157,7 @@ def view_job():
         job_id = request.form['view_button']
 
         session['job_id'] = job_id
-    
+
         sql = "SELECT * FROM jobs INNER JOIN users ON jobs.UserID=users.userId WHERE jobId = " + job_id
         cursor.execute(sql)
         results = cursor.fetchall()
@@ -171,7 +171,7 @@ def view_job():
             user_Id = 0
             user_type = ""
 
-        return render_template('viewJob.html' , results = results, user_type = user_type)
+        return render_template('viewJob.html' , results = results, user_type = user_type, user_Id = user_Id)
     return render_template('viewJob.html')
 
 @app.route('/', methods = ['GET', 'POST'])
