@@ -41,7 +41,6 @@ def login():
                 session['user_type'] = row[0]
             return redirect("/", code=302)
 
-
     return render_template('login.html', error=error)
 
 @app.route('/post_job', methods = ['GET', 'POST'])
@@ -230,6 +229,8 @@ def register():
 
         session['username'] = username
         session['userType'] = user_type
+
+        print(user_type)
 
         cursor.execute("INSERT INTO users (firstName, lastName, username, userType, description, age, phone, email, street, town, county, password) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (firstname, lastname, username, user_type, description, age, phone, email, street, town, county, password))
         db.commit()
