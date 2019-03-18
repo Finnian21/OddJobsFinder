@@ -6,8 +6,8 @@ import pymysql
 db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')
 app = Flask(__name__)
 mail=Mail(app)
-"""
 cursor = db.cursor()
+"""
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_HOST_USER = "finnian2010@hotmail.com"
 EMAIL_HOST_PASSWORD = 'Rathdrum21'
