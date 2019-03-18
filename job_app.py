@@ -221,7 +221,7 @@ def register():
         user_type =  request.form["userType"]
         description = request.form['description']
         age =  request.form["age"]
-        phoee =  request.form["phone"]
+        phone =  request.form["phone"]
         email =  request.form["email"]
         street = request.form["street"]
         town = request.form["town"]
@@ -230,7 +230,7 @@ def register():
 
         session['username'] = username
 
-        cursor.execute("INSERT INTO users () VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (title, the_user_Id, description, duration, pay, catagory, time_stamp_posted, resources_provided, resources_required, email, phone, street, town, county))
+        cursor.execute("INSERT INTO users (firstName, lastName, username, userType, description, age, phone, email, street, town, county password) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (firstname, lastname, username, user_type, description, age, phone, email, street, town, county, password))
         db.commit()
 
         return redirect("/", code=302)
