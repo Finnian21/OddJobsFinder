@@ -212,7 +212,7 @@ def log_out():
 
 @app.route('/register', methods = ['GET', 'POST'])
 def register():
-    if username in session:
+    if 'username' in session:
         return redirect("/", code=302)
 
     if request.method == 'POST':
