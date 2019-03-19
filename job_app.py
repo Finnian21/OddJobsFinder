@@ -244,11 +244,11 @@ def edit_job():
     if user_type != 'Job Poster':
         return redirect("/", code=302)
         
-    if request.method == 'POST':
-        job_id = request.form['edit_button']
-        sql = "SELECT * FROM jobs WHERE jobId = " + job_id
-        cursor.execute(sql)
-        results = cursor.fetchall()
+
+    job_id = request.form['edit_button']
+    sql = "SELECT * FROM jobs WHERE jobId = " + job_id
+    cursor.execute(sql)
+    results = cursor.fetchall()
         
         if request.method == 'POST':
             
@@ -269,12 +269,12 @@ def edit_job():
             resourcesRequired = %s, email = %s, phone = %s, email = %s, street = %s, town = %s, county = %s""", (title, description, duration, pay, 
             catagory, resources_provided, resources_required, phone, email, street, town, county))
             db.commit()
-            
+
             return redirect("/view_job", code=302)
 
-        return render_template('editJob.html', results=results)
+    return render_template('editJob.html', results=results)
 
-    return render_template('editJob.html')
+   # return render_template('editJob.html')
 
 app.secret_key = 'super secret key'
 if __name__ == '__main__':
