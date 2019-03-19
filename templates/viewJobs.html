@@ -29,8 +29,10 @@
                   <div class="btn-group">
                   <form method = "POST" action = "/view_job">
                     <button type="submit"class="btn btn-sm btn-outline-secondary" name = "view_button" value = "{{row[0]}}">View</button>
+                  </form>
                     {%if the_user_Id == row[2]%}
-                    <button type="button" class="btn btn-sm btn-outline-secondary" value = "{{row[0]}}">Edit</button>
+                  <form method = "POST" action = "/edit_job">
+                    <button type="button" class="btn btn-sm btn-outline-secondary" name = "edit_button" value = "{{row[0]}}">Edit</button>
                     {% endif %}
                   </form>
                   </div>

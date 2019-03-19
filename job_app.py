@@ -232,6 +232,45 @@ def register():
 
     return render_template('register.html')
 
+@app.route('/edit_job', methods = ['GET', 'POST'])
+def edit_job():
+    
+    if 'username' not in session:
+        return redirect("/login", code=302)
+
+    username = session['username']
+    user_type = session['user_type']
+
+    if user_type != 'Job Poster':
+        return redirect("/", code=302)
+
+    if request.method == 'POST':
+        job_id = request.form['edit_button']
+        sql = "SELECT * FROM jobs WHERE jobId = " + job_id
+        cursor.execute(sql)
+        results = cursor.fetchall()
+
+        if request.method == 'POST':
+            title =  request.form["inputTitle"]
+            description =  request.form["description"]
+            duration =  request.form["duration"]
+            pay =  request.form["pay"]
+            catagory =  request.form["catagory"]
+            resources_provided = request.form["resourcesProvided"]
+            resources_required = request.form["resourcesRequired"]
+            phone = request.form["phone"]
+            email = request.form["email"]    
+            street = request.form["street"]
+            town = request.form["town"]
+            county = request.form["county"]
+
+            cursor.execute("UPDATE jobs SET JobsPosted = JobsPosted + 1 WHERE userID = %s", (the_user_Id))
+            db.commit()
+
+            return redirect("/view_job", code=302)
+
+    return render_template('edit_job.html', results=results)
+
 app.secret_key = 'super secret key'
 if __name__ == '__main__':
    app.run(debug = True)
