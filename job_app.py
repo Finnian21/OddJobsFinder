@@ -232,6 +232,13 @@ def register():
 
     return render_template('register.html')
 
+@app.route('/secure_id', methods = ['GET', 'POST'])
+def secure_id():
+    job_id = request.form['edit_button']
+    session['job_id'] = job_id
+
+    return redirect("/edit_job", code=302)
+
 @app.route('/edit_job', methods = ['GET', 'POST'])
 def edit_job():
     
@@ -243,15 +250,13 @@ def edit_job():
 
     if user_type != 'Job Poster':
         return redirect("/", code=302)
-        
-
-    job_id = request.form['edit_button']
+    
+    job_id = session['job_id']
     sql = "SELECT * FROM jobs WHERE jobId = " + job_id
     cursor.execute(sql)
     results = cursor.fetchall()
         
     if request.method == 'POST':
-        
         title =  request.form["inputTitle"]
         description =  request.form["description"]
         duration =  request.form["duration"]
@@ -273,8 +278,6 @@ def edit_job():
         return redirect("/view_job", code=302)
 
     return render_template('editJob.html', results=results)
-
-   # return render_template('editJob.html')
 
 app.secret_key = 'super secret key'
 if __name__ == '__main__':
