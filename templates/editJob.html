@@ -6,8 +6,9 @@
       <form class="form-signin" method = "POST" action = "" class = "form-control"><br>
         <div class="two-col">
           <div class="col1">
+          {%for row in results%}
             <label for="inputTitle">Job Title:</label>
-            <input type="text" id="inputTitle" name =  "inputTitle" class="form-control" required autofocus>
+            <input type="text" id="inputTitle" name =  "inputTitle" class="form-control" value = "row[1]" required autofocus>
             <br>
             <label for="pay" class = "">Pay(Euro):</label>
               <input type="number" name="pay" id = "pay" class = "form-control" min = "1" max = "500"><br>
@@ -34,23 +35,15 @@
         <label for="description">Description:</label>
         <textarea rows="8" cols="40" id = "description" name="description" type = "text" class = "form-control"></textarea>
         <br>
-        <label for="differentContacts" >Use different contact details?</label><br>
-        <input type="checkbox" name = "differentContacts" id = "differentContacts" onclick="myFunction()">
-        <div id = "fields" style = "display:none">
-              <label for="email">Email:</label>
-              <input type="email"  name = "email" id="email" class="form-control" autofocus>
-              <label for="phone">Phone Number:</label>
-              <input type="number" name = "phone" id="phone" class="form-control" autofocus>
-        </div>
-        <br><br>
-        <label for="differentAddress" >Use different address?</label><br>
-        <input type="checkbox" name = "differentAddress" id = "differentAddress" onclick = "myFunction2()">
-        <div id = "address" style = "display:none">
-            <label for="street">Street:</label>
-            <input type="text" name = "street" id="street" class="form-control" autofocus>
-            <label for="town">Town:</label>
-            <input type="text" id="town" name = "town" class="form-control" autofocus>
-            <label for="county">County:</label>
+        <label for="email">Email:</label>
+        <input type="email"  name = "email" id="email" class="form-control" autofocus>
+        <label for="phone">Phone Number:</label>
+        <input type="number" name = "phone" id="phone" class="form-control" autofocus>
+        <label for="street">Street:</label>
+        <input type="text" name = "street" id="street" class="form-control" autofocus>
+        <label for="town">Town:</label>
+        <input type="text" id="town" name = "town" class="form-control" autofocus>
+        <label for="county">County:</label>
             <select class = "form-control" name = "county" id = "county">
                 <option value="Antirm" class = "form-control">Antrim</option>
                 <option value="Armagh" class = "form-control">Armagh</option>

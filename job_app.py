@@ -270,7 +270,7 @@ def edit_job():
             return redirect("/view_job", code=302)
             """
         return render_template('editJob.html', results=results)
-    return render_template('editJob.html', results=results)
+    return render_template('editJob.html')
 
 app.secret_key = 'super secret key'
 if __name__ == '__main__':
