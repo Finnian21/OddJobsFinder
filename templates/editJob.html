@@ -45,7 +45,8 @@
         <label for="town">Town:</label>
         <input type="text" id="town" name = "town" class="form-control" value = "{{row[13]}}" autofocus>
         <label for="county">County:</label>
-            <select class = "form-control" name = "county" id = "county" value = "{{row[14]}}">
+            <select class = "form-control" name = "county" id = "county">
+                <option class="form-control" value="{{row[14]}}" selected = "selected">{{row[14]}}</option>
                 <option value="Antirm" class = "form-control">Antrim</option>
                 <option value="Armagh" class = "form-control">Armagh</option>
                 <option value="Carlow" class = "form-control">Carlow</option>
