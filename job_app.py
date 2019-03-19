@@ -243,34 +243,37 @@ def edit_job():
 
     if user_type != 'Job Poster':
         return redirect("/", code=302)
-    
-    job_id = request.form['edit_button']
-    sql = "SELECT * FROM jobs WHERE jobId = " + job_id
-    cursor.execute(sql)
-    results = cursor.fetchall()
-
+        
     if request.method == 'POST':
-        """
-        title =  request.form["inputTitle"]
-        description =  request.form["description"]
-        duration =  request.form["duration"]
-        pay =  request.form["pay"]
-        catagory =  request.form["catagory"]
-        resources_provided = request.form["resourcesProvided"]
-        resources_required = request.form["resourcesRequired"]
-        phone = request.form["phone"]
-        email = request.form["email"]    
-        street = request.form["street"]
-        town = request.form["town"]
-        county = request.form["county"]
-        """
-       # cursor.execute("""UPDATE jobs SET title = %s, description = %s, duration = %s, pay = %s, catagory = %s, resourcesProvided = %s,
-       # resourcesRequired = %s, email = %s, phone = %s, email = %s, street = %s, town = %s, county = %s""", (title, description, duration, pay, 
-       # catagory, resources_provided, resources_required, phone, email, street, town, county))
-       # db.commit()
-    
-        return redirect("/view_job", code=302)
+        job_id = request.form['edit_button']
+        sql = "SELECT * FROM jobs WHERE jobId = " + job_id
+        cursor.execute(sql)
+        results = cursor.fetchall()
 
+        if request.method == 'POST':
+            """
+            title =  request.form["inputTitle"]
+            description =  request.form["description"]
+            duration =  request.form["duration"]
+            pay =  request.form["pay"]
+            catagory =  request.form["catagory"]
+            resources_provided = request.form["resourcesProvided"]
+            resources_required = request.form["resourcesRequired"]
+            phone = request.form["phone"]
+            email = request.form["email"]    
+            street = request.form["street"]
+            town = request.form["town"]
+            county = request.form["county"]
+            """
+            # cursor.execute("""UPDATE jobs SET title = %s, description = %s, duration = %s, pay = %s, catagory = %s, resourcesProvided = %s,
+            # resourcesRequired = %s, email = %s, phone = %s, email = %s, street = %s, town = %s, county = %s""", (title, description, duration, pay, 
+            # catagory, resources_provided, resources_required, phone, email, street, town, county))
+            # db.commit()
+    
+            return redirect("/view_job", code=302)
+
+        return render_template('editJob.html', results=results)
+        
     return render_template('editJob.html', results=results)
 
 app.secret_key = 'super secret key'
