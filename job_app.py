@@ -249,7 +249,7 @@ def edit_job():
         sql = "SELECT * FROM jobs WHERE jobId = " + job_id
         cursor.execute(sql)
         results = cursor.fetchall()
-
+        """
         if request.method == 'POST':
             title =  request.form["inputTitle"]
             description =  request.form["description"]
@@ -268,9 +268,10 @@ def edit_job():
             db.commit()
 
             return redirect("/view_job", code=302)
-
+            """
+        return render_template('edit_job.html', results=results)
     return render_template('edit_job.html', results=results)
-
+    
 app.secret_key = 'super secret key'
 if __name__ == '__main__':
    app.run(debug = True)
