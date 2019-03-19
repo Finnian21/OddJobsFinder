@@ -8,7 +8,7 @@
           <div class="col1">
           {%for row in results%}
             <label for="inputTitle">Job Title:</label>
-            <input type="text" id="inputTitle" name =  "inputTitle" class="form-control" value = "row[1]" required autofocus>
+            <input type="text" id="inputTitle" name =  "inputTitle" class="form-control" value = " {{row[1]}}" required autofocus>
             <br>
             <label for="pay" class = "">Pay(Euro):</label>
               <input type="number" name="pay" id = "pay" class = "form-control" min = "1" max = "500"><br>
@@ -77,6 +77,7 @@
                 <option value="Westmeath" class = "form-control">Westmeath</option>
                 <option value="Wicklow" class = "form-control">Wicklow</option>
             </select>
+        {% endfor %}
         </div>
       <br><br>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
