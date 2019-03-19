@@ -275,7 +275,7 @@ def edit_job():
         catagory, resources_provided, resources_required, email, phone, street, town, county, job_id))
         db.commit()
 
-        return redirect("/view_job", code=302)
+        return redirect("/view_jobs", code=302)
 
     return render_template('editJob.html', results=results)
 
