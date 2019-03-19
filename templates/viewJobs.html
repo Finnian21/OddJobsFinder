@@ -32,7 +32,7 @@
                   </form>
                     {%if the_user_Id == row[2]%}
                   <form method = "POST" action = "/edit_job">
-                    <button type="button" class="btn btn-sm btn-outline-secondary" name = "edit_button" value = "{{row[0]}}">Edit</button>
+                    <button type="submit" class="btn btn-sm btn-outline-secondary" name = "edit_button" value = "{{row[0]}}">Edit</button>
                     {% endif %}
                   </form>
                   </div>
