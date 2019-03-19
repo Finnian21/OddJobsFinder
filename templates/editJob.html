@@ -8,16 +8,16 @@
           <div class="col1">
           {%for row in results%}
             <label for="inputTitle">Job Title:</label>
-            <input type="text" id="inputTitle" name =  "inputTitle" class="form-control" value = " {{row[1]}}" required autofocus>
+            <input type="text" id="inputTitle" name =  "inputTitle" class="form-control" value = "{{row[1]}}" required autofocus>
             <br>
             <label for="pay" class = "">Pay(Euro):</label>
-              <input type="number" name="pay" id = "pay" class = "form-control" min = "1" max = "500"><br>
+              <input type="number" name="pay" id = "pay" class = "form-control" min = "1" max = "500" vaulue = "{{row[5]}}"><br>
               <label for="resourcesProvided" class = "">Resources Provided:</label>
-              <textarea rows="5" id = "resourcesProvided" cols="40" name="resourcesProvided" type = "text" class = "form-control"></textarea>
+              <textarea rows="5" id = "resourcesProvided" cols="40" name="resourcesProvided" type = "text" class = "form-control" vaulue = "{{row[8]}}"></textarea>
           </div>
           <div class="col2">
             <label for="catagory">Catagory:</label>
-            <select class = "form-control" name = "catagory" id = "catagory">
+            <select class = "form-control" name = "catagory" id = "catagory" value = "{{row[6]}}">
                 <option value="Home" class = "form-control">Home</option>
                 <option value="Garden" class = "form-control">Gardening</option>
                 <option value="Babysitting" class = "form-control">Babysitting</option>
@@ -26,25 +26,25 @@
             </select>
             <br>
             <label for="duration">Duration:</label>
-            <input type="text" name="duration" id = "duration" class = "form-control"><br>
+            <input type="text" name="duration" id = "duration" class = "form-control" value = "{{row[4]}}"><br>
             <label for="resourcesRequired" class = "">Resources Required:</label>
-            <textarea rows="5" id = "resourcesRequired" cols="40" name="resourcesRequired" type = "text" class = "form-control"></textarea>
+            <textarea rows="5" id = "resourcesRequired" cols="40" name="resourcesRequired" type = "text" class = "form-control" vaulue = "{{row[9]}}"></textarea>
           </div>
         </div>
         <br>
         <label for="description">Description:</label>
-        <textarea rows="8" cols="40" id = "description" name="description" type = "text" class = "form-control"></textarea>
+        <textarea rows="8" cols="40" id = "description" name="description" type = "text" class = "form-control" value = "{{row[3]}}"></textarea>
         <br>
         <label for="email">Email:</label>
-        <input type="email"  name = "email" id="email" class="form-control" autofocus>
+        <input type="email"  name = "email" id="email" class="form-control" vaulue = "{{row[10]}}" autofocus>
         <label for="phone">Phone Number:</label>
-        <input type="number" name = "phone" id="phone" class="form-control" autofocus>
+        <input type="number" name = "phone" id="phone" class="form-control" vaulue = "{{row[11]}}" autofocus>
         <label for="street">Street:</label>
-        <input type="text" name = "street" id="street" class="form-control" autofocus>
+        <input type="text" name = "street" id="street" class="form-control" vaulue = "{{row[12]}}" autofocus>
         <label for="town">Town:</label>
-        <input type="text" id="town" name = "town" class="form-control" autofocus>
+        <input type="text" id="town" name = "town" class="form-control" vaulue = "{{row[13]}}" autofocus>
         <label for="county">County:</label>
-            <select class = "form-control" name = "county" id = "county">
+            <select class = "form-control" name = "county" id = "county" vaulue = "{{row[14]}}">
                 <option value="Antirm" class = "form-control">Antrim</option>
                 <option value="Armagh" class = "form-control">Armagh</option>
                 <option value="Carlow" class = "form-control">Carlow</option>
