@@ -271,11 +271,11 @@ def edit_job():
         county = request.form["county"]
         
         cursor.execute("""UPDATE jobs SET title = %s, description = %s, duration = %s, pay = %s, catagory = %s, resourcesProvided = %s,
-        resourcesRequired = %s, email = %s, phone = %s, street = %s, town = %s, county = %s""", (title, description, duration, pay, 
-        catagory, resources_provided, resources_required, email, phone, street, town, county))
+        resourcesRequired = %s, email = %s, phone = %s, street = %s, town = %s, county = %s WHERE JobID = %s""", (title, description, duration, pay, 
+        catagory, resources_provided, resources_required, email, phone, street, town, county, job_id))
         db.commit()
 
-        return redirect("/view_jobs", code=302)
+        return redirect("/view_job", code=302)
 
     return render_template('editJob.html', results=results)
 
