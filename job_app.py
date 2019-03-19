@@ -250,6 +250,7 @@ def edit_job():
     results = cursor.fetchall()
 
     if request.method == 'POST':
+        """
         title =  request.form["inputTitle"]
         description =  request.form["description"]
         duration =  request.form["duration"]
@@ -262,7 +263,7 @@ def edit_job():
         street = request.form["street"]
         town = request.form["town"]
         county = request.form["county"]
-    
+        """
         cursor.execute("""UPDATE jobs SET title = %s, description = %s, duration = %s, pay = %s, catagory = %s, resourcesProvided = %s,
         resourcesRequired = %s, email = %s, phone = %s, email = %s, street = %s, town = %s, county = %s""", (title, description, duration, pay, 
         catagory, resources_provided, resources_required, phone, email, street, town, county))
