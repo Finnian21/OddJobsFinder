@@ -217,12 +217,12 @@ def take_job():
         cursor.execute("UPDATE jobs SET takerId = '" + user_id + "'" + " WHERE JobId = %s", (job_id))
         db.commit()
         
-        sql = "SELECT * FROM users where userId ='" + user_id + "'"
+        sql = "SELECT * FROM jobs where userId ='" + job_id + "'"
         cursor.execute(sql)
         results = cursor.fetchall()
 
         for row in results:
-            email = row[8]
+            email = row[9]
         
         print(email)
         
