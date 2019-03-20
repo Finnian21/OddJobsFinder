@@ -213,6 +213,7 @@ def take_job():
     if 'username' in  session:
         results = session['results']
         job_id = session['job_id']
+        username = session['username']
         user_id = str(session['user_id'])
         cursor.execute("UPDATE jobs SET takerId = '" + user_id + "'" + " WHERE JobId = %s", (job_id))
         db.commit()
@@ -223,11 +224,10 @@ def take_job():
         
         for row in results:
             email = row[10]
-        
-            print(email)
-        
+            title = row[1]
+
         msg = Message('Hello', sender = 'oddjobsfinder@gmail.com', recipients = [email])
-        msg.body = "Hello Flask message sent from Flask-Mail"
+        msg.body = "Hi, your job titled " + title + "has been taken by " + username + ". Do you wish to accept it?"
         mail.send(msg)
         
     else:
