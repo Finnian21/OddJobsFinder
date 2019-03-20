@@ -166,10 +166,7 @@ def view_jobs():
 
 @app.route('/view_job', methods = ['GET', 'POST'])
 def view_job():
-            
-    if 'username' not in session:
-        return redirect("/", code=302)
-        
+
     db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')
     cursor = db.cursor()
 
