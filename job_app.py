@@ -217,7 +217,7 @@ def take_job():
         cursor.execute("UPDATE jobs SET takerId = '" + user_id + "'" + " WHERE JobId = %s", (job_id))
         db.commit()
 
-        msg = Message('Hello', sender = 'oddjobsfinder@gmail.com', recipients = ['finnian2010@hotmail.com'])
+        msg = Message('Hello', sender = 'oddjobsfinder@gmail.com', recipients = ['hibernium@protonmail.com'])
         msg.body = "Hello Flask message sent from Flask-Mail"
         mail.send(msg)
         
