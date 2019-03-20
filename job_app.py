@@ -3,7 +3,7 @@ from flask_mail import Mail, Message
 import datetime
 import pymysql
 
-session['db'] = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')
+db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')
 app = Flask(__name__)
 mail=Mail(app)
 
@@ -16,7 +16,6 @@ EMAIL_USE_TLS = True
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
     error = None
-    db = session['db']
     cursor = db.cursor()
 
     if 'username' in session:
@@ -41,12 +40,13 @@ def login():
             for row in results:
                 session['user_type'] = row[0]
             return redirect("/", code=302)
-
+    cursor.close()
+    db.close()
     return render_template('login.html', error=error)
 
 @app.route('/post_job', methods = ['GET', 'POST'])
 def post_job():
-    db = session['db']
+    #db = session['db']
     cursor = db.cursor()
     
     if 'username' not in session:
@@ -123,12 +123,13 @@ def post_job():
         db.commit()
 
         return redirect("/view_jobs", code=302)
-
+    cursor.close()
+    db.close()
     return render_template('postJob.html', results=results)
 
 @app.route('/view_jobs', methods = ['GET', 'POST'])
 def view_jobs():
-    db = session['db']
+    #db = session['db']
     cursor = db.cursor()
 
     if 'username' in session: 
@@ -155,13 +156,15 @@ def view_jobs():
     for row in results2:
         session['job_id'] = row[2]
         elapsed_time = current_time - row[7]
-
+    
+    cursor.close()
+    db.close()
     return render_template('viewJobs.html', results2 = results2, the_user_Id = the_user_Id, current_time = current_time, user_type = user_type)
 
 @app.route('/view_job', methods = ['GET', 'POST'])
 def view_job():
 
-    db = session['db']
+    #db = session['db']
     cursor = db.cursor()
 
     if request.method == 'POST':
@@ -183,6 +186,8 @@ def view_job():
             user_type = ""
         
         return render_template('viewJob.html' , results = results, user_type = user_type, user_Id = user_Id)
+    cursor.close()
+    db.close()
     return render_template('viewJob.html')
 
 @app.route('/', methods = ['GET', 'POST'])
@@ -198,7 +203,7 @@ def home():
 
 @app.route('/take_job', methods = ['GET', 'POST'])
 def take_job():
-    db = session['db']
+    #db = session['db']
     cursor = db.cursor()
 
     if 'username' in  session:
@@ -214,7 +219,8 @@ def take_job():
         """
     else:
         return redirect("/login", code=302)
-
+    cursor.close()
+    db.close()
     return render_template('takeJob.html', results = results)
 
 @app.route('/log_out', methods = ['GET', 'POST'])
@@ -224,7 +230,7 @@ def log_out():
 
 @app.route('/register', methods = ['GET', 'POST'])
 def register():
-    db = session['db']
+    #db = session['db']
     cursor = db.cursor()
 
     if request.method == 'POST':
@@ -245,7 +251,8 @@ def register():
         db.commit()
 
         return redirect("/login", code=302)
-
+    cursor.close()
+    db.close()
     return render_template('register.html')
 
 @app.route('/secure_id', methods = ['GET', 'POST'])
@@ -257,7 +264,7 @@ def secure_id():
 
 @app.route('/edit_job', methods = ['GET', 'POST'])
 def edit_job():
-    db = session['db']
+    #db = session['db']
     cursor = db.cursor()
     
     if 'username' not in session:
@@ -294,7 +301,9 @@ def edit_job():
         db.commit()
 
         return redirect("/view_jobs", code=302)
-
+    
+    cursor.close()
+    db.close()
     return render_template('editJob.html', results=results)
 
 app.secret_key = 'super secret key'
