@@ -227,7 +227,8 @@ def take_job():
             title = row[1]
 
         msg = Message('Hello', sender = 'oddjobsfinder@gmail.com', recipients = [email])
-        msg.body = "Hi, your job titled " + title + " has been taken by " + username + ". <h1>Do you wish to accept it?</h1>"
+        msg.body = "Hi, your job titled " + title + " has been taken by " + username + "."
+        msg.html = render_template("/email.html")
         mail.send(msg)
         
     else:
