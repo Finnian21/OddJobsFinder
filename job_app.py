@@ -41,9 +41,6 @@ def login():
             for row in results:
                 session['user_type'] = row[0]
             return redirect("/", code=302)
-        
-        cursor.close()
-
 
     return render_template('login.html', error=error)
 
@@ -126,8 +123,6 @@ def post_job():
         db.commit()
 
         return redirect("/view_jobs", code=302)
-    
-    cursor.close()
 
     return render_template('postJob.html', results=results)
 
@@ -160,8 +155,7 @@ def view_jobs():
     for row in results2:
         session['job_id'] = row[2]
         elapsed_time = current_time - row[7]
-    
-    cursor.close()
+
     return render_template('viewJobs.html', results2 = results2, the_user_Id = the_user_Id, current_time = current_time, user_type = user_type)
 
 @app.route('/view_job', methods = ['GET', 'POST'])
@@ -188,7 +182,6 @@ def view_job():
             user_Id = 0
             user_type = ""
         
-        cursor.close()
         return render_template('viewJob.html' , results = results, user_type = user_type, user_Id = user_Id)
     return render_template('viewJob.html')
 
@@ -219,7 +212,6 @@ def take_job():
         msg.body = "Hello Flask message sent from Flask-Mail"
         mail.send(msg)
         """
-        cursor.close()
     else:
         return redirect("/login", code=302)
 
@@ -251,7 +243,7 @@ def register():
 
         cursor.execute("INSERT INTO users (firstName, lastName, username, userType, description, age, phone, email, street, town, county, password) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (firstname, lastname, username, user_type, description, age, phone, email, street, town, county, password))
         db.commit()
-        cursor.close()
+
         return redirect("/login", code=302)
 
     return render_template('register.html')
@@ -300,7 +292,6 @@ def edit_job():
         resourcesRequired = %s, email = %s, phone = %s, street = %s, town = %s, county = %s WHERE JobID = %s""", (title, description, duration, pay, 
         catagory, resources_provided, resources_required, email, phone, street, town, county, job_id))
         db.commit()
-        cursor.close()
 
         return redirect("/view_jobs", code=302)
 
