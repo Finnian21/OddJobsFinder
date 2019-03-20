@@ -217,7 +217,7 @@ def take_job():
         cursor.execute("UPDATE jobs SET takerId = '" + user_id + "'" + " WHERE JobId = %s", (job_id))
         db.commit()
         
-        sql = "SELECT * FROM jobs where userId ='" + job_id + "'"
+        sql = "SELECT * FROM jobs where jobId ='" + job_id + "'"
         cursor.execute(sql)
         results = cursor.fetchall()
         
