@@ -3,20 +3,21 @@ from flask_mail import Mail, Message
 import datetime
 import pymysql
 
-db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')
+session['db'] = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')
 app = Flask(__name__)
 mail=Mail(app)
-cursor = db.cursor()
-"""
+
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_HOST_USER = "finnian2010@hotmail.com"
 EMAIL_HOST_PASSWORD = 'Rathdrum21'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-"""
+
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
     error = None
+    db = session['db']
+    cursor = db.cursor()
 
     if 'username' in session:
         return redirect("/", code=302)
@@ -40,11 +41,16 @@ def login():
             for row in results:
                 session['user_type'] = row[0]
             return redirect("/", code=302)
+        
+        cursor.close()
+
 
     return render_template('login.html', error=error)
 
 @app.route('/post_job', methods = ['GET', 'POST'])
 def post_job():
+    db = session['db']
+    cursor = db.cursor()
     
     if 'username' not in session:
         return redirect("/login", code=302)
@@ -120,11 +126,16 @@ def post_job():
         db.commit()
 
         return redirect("/view_jobs", code=302)
+    
+    cursor.close()
 
     return render_template('postJob.html', results=results)
 
 @app.route('/view_jobs', methods = ['GET', 'POST'])
 def view_jobs():
+    db = session['db']
+    cursor = db.cursor()
+
     if 'username' in session: 
         username = session['username']
         user_type = session['user_type']
@@ -149,10 +160,16 @@ def view_jobs():
     for row in results2:
         session['job_id'] = row[2]
         elapsed_time = current_time - row[7]
+    
+    cursor.close()
     return render_template('viewJobs.html', results2 = results2, the_user_Id = the_user_Id, current_time = current_time, user_type = user_type)
 
 @app.route('/view_job', methods = ['GET', 'POST'])
 def view_job():
+
+    db = session['db']
+    cursor = db.cursor()
+
     if request.method == 'POST':
         job_id = request.form['view_button']
 
@@ -170,7 +187,8 @@ def view_job():
         else:
             user_Id = 0
             user_type = ""
-
+        
+        cursor.close()
         return render_template('viewJob.html' , results = results, user_type = user_type, user_Id = user_Id)
     return render_template('viewJob.html')
 
@@ -187,6 +205,9 @@ def home():
 
 @app.route('/take_job', methods = ['GET', 'POST'])
 def take_job():
+    db = session['db']
+    cursor = db.cursor()
+
     if 'username' in  session:
         results = session['results']
         job_id = session['job_id']
@@ -198,6 +219,7 @@ def take_job():
         msg.body = "Hello Flask message sent from Flask-Mail"
         mail.send(msg)
         """
+        cursor.close()
     else:
         return redirect("/login", code=302)
 
@@ -210,6 +232,8 @@ def log_out():
 
 @app.route('/register', methods = ['GET', 'POST'])
 def register():
+    db = session['db']
+    cursor = db.cursor()
 
     if request.method == 'POST':
         firstname =  request.form["firstname"]
@@ -227,7 +251,7 @@ def register():
 
         cursor.execute("INSERT INTO users (firstName, lastName, username, userType, description, age, phone, email, street, town, county, password) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (firstname, lastname, username, user_type, description, age, phone, email, street, town, county, password))
         db.commit()
-
+        cursor.close()
         return redirect("/login", code=302)
 
     return render_template('register.html')
@@ -241,6 +265,8 @@ def secure_id():
 
 @app.route('/edit_job', methods = ['GET', 'POST'])
 def edit_job():
+    db = session['db']
+    cursor = db.cursor()
     
     if 'username' not in session:
         return redirect("/login", code=302)
@@ -274,6 +300,7 @@ def edit_job():
         resourcesRequired = %s, email = %s, phone = %s, street = %s, town = %s, county = %s WHERE JobID = %s""", (title, description, duration, pay, 
         catagory, resources_provided, resources_required, email, phone, street, town, county, job_id))
         db.commit()
+        cursor.close()
 
         return redirect("/view_jobs", code=302)
 
