@@ -180,6 +180,9 @@ def view_job():
         cursor.execute(sql)
         results = cursor.fetchall()
 
+        for row in results:
+            session['firstname'] = row[18]
+
         session['results'] = results
 
         if 'username' in session:
@@ -215,6 +218,8 @@ def take_job():
         job_id = session['job_id']
         username = session['username']
         user_id = str(session['user_id'])
+        firstname = session['firstname']
+
         cursor.execute("UPDATE jobs SET takerId = '" + user_id + "'" + " WHERE JobId = %s", (job_id))
         db.commit()
         
@@ -226,9 +231,9 @@ def take_job():
             email = row[10]
             title = row[1]
 
-        msg = Message('Hello', sender = 'oddjobsfinder@gmail.com', recipients = [email])
+        msg = Message('Job Taken', sender = 'oddjobsfinder@gmail.com', recipients = [email])
         msg.body = "Hi, your job titled " + title + " has been taken by " + username + "."
-        msg.html = render_template("/email.html")
+        msg.html = render_template("/email.html", title = title, username = username, firstname=firstname)
         mail.send(msg)
         
     else:
