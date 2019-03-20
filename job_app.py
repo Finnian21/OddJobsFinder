@@ -220,7 +220,7 @@ def take_job():
         sql = "SELECT * FROM jobs where userId ='" + job_id + "'"
         cursor.execute(sql)
         results = cursor.fetchall()
-
+        email = ''
         for row in results:
             email = row[9]
         
