@@ -7,7 +7,7 @@ app = Flask(__name__)
 mail=Mail(app)
 
 EMAIL_HOST = "smtp.gmail.com"
-EMAIL_HOST_USER = "finnian2010@hotmail.com"
+EMAIL_HOST_USER = "oddjobsfinder@gmail.com"
 EMAIL_HOST_PASSWORD = 'Rathdrum21'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
@@ -214,11 +214,11 @@ def take_job():
         user_id = str(session['user_id'])
         cursor.execute("UPDATE jobs SET takerId = '" + user_id + "'" + " WHERE JobId = %s", (job_id))
         db.commit()
-        """
-        msg = Message('Hello', sender = 'finnian2010@hotmail.com', recipients = ['finnian2010@hotmail.com'])
+        
+        msg = Message('Hello', sender = 'oddjobsfinder@gmail.com', recipients = ['finnian2010@hotmail.com'])
         msg.body = "Hello Flask message sent from Flask-Mail"
         mail.send(msg)
-        """
+        
     else:
         return redirect("/login", code=302)
     cursor.close()
