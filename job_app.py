@@ -3,7 +3,7 @@ from flask_mail import Mail, Message
 import datetime
 import pymysql
 
-db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')
+#db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')
 app = Flask(__name__)
 mail=Mail(app)
 
@@ -46,7 +46,6 @@ def login():
 
 @app.route('/post_job', methods = ['GET', 'POST'])
 def post_job():
-    #db = session['db']
     cursor = db.cursor()
     
     if 'username' not in session:
@@ -123,12 +122,14 @@ def post_job():
         db.commit()
 
         return redirect("/view_jobs", code=302)
+    
     cursor.close()
     db.close()
     return render_template('postJob.html', results=results)
 
 @app.route('/view_jobs', methods = ['GET', 'POST'])
 def view_jobs():
+    db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')
     #db = session['db']
     cursor = db.cursor()
 
