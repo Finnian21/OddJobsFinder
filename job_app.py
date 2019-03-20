@@ -222,7 +222,7 @@ def take_job():
         results = cursor.fetchall()
         
         for row in results:
-            email = row[9]
+            email = row[10]
         
             print(email)
         
