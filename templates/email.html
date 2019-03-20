@@ -1,8 +1,10 @@
 <p>Hi {{firstname}},</p>
 <p>Your job titled {{title}} has been taken by {{username}}.</p>
 <p>Do you wish to accept them?</p>
-<a href = ""><button>Accept</button><br></a>
-<a href = ""><button>Decline</button></a>
+<form action = "/accept_user" method = "POST">
+<button value = "accept" type = "submit" name = "acceptButton">Accept</button>
+<button value = "decline" type = "submit" name = "acceptButton">Decline</button>
+</form>
 <p>Best Regards,</p>
 <p>Finnian</p>
 
