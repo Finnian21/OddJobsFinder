@@ -6,12 +6,6 @@ import pymysql
 app = Flask(__name__)
 mail=Mail(app)
 
-EMAIL_HOST = "smtp.gmail.com"
-EMAIL_HOST_USER = "oddjobsfinder@gmail.com"
-EMAIL_HOST_PASSWORD = 'Rathdrum21'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
     db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')
@@ -215,6 +209,13 @@ def take_job():
         user_id = str(session['user_id'])
         cursor.execute("UPDATE jobs SET takerId = '" + user_id + "'" + " WHERE JobId = %s", (job_id))
         db.commit()
+        """
+        EMAIL_HOST = "smtp.gmail.com"
+        EMAIL_HOST_USER = "oddjobsfinder@gmail.com"
+        EMAIL_HOST_PASSWORD = 'Rathdrum21'
+        EMAIL_PORT = 587
+        EMAIL_USE_TLS = True
+        """
         
         msg = Message('Hello', sender = 'oddjobsfinder@gmail.com', recipients = ['finnian2010@hotmail.com'])
         msg.body = "Hello Flask message sent from Flask-Mail"
