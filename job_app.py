@@ -222,8 +222,10 @@ def take_job():
         results = cursor.fetchall()
 
         for row in results:
-            email = row
-            
+            email = row[8]
+        
+        print(email)
+        
         msg = Message('Hello', sender = 'oddjobsfinder@gmail.com', recipients = [email])
         msg.body = "Hello Flask message sent from Flask-Mail"
         mail.send(msg)
