@@ -3,7 +3,6 @@ from flask_mail import Mail, Message
 import datetime
 import pymysql
 
-session['db'] = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')
 app = Flask(__name__)
 mail=Mail(app)
 
@@ -187,6 +186,7 @@ def view_job():
 
 @app.route('/', methods = ['GET', 'POST'])
 def home():
+    session['db'] = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')
     if 'username' in session: 
         username = session['username']
         user_type = session['user_type']
