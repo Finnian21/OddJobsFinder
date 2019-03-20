@@ -3,7 +3,6 @@ from flask_mail import Mail, Message
 import datetime
 import pymysql
 
-#db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')
 app = Flask(__name__)
 mail=Mail(app)
 
@@ -15,6 +14,7 @@ EMAIL_USE_TLS = True
 
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
+    db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')
     error = None
     cursor = db.cursor()
 
@@ -46,6 +46,7 @@ def login():
 
 @app.route('/post_job', methods = ['GET', 'POST'])
 def post_job():
+    db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')
     cursor = db.cursor()
     
     if 'username' not in session:
@@ -164,7 +165,7 @@ def view_jobs():
 
 @app.route('/view_job', methods = ['GET', 'POST'])
 def view_job():
-
+    db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')
     #db = session['db']
     cursor = db.cursor()
 
@@ -204,7 +205,7 @@ def home():
 
 @app.route('/take_job', methods = ['GET', 'POST'])
 def take_job():
-    #db = session['db']
+    db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')#db = session['db']
     cursor = db.cursor()
 
     if 'username' in  session:
@@ -231,7 +232,7 @@ def log_out():
 
 @app.route('/register', methods = ['GET', 'POST'])
 def register():
-    #db = session['db']
+    db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')
     cursor = db.cursor()
 
     if request.method == 'POST':
@@ -265,7 +266,7 @@ def secure_id():
 
 @app.route('/edit_job', methods = ['GET', 'POST'])
 def edit_job():
-    #db = session['db']
+    db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')
     cursor = db.cursor()
     
     if 'username' not in session:
