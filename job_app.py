@@ -243,14 +243,14 @@ def take_job():
     return render_template('takeJob.html', results = results)
 
 @app.route('/decline_user', methods = ['GET', 'POST'])
-def accept_user():
-    accept = True
+def decline_user():
+    accept = False
 
     return render_template('accept.html')
 
 @app.route('/accept_user', methods = ['GET', 'POST'])
 def accept_user():
-    accept = False
+    accept = True
 
     return render_template('accept.html')
 
