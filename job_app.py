@@ -220,9 +220,6 @@ def take_job():
         username = session['username']
         user_id = str(session['user_id'])
         firstname = session['firstname']
-
-        cursor.execute("UPDATE jobs SET takerId = '" + user_id + "'" + " WHERE JobId = %s", (job_id))
-        db.commit()
         
         sql = "SELECT * FROM jobs where jobId ='" + job_id + "'"
         cursor.execute(sql)
@@ -231,6 +228,7 @@ def take_job():
         for row in results:
             email = row[10]
             title = row[1]
+        session['title'] = title
 
         msg = Message('Job Taken', sender = 'oddjobsfinder@gmail.com', recipients = [email])
         msg.body = "Hi, your job titled " + title + " has been taken by " + username + "."
@@ -246,16 +244,37 @@ def take_job():
 
 @app.route('/decline_user', methods = ['GET', 'POST'])
 def decline_user():
-    accept = False
 
-    return render_template('accept.html')
+    return redirect("/", code=302)
 
 @app.route('/accept_user', methods = ['GET', 'POST'])
 def accept_user():
-    accept = True
-    session['accept'] = accept
+    db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')#db = session['db']
+    cursor = db.cursor()
 
-    return render_template('accept.html')
+    job_id = session['job_id']
+    user_id = str(session['user_id'])
+
+    sql = "SELECT * FROM users where user_id ='" + user_id + "'"
+    cursor.execute(sql)
+    results = cursor.fetchall()
+    title = session['title']
+
+    for row in results:
+        email = row[8]
+        firstname = row[1]
+
+    msg = Message('Job Taken', sender = 'oddjobsfinder@gmail.com', recipients = [email])
+    msg.body = "Hi, you have been accepted."
+    msg.html = render_template("/acceptEmail.html", title = title, username = username, firstname=firstname)
+    mail.send(msg)
+
+    cursor.execute("UPDATE jobs SET takerId = %s, takenFlag = '1' WHEREJobId = %s", (user_id, job_id))
+    db.commit()
+
+    cursor.close()
+    db.close()
+    return redirect("/", code=302)
 
 @app.route('/log_out', methods = ['GET', 'POST'])
 def log_out():
