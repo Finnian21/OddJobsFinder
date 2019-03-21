@@ -242,7 +242,7 @@ def take_job():
     db.close()
     return render_template('takeJob.html', results = results)
 
-@app.route('/accept_user', methods = ['GET', 'POST'])
+@app.route('/decline_user', methods = ['GET', 'POST'])
 def accept_user():
     accept = True
 
@@ -252,7 +252,7 @@ def accept_user():
 def accept_user():
     accept = False
 
-        return render_template('accept.html')
+    return render_template('accept.html')
 
 @app.route('/log_out', methods = ['GET', 'POST'])
 def log_out():
