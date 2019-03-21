@@ -185,6 +185,7 @@ def view_job():
             session['firstname'] = row[18]
             session['job_username'] = row[20]
 
+        print(session['job_username'])
         session['results'] = results
 
         if 'username' in session:
@@ -221,6 +222,8 @@ def take_job():
         username = session['username']
         user_id = str(session['user_id'])
         firstname = session['firstname']
+        job_username = session['job_username']
+        session['job_username'] = job_username
         
         sql = "SELECT * FROM jobs where jobId ='" + job_id + "'"
         cursor.execute(sql)
