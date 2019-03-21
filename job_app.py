@@ -183,6 +183,7 @@ def view_job():
 
         for row in results:
             session['firstname'] = row[18]
+            session['job_username'] = row[20]
 
         session['results'] = results
 
@@ -254,6 +255,7 @@ def accept_user():
 
     job_id = session['job_id']
     user_id = str(session['user_id'])
+    job_username = session['job_username']
 
     sql = "SELECT * FROM users where userId ='" + user_id + "'"
     cursor.execute(sql)
@@ -266,7 +268,7 @@ def accept_user():
 
     msg = Message('Job Taken', sender = 'oddjobsfinder@gmail.com', recipients = [email])
     msg.body = "Hi, you have been accepted."
-    msg.html = render_template("/acceptEmail.html", title = title, username = username, firstname=firstname)
+    msg.html = render_template("/acceptEmail.html", title = title, job_username = job_username, firstname=firstname)
     mail.send(msg)
 
     cursor.execute("UPDATE jobs SET takerId = %s, takenFlag = '1' WHEREJobId = %s", (user_id, job_id))
