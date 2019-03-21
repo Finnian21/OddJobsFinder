@@ -183,7 +183,7 @@ def view_job():
 
         for row in results:
             session['firstname'] = row[18]
-            session['job_username'] = row[19]
+            session['job_username'] = row[20]
 
         session['results'] = results
 
@@ -246,8 +246,30 @@ def take_job():
 
 @app.route('/decline_user', methods = ['GET', 'POST'])
 def decline_user():
+    db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')#db = session['db']
+    cursor = db.cursor()
 
-    return redirect("/", code=302)
+    job_id = session['job_id']
+    user_id = str(session['user_id'])
+    job_username = session['job_username']
+
+    sql = "SELECT * FROM users where userId ='" + user_id + "'"
+    cursor.execute(sql)
+    results = cursor.fetchall()
+    title = session['title']
+
+    for row in results:
+        email = row[8]
+        firstname = row[1]
+
+    msg = Message('Job Taken', sender = 'oddjobsfinder@gmail.com', recipients = [email])
+    msg.html = render_template("/declineEmail.html", title = title, job_username = job_username, firstname=firstname)
+    mail.send(msg)
+
+    cursor.close()
+    db.close()
+    
+    #return redirect("/", code=302)
 
 @app.route('/accept_user', methods = ['GET', 'POST'])
 def accept_user():
