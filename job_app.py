@@ -255,7 +255,7 @@ def accept_user():
     job_id = session['job_id']
     user_id = str(session['user_id'])
 
-    sql = "SELECT * FROM users where user_id ='" + user_id + "'"
+    sql = "SELECT * FROM users where userId ='" + user_id + "'"
     cursor.execute(sql)
     results = cursor.fetchall()
     title = session['title']
