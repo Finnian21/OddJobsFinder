@@ -245,18 +245,14 @@ def take_job():
 @app.route('/accept_user', methods = ['GET', 'POST'])
 def accept_user():
     accept = True
-    
-    if request.method == 'POST':
-        if request.form['view_button'] == 'accept':
-            print(accept)
-
-        else:
-            accept = False
-            print(accept)
-            
-        return render_template('accept.html')
 
     return render_template('accept.html')
+
+@app.route('/accept_user', methods = ['GET', 'POST'])
+def accept_user():
+    accept = False
+
+        return render_template('accept.html')
 
 @app.route('/log_out', methods = ['GET', 'POST'])
 def log_out():
