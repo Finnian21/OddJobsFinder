@@ -255,7 +255,7 @@ def accept_user():
     cursor = db.cursor()
 
     job_id = session['job_id']
-    user_id = session['user_id']
+    user_id = str(session['user_id'])
     job_username = session['job_username']
 
     sql = "SELECT * FROM users where userId ='" + user_id + "'"
@@ -274,6 +274,7 @@ def accept_user():
 
     cursor.execute("UPDATE jobs SET takerId = %s, takenFlag = '1' WHERE JobId = %s", (user_id, job_id))
     db.commit()
+    print("UPDATE jobs SET takerId = %s, takenFlag = '1' WHERE JobId = %s", (user_id, job_id))
 
     cursor.close()
     db.close()
