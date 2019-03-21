@@ -255,7 +255,7 @@ def accept_user():
     cursor = db.cursor()
 
     job_id = session['job_id']
-    user_id = str(session['user_id'])
+    user_id = session['user_id']
     job_username = session['job_username']
 
     sql = "SELECT * FROM users where userId ='" + user_id + "'"
@@ -271,8 +271,7 @@ def accept_user():
     msg.body = "Hi, you have been accepted."
     msg.html = render_template("/acceptEmail.html", title = title, job_username = job_username, firstname=firstname)
     mail.send(msg)
-    sql = "UPDATE jobs SET takerId = %s, takenFlag = '1' WHERE JobId = %s", (user_id, job_id)
-    print(sql)
+
     cursor.execute("UPDATE jobs SET takerId = %s, takenFlag = '1' WHERE JobId = %s", (user_id, job_id))
     db.commit()
 
