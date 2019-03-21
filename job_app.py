@@ -269,7 +269,7 @@ def decline_user():
     cursor.close()
     db.close()
 
-    return redirect("/", code=302)
+    #return redirect("/", code=302)
 
 @app.route('/accept_user', methods = ['GET', 'POST'])
 def accept_user():
