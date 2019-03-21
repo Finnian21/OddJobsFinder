@@ -40,7 +40,8 @@ def login():
             
             for row in results:
                 session['user_type'] = row[0]
-            return redirect("/", code=302)
+
+            return redirect("/"+ session['route'], code=302)
     cursor.close()
     db.close()
     return render_template('login.html', error=error)
@@ -237,6 +238,7 @@ def take_job():
         mail.send(msg)
         
     else:
+        session['route'] = 'take_job'
         return redirect("/login", code=302)
     cursor.close()
     db.close()
@@ -251,6 +253,7 @@ def decline_user():
 @app.route('/accept_user', methods = ['GET', 'POST'])
 def accept_user():
     accept = True
+    session['accept'] = accept
 
     return render_template('accept.html')
 
