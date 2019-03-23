@@ -2,8 +2,7 @@
 {% block content %}
 {%if user_type == "Job Poster" or user_type == "Admin"%}
   {% include "nav.html" %}
-{%endif%}
-{%if user_type == "Job Searcher"%}
+{%elif user_type == "Job Searcher"%}
   {% include "nav2.html" or user_type == "Admin"%}
 {%else%}
 {% include "nav3.html" %}
