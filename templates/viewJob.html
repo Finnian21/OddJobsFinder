@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
-{%if user_type == "Job Poster" || user_type == "Admin"%}
+{%if user_type == "Job Poster" or user_type == "Admin"%}
   {% include "nav.html" %}
 {%if user_type == "Job Searcher"%}
-  {% include "nav2.html" || user_type == "Admin"%}
+  {% include "nav2.html" or user_type == "Admin"%}
 {%else%}
 {% include "nav3.html" %}
 <div class="album py-5 bg-light">
@@ -21,7 +21,7 @@
         <h3>Address</h3>
         {{row[12]}}, {{row[13]}}, Co. {{row[14]}}<br>
         <br>
-        {%if user_type != "Job Poster" || user_type == "Admin"%}
+        {%if user_type != "Job Poster" or user_type == "Admin"%}
             <a href = "/take_job"><button class="btn btn-sm btn-outline-secondary" type="submit" value = "{{row[0]}}">Take Job</button></a>
         {%endif%}
     
