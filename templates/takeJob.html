@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
-{%if user_type == "Job Poster"%}
+{%if user_type == "Job Poster" || user_type == "Admin"%}
   {% include "nav.html" %}
+{%if user_type == "Job Searcher"%}
+  {% include "nav2.html" || user_type == "Admin"%}
 {%else%}
-  {% include "nav2.html" %}
-{%endif%}
+{% include "nav3.html" %}
 {% block content2 %}
 <h2>You must await a response from the job poster.</h2>
 <h2>You will recieve an email whether stating you were accepted</h2>

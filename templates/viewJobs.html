@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
-{%if user_type == "Job Poster"%}
+{%if user_type == "Job Poster" || user_type == "Admin"%}
   {% include "nav.html" %}
+{%if user_type == "Job Searcher"%}
+  {% include "nav2.html" || user_type == "Admin"%}
 {%else%}
-  {% include "nav2.html" %}
-{%endif%}
+{% include "nav3.html" %}
 {% block content2 %}
   <title>View Jobs</title>
     <main role="main">
@@ -30,7 +31,7 @@
                   <form method = "POST" action = "/view_job">
                     <button type="submit"class="btn btn-sm btn-outline-secondary" name = "view_button" value = "{{row[0]}}">View</button>
                   </form>
-                    {%if the_user_Id == row[2]%}
+                    {%if the_user_Id == row[2] || user_type == 'Admin'%}
                   <form method = "POST" action = "/secure_id">
                     <button type="submit" class="btn btn-sm btn-outline-secondary" name = "edit_button" value = "{{row[0]}}">Edit</button>
                     {% endif %}
