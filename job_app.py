@@ -56,6 +56,7 @@ def post_job():
 
     username = session['username']
     user_type = session['user_type']
+    print(user_type)
 
     if user_type != 'Job Poster' or user_type != 'Admin':
         return redirect("/", code=302)
