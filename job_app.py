@@ -350,7 +350,7 @@ def edit_job():
     username = session['username']
     user_type = session['user_type']
 
-    if user_type != 'Job Poster':
+    if user_type == 'Job Searcher':
         return redirect("/", code=302)
     
     job_id = session['job_id']
