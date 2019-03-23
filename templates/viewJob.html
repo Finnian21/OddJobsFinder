@@ -26,7 +26,7 @@
             <a href = "/take_job"><button class="btn btn-sm btn-outline-secondary" type="submit" value = "{{row[0]}}">Take Job</button></a>
         {%endif%}
     
-        {%if user_Id == row[2]% or user_type == "Admin"}
+        {%if user_Id == row[2] or user_type == "Admin"}
           <form method = "POST" action = "/secure_id">
             <button type="submit" class="btn btn-sm btn-outline-secondary" name = "edit_button" value = "{{row[0]}}">Edit</button>
           </form>
