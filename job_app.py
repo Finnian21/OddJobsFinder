@@ -57,7 +57,7 @@ def post_job():
     username = session['username']
     user_type = session['user_type']
 
-    if user_type != 'Job Poster':
+    if user_type != 'Job Poster' or user_type == 'Admin':
         return redirect("/", code=302)
 
     sql = "SELECT * FROM users where username = '" + username + "'"
@@ -134,7 +134,6 @@ def post_job():
 def view_jobs():
 
     db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')
-    #db = session['db']
     cursor = db.cursor()
 
     if 'username' in session: 
