@@ -22,6 +22,7 @@ def login():
     db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')
     error = None
     cursor = db.cursor()
+    cursor2 = db.cursor()
 
     if 'username' in session:
         return redirect("/", code=302)
@@ -31,22 +32,18 @@ def login():
         username = request.form['username']
         password = request.form['password']
 
-        cursor.execute("SELECT salt from users Where username = '" + username + "'")
-        results = cursor.fetchall()
+        cursor2.execute("SELECT salt from users Where username = '" + username + "'")
+        results = cursor2.fetchall()
 
         for row in results:
             the_salt = row[0]
-        print(the_salt)
+
         password = hashlib.sha256(password.encode()+ the_salt.encode()).hexdigest()
 
-        print(password)
-
-        sql = "SELECT username, password from users where username='" + username + "' and password='" + password + "'"
-        results2 = cursor.fetchall()
+        sql = "SELECT * from users where username='" + username + "' and password='" + password + "'"
         cursor.execute(sql)
-        
-        for row in results2:
-            print(row[1])
+
+        print(sql)
 
         if cursor.fetchone() is None:
             error = 'Invalid Credentials. Please try again.'
