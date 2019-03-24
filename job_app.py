@@ -330,10 +330,9 @@ def register():
 
         hashed_password = hashlib.sha256(password.encode()).hexdigest()
         print(len(hashed_password))
-        salt = b62encode(os.urandom(64))
-        the_salt = crypt.mksalt(crypt.METHOD_SHA512)
+
+        the_salt = crypt.mksalt(crypt.METHOD_SHA256)
         print(the_salt)
-        print(salt)
         print(hashed_password)
 
         cursor.execute("INSERT INTO users (firstName, lastName, username, userType, description, age, phone, email, street, town, county, password) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (firstname, lastname, username, user_type, description, age, phone, email, street, town, county, password))
