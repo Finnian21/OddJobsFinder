@@ -32,7 +32,7 @@ def login():
         password = request.form['password']
 
         cursor.execute("SELECT salt from users Where username = '" + username + "'")
-        results = cursor2.fetchall()
+        results = cursor.fetchall()
 
         for row in results:
             the_salt = row[0]
