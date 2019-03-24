@@ -325,10 +325,8 @@ def register():
         county = request.form["county"]
         password = request.form["password"]
         
-        salt = uuid.uuid4().hex
-        hashed_password = hashlib.sha512(password + salt).encode('utf-8').hexdigest()
+        hashed_password = hashlib.sha256(db_password.encode().hexdigest())
 
-        print(salt)
         print(hashed_password)
 
         cursor.execute("INSERT INTO users (firstName, lastName, username, userType, description, age, phone, email, street, town, county, password) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (firstname, lastname, username, user_type, description, age, phone, email, street, town, county, password))
