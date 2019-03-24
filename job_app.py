@@ -328,7 +328,7 @@ def register():
 
         hashed_password = hashlib.sha256(password.encode()).hexdigest()
 
-        salt = random.getrandbits(hashed_password.len())
+        salt = random.getrandbits(len(hashed_password))
         print(salt)
         print(hashed_password)
 
