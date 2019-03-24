@@ -327,7 +327,7 @@ def register():
         password = request.form["password"]
 
         hashed_password = hashlib.sha256(password.encode()).hexdigest()
-
+        print(len(hashed_password))
         salt = random.getrandbits(len(hashed_password))
         print(salt)
         print(hashed_password)
