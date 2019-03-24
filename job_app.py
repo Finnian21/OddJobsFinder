@@ -325,7 +325,7 @@ def register():
         county = request.form["county"]
         password = request.form["password"]
         
-        salt = uuid.uuid4().encode('utf-8').hex
+        salt = uuid.uuid4().hex
         hashed_password = hashlib.sha512(password + salt).encode('utf-8').hexdigest()
 
         print(salt)
