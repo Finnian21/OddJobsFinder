@@ -325,10 +325,11 @@ def register():
         town = request.form["town"]
         county = request.form["county"]
         password = request.form["password"]
-        salt = random.getrandbits(128)
-        print(salt)
+
         hashed_password = hashlib.sha256(password.encode()).hexdigest()
+        print(salt)
         
+        salt = random.getrandbits(128)
         print(hashed_password)
 
         cursor.execute("INSERT INTO users (firstName, lastName, username, userType, description, age, phone, email, street, town, county, password) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (firstname, lastname, username, user_type, description, age, phone, email, street, town, county, password))
