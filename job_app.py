@@ -2,6 +2,7 @@ from flask import Flask, render_template, url_for, escape, request, redirect, se
 from flask_mail import Mail, Message
 import datetime
 import pymysql
+import hashlib, uuid
 
 app = Flask(__name__)
 mail=Mail(app)
@@ -323,6 +324,11 @@ def register():
         town = request.form["town"]
         county = request.form["county"]
         password = request.form["password"]
+        salt = uuid.uuid4().hex
+       
+        hashed_password = hashlib.sha512(password + salt).hexdigest()
+        print(salt)
+        print(hashed_password)
 
         cursor.execute("INSERT INTO users (firstName, lastName, username, userType, description, age, phone, email, street, town, county, password) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (firstname, lastname, username, user_type, description, age, phone, email, street, town, county, password))
         db.commit()
