@@ -4,6 +4,8 @@ import datetime
 import pymysql
 import hashlib, uuid
 import random
+import crypt
+crypt.mksalt(crypt.METHOD_SHA512)
 
 app = Flask(__name__)
 mail=Mail(app)
@@ -329,6 +331,8 @@ def register():
         hashed_password = hashlib.sha256(password.encode()).hexdigest()
         print(len(hashed_password))
         salt = b62encode(os.urandom(64))
+        the_salt = crypt.mksalt(crypt.METHOD_SHA512)
+        print(the_salt)
         print(salt)
         print(hashed_password)
 
