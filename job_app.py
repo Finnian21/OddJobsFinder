@@ -3,6 +3,8 @@ from flask_mail import Mail, Message
 import datetime
 import pymysql
 import hashlib, uuid
+import random
+import string
 
 app = Flask(__name__)
 mail=Mail(app)
