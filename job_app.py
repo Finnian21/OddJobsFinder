@@ -329,8 +329,8 @@ def register():
         password = request.form["password"]
         
         the_salt = crypt.mksalt(crypt.METHOD_SHA256)
-        hashed_password = hashlib.sha256(password.encode()+ the_salt.encode()).hexdigest()
-        print(hashed_password)
+        password = hashlib.sha256(password.encode()+ the_salt.encode()).hexdigest()
+        print(password)
 
         cursor.execute("INSERT INTO users (firstName, lastName, username, userType, description, age, phone, email, street, town, county, password) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (firstname, lastname, username, user_type, description, age, phone, email, street, town, county, password))
         db.commit()
