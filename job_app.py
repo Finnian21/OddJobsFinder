@@ -36,7 +36,7 @@ def login():
 
         for row in results:
             the_salt = row[0]
-        
+        print(the_salt)
         password = hashlib.sha256(password.encode()+ the_salt.encode()).hexdigest()
 
         print(password)
