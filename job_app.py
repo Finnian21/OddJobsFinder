@@ -325,7 +325,7 @@ def register():
         county = request.form["county"]
         password = request.form["password"]
         
-        hashed_password = hashlib.sha256(db_password.encode().hexdigest())
+        hashed_password = hashlib.sha256(password.encode().hexdigest())
 
         print(hashed_password)
 
