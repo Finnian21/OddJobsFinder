@@ -34,6 +34,9 @@ def login():
         cursor.execute("SELECT salt from users Where username = '" + username + "'")
         results = cursor.fetchall()
 
+        for row in results:
+            the_salt = row[0]
+        
         password = hashlib.sha256(password.encode()+ the_salt.encode()).hexdigest()
 
         sql = "SELECT * from users where username='" + username + "' and password='" + password + "'"
