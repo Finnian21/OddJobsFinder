@@ -326,9 +326,8 @@ def register():
         password = request.form["password"]
         
         hashed_password = hashlib.sha256(password.encode())
-        hashed_password.hexdigest()
 
-        print(hashed_password)
+        print(hashed_password.hexdigest())
 
         cursor.execute("INSERT INTO users (firstName, lastName, username, userType, description, age, phone, email, street, town, county, password) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (firstname, lastname, username, user_type, description, age, phone, email, street, town, county, password))
         db.commit()
