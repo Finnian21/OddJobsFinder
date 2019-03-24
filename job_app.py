@@ -41,7 +41,7 @@ def login():
 
         sql = "SELECT * from users where username='" + username + "' and password='" + password + "'"
 
-        cursor.execute(sql2)
+        cursor.execute(sql)
 
         if cursor.fetchone() is None:
             error = 'Invalid Credentials. Please try again.'
