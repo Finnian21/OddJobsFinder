@@ -326,7 +326,7 @@ def register():
         password = request.form["password"]
         
         hashed_password = hashlib.sha256(password.encode()).hexdigest()
-        salt = uuid.uuid4().hex
+        salt = uuid.uui128().hex
         print(salt)
         print(hashed_password)
 
