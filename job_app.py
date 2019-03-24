@@ -30,9 +30,15 @@ def login():
 
         username = request.form['username']
         password = request.form['password']
+
+        cursor.execute("SELECT salt from users Where username = '" + username + "'")
+        results = cursor.fetchall()
+
+        password = hashlib.sha256(password.encode()+ the_salt.encode()).hexdigest()
+
         sql = "SELECT * from users where username='" + username + "' and password='" + password + "'"
 
-        cursor.execute(sql)
+        cursor.execute(sql2)
 
         if cursor.fetchone() is None:
             error = 'Invalid Credentials. Please try again.'
