@@ -180,7 +180,7 @@ def view_jobs():
 
 @app.route('/view_job', methods = ['GET', 'POST'])
 def view_job():
-    db = session['db']
+    db = session['database']
     #db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')
     cursor = db.cursor()
 
@@ -214,7 +214,8 @@ def view_job():
 @app.route('/', methods = ['GET', 'POST'])
 def home():
     db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')#db = session['db']
-    session['db'] = db
+    session['database'] = db
+
     if 'username' in session: 
         username = session['username']
         user_type = session['user_type']
