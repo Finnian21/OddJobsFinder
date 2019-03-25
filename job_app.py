@@ -422,7 +422,7 @@ def edit_profile():
     user_Id = session['user_id']
     
     job_id = session['job_id']
-    sql = "SELECT * FROM users WHERE jobId = " + str(user_Id)
+    sql = "SELECT * FROM users WHERE userId = " + str(user_Id)
     cursor.execute(sql)
     results = cursor.fetchall()
         
