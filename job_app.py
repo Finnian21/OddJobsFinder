@@ -211,7 +211,7 @@ def view_taken_jobs():
     
     cursor.close()
     db.close()
-    return render_template('viewJobs.html', results2 = results2, the_user_Id = the_user_Id, current_time = current_time, user_type = user_type)
+    return render_template('viewTakenJobs.html', results2 = results2, the_user_Id = the_user_Id, current_time = current_time, user_type = user_type)
 
 @app.route('/view_job', methods = ['GET', 'POST'])
 def view_job():
