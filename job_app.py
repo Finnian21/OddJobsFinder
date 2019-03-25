@@ -409,6 +409,50 @@ def edit_job():
     db.close()
     return render_template('editJob.html', results=results)
 
+@app.route('/edit_profile', methods = ['GET', 'POST'])
+def edit_profile():
+    db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')
+    cursor = db.cursor()
+    
+    if 'username' not in session:
+        return redirect("/login", code=302)
+
+    username = session['username']
+    user_type = session['user_type']
+
+    if user_type == 'Job Searcher':
+        return redirect("/", code=302)
+    
+    job_id = session['job_id']
+    sql = "SELECT * FROM jobs WHERE jobId = " + job_id
+    cursor.execute(sql)
+    results = cursor.fetchall()
+        
+    if request.method == 'POST':
+        title =  request.form["inputTitle"]
+        description =  request.form["description"]
+        duration =  request.form["duration"]
+        pay =  request.form["pay"]
+        catagory =  request.form["catagory"]
+        resources_provided = request.form["resourcesProvided"]
+        resources_required = request.form["resourcesRequired"]
+        phone = request.form["phone"]
+        email = request.form["email"]    
+        street = request.form["street"]
+        town = request.form["town"]
+        county = request.form["county"]
+        
+        cursor.execute("""UPDATE jobs SET title = %s, description = %s, duration = %s, pay = %s, catagory = %s, resourcesProvided = %s,
+        resourcesRequired = %s, email = %s, phone = %s, street = %s, town = %s, county = %s WHERE JobID = %s""", (title, description, duration, pay, 
+        catagory, resources_provided, resources_required, email, phone, street, town, county, job_id))
+        db.commit()
+
+        return redirect("/view_profile", code=302)
+    
+    cursor.close()
+    db.close()
+    return render_template('editProfile.html', results=results)
+
 @app.route('/view_profile', methods = ['GET', 'POST'])
 def view_profile():
     db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')

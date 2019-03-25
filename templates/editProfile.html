@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% block content %}
+{% include "nav.html" %}
+{% block content2 %}
+   <h2  class="h2">Edit Job</h2>
+      <form class="form-signin" method = "POST" action = "/edit_profile" class = "form-control"><br>
+        {%for row in results%}
+        <div class="two-col">
+          <div class="col1">
+            <label for="inputTitle">First Name:</label>
+            <input type="text" id="inputTitle" name =  "inputTitle" class="form-control" value = "{{row[1]}}" required autofocus>
+            <br>
+            <label for="pay" class = "">Age:</label>
+              <input type="number" name="pay" id = "pay" class = "form-control" min = "1" max = "500" value = "{{row[5]}}"><br>
+              <label for="resourcesProvided" class = "">Resources Provided:</label>
+              <textarea rows="5" id = "resourcesProvided" cols="40" name="resourcesProvided" type = "text" class = "form-control">{{row[8]}}</textarea>
+          </div>
+          <div class="col2">
+          <label for="inputTitle">Last Name:</label>
+            <input type="text" id="inputTitle" name =  "inputTitle" class="form-control" value = "{{row[1]}}" required autofocus>
+            <br>
+            <label for="duration">Username:</label>
+            <input type="text" name="duration" id = "duration" class = "form-control" value = "{{row[4]}}"><br>
+          </div>
+        </div>
+        <br>
+        <label for="description">Description:</label>
+        <textarea rows="8" cols="40" id = "description" name="description" type = "text" class = "form-control">{{row[3]}}</textarea>
+        <br>
+        <label for="email">Email:</label>
+        <input type="email"  name = "email" id="email" class="form-control" value = "{{row[10]}}" autofocus>
+        <label for="phone">Phone Number:</label>
+        <input type="number" name = "phone" id="phone" class="form-control" value = "{{row[11]}}" autofocus>
+        <label for="street">Street:</label>
+        <input type="text" name = "street" id="street" class="form-control" value = "{{row[12]}}" autofocus>
+        <label for="town">Town:</label>
+        <input type="text" id="town" name = "town" class="form-control" value = "{{row[13]}}" autofocus>
+        <label for="county">County:</label>
+            <select class = "form-control" name = "county" id = "county">
+                <option class="form-control" value="{{row[14]}}" selected = "selected">{{row[14]}}</option>
+                <option value="Antirm" class = "form-control">Antrim</option>
+                <option value="Armagh" class = "form-control">Armagh</option>
+                <option value="Carlow" class = "form-control">Carlow</option>
+                <option value="Cavan" class = "form-control">Cavan</option>
+                <option value="Clare" class = "form-control">Clare</option>
+                <option value="Cork" class = "form-control">Cork</option>
+                <option value="Derry" class = "form-control">Derry</option>
+                <option value="Donegal" class = "form-control">Donegal</option>
+                <option value="Down" class = "form-control">Down</option>
+                <option value="Dublin" class = "form-control">Dublin</option>
+                <option value="Fermanagh" class = "form-control">Fermanagh</option>
+                <option value="Galway" class = "form-control">Galway</option>
+                <option value="Kerry" class = "form-control">Kerry</option>
+                <option value="Kildare" class = "form-control">kildare</option>
+                <option value="Kilkenny" class = "form-control">Kilkenny</option>
+                <option value="Laois" class = "form-control">Laois</option>
+                <option value="Leitrim" class = "form-control">Leitrim</option>
+                <option value="Limerick" class = "form-control">Limerick</option>
+                <option value="longford" class = "form-control">Longford</option>
+                <option value="Louth" class = "form-control">Louth</option>
+                <option value="Mayo" class = "form-control">Mayo</option>
+                <option value="Meath" class = "form-control">Meath</option>
+                <option value="Monaghan" class = "form-control">Monaghan</option>
+                <option value="Offaly" class = "form-control">Offaly</option>
+                <option value="Roscommon" class = "form-control">Roscommon</option>
+                <option value="Sligo" class = "form-control">Sligo</option>
+                <option value="Tipperary" class = "form-control">Tipperary</option>
+                <option value="Tyrone" class = "form-control">Tyrone</option>
+                <option value="Waterford" class = "form-control">Waterford</option>
+                <option value="Westmeath" class = "form-control">Westmeath</option>
+                <option value="Wicklow" class = "form-control">Wicklow</option>
+            </select>
+      <br><br>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+        <p class="mt-5 mb-3 text-muted">&copy; 2019</p>
+    </form>
+    {% endfor %}
+{% endblock %}
+{% endblock %}
