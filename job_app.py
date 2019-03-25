@@ -439,7 +439,7 @@ def edit_profile():
         county = request.form["county"]
         
         cursor.execute("""UPDATE users SET firstname = %s, lastname = %s, username = %s, age = %s, phone = %s, email = %s, street = %s, town = %s, county = %s WHERE userId = %s""", 
-        (firstname, lastname, username, description, age, phone, email, town, county))
+        (firstname, lastname, username, description, age, phone, email, town, county, userId))
         db.commit()
 
         return redirect("/view_profile", code=302)
