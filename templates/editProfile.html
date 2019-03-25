@@ -7,17 +7,17 @@
         {%for row in results%}
         <div class="two-col">
           <div class="col1">
-            <label for="inputTitle">First Name:</label>
+            <label for="firstname">First Name:</label>
             <input type="text" id="firstname" name =  "firstname" class="form-control" value = "{{row[1]}}" required autofocus>
             <br>
             <label for="age" class = "">Age:</label>
-              <input type="number" name="pay" id = "pay" class = "form-control" min = "1" max = "500" value = "{{row[4]}}"><br>
+              <input type="number" name="age" id = "age" class = "form-control" min = "1" max = "100" value = "{{row[4]}}"><br>
           </div>
           <div class="col2">
-          <label for="inputTitle">Last Name:</label>
+          <label for="firstname">Last Name:</label>
             <input type="text" id="lastname" name =  "lastname" class="form-control" value = "{{row[2]}}" required autofocus>
             <br>
-            <label for="duration">Username:</label>
+            <label for="username">Username:</label>
             <input type="text" name="username" id = "username" class = "form-control" value = "{{row[3]}}"><br>
           </div>
         </div>
@@ -35,7 +35,7 @@
         <input type="text" id="town" name = "town" class="form-control" value = "{{row[10]}}" autofocus>
         <label for="county">County:</label>
             <select class = "form-control" name = "county" id = "county">
-                <option class="form-control" value="{{row[14]}}" selected = "selected">{{row[11]}}</option>
+                <option class="form-control" value="{{row[11]}}" selected = "selected">{{row[11]}}</option>
                 <option value="Antirm" class = "form-control">Antrim</option>
                 <option value="Armagh" class = "form-control">Armagh</option>
                 <option value="Carlow" class = "form-control">Carlow</option>
