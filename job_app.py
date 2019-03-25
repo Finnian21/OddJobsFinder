@@ -419,12 +419,13 @@ def edit_profile():
 
     username = session['username']
     user_type = session['user_type']
+    user_Id = session['user_id']
 
     if user_type == 'Job Searcher':
         return redirect("/", code=302)
     
     job_id = session['job_id']
-    sql = "SELECT * FROM jobs WHERE jobId = " + job_id
+    sql = "SELECT * FROM users WHERE jobId = " + str(user_Id)
     cursor.execute(sql)
     results = cursor.fetchall()
         
@@ -463,7 +464,6 @@ def view_profile():
     sql = "SELECT * from users where userId = '" + str(user_id) + "'"
     cursor.execute(sql)
     results = cursor.fetchall()
-    print(sql)
 
     if 'username' not in session:
         return redirect("/", code=302)

@@ -8,36 +8,34 @@
         <div class="two-col">
           <div class="col1">
             <label for="inputTitle">First Name:</label>
-            <input type="text" id="inputTitle" name =  "inputTitle" class="form-control" value = "{{row[1]}}" required autofocus>
+            <input type="text" id="firstname" name =  "firstname" class="form-control" value = "{{row[1]}}" required autofocus>
             <br>
-            <label for="pay" class = "">Age:</label>
-              <input type="number" name="pay" id = "pay" class = "form-control" min = "1" max = "500" value = "{{row[5]}}"><br>
-              <label for="resourcesProvided" class = "">Resources Provided:</label>
-              <textarea rows="5" id = "resourcesProvided" cols="40" name="resourcesProvided" type = "text" class = "form-control">{{row[8]}}</textarea>
+            <label for="age" class = "">Age:</label>
+              <input type="number" name="pay" id = "pay" class = "form-control" min = "1" max = "500" value = "{{row[4]}}"><br>
           </div>
           <div class="col2">
           <label for="inputTitle">Last Name:</label>
-            <input type="text" id="inputTitle" name =  "inputTitle" class="form-control" value = "{{row[1]}}" required autofocus>
+            <input type="text" id="lastname" name =  "lastname" class="form-control" value = "{{row[2]}}" required autofocus>
             <br>
             <label for="duration">Username:</label>
-            <input type="text" name="duration" id = "duration" class = "form-control" value = "{{row[4]}}"><br>
+            <input type="text" name="username" id = "username" class = "form-control" value = "{{row[3]}}"><br>
           </div>
         </div>
         <br>
         <label for="description">Description:</label>
-        <textarea rows="8" cols="40" id = "description" name="description" type = "text" class = "form-control">{{row[3]}}</textarea>
+        <textarea rows="8" cols="40" id = "description" name="description" type = "text" class = "form-control">{{row[5]}}</textarea>
         <br>
         <label for="email">Email:</label>
-        <input type="email"  name = "email" id="email" class="form-control" value = "{{row[10]}}" autofocus>
+        <input type="email"  name = "email" id="email" class="form-control" value = "{{row[8]}}" autofocus>
         <label for="phone">Phone Number:</label>
-        <input type="number" name = "phone" id="phone" class="form-control" value = "{{row[11]}}" autofocus>
+        <input type="number" name = "phone" id="phone" class="form-control" value = "{{row[7]}}" autofocus>
         <label for="street">Street:</label>
-        <input type="text" name = "street" id="street" class="form-control" value = "{{row[12]}}" autofocus>
+        <input type="text" name = "street" id="street" class="form-control" value = "{{row[9]}}" autofocus>
         <label for="town">Town:</label>
-        <input type="text" id="town" name = "town" class="form-control" value = "{{row[13]}}" autofocus>
+        <input type="text" id="town" name = "town" class="form-control" value = "{{row[10]}}" autofocus>
         <label for="county">County:</label>
             <select class = "form-control" name = "county" id = "county">
-                <option class="form-control" value="{{row[14]}}" selected = "selected">{{row[14]}}</option>
+                <option class="form-control" value="{{row[14]}}" selected = "selected">{{row[11]}}</option>
                 <option value="Antirm" class = "form-control">Antrim</option>
                 <option value="Armagh" class = "form-control">Armagh</option>
                 <option value="Carlow" class = "form-control">Carlow</option>
