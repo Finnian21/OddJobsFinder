@@ -432,6 +432,7 @@ def edit_profile():
         username =  request.form["username"]
         description =  request.form["description"]
         age =  request.form["age"]
+        print(age)
         phone = request.form["phone"]
         email = request.form["email"]    
         street = request.form["street"]
