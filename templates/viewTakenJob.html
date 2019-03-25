@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+{%if user_type == "Job Poster" or user_type == "Admin"%}
+  {% include "nav.html" %}
+{%elif user_type == "Job Searcher"%}
+  {% include "nav2.html" or user_type == "Admin"%}
+{%else%}
+{% include "nav3.html" %}
+{%endif%}
+{% block content2 %}
+{%for row in results%}
+<div class="album py-5 bg-light">
+    <div class = "a">
+        <h3>Job Details</h3>
+        <b>Title:</b> {{row[1]}}<br>
+        <b>User Name:</b> {{row[18]}} {{row[19]}}<br>
+        <b>Pay(€):</b> {{row[5]}}<br>
+        <b>Duration:</b> {{row[4]}}<br>
+        <b>Catagory:</b> {{row[6]}}<br>
+        <b>Description:</b> {{row[3]}}<br>
+        <b>Resources Required:</b> {{row[8]}}<br>
+        <b>Resources Provided:</b> {{row[9]}}<br>
+        <br>
+        <h3>Address</h3>
+        {{row[12]}}, {{row[13]}}, Co. {{row[14]}}<br>
+        <br>
+        {%if user_type != "Job Poster" or user_type == "Admin"%}
+            <a href = "/take_job"><button class="btn btn-sm btn-outline-secondary" type="submit" value = "{{row[0]}}">Take Job</button></a>
+        {%endif%}
+    
+        {%if user_Id == row[2] or user_type == "Admin"%}
+          <form method = "POST" action = "/secure_id">
+            <button type="submit" class="btn btn-sm btn-outline-secondary" name = "edit_button" value = "{{row[0]}}">Edit</button>
+          </form>
+        {% endif %}
+    </div>
+</div>
+{%endfor%}
+{% endblock %}
+{% endblock %}

@@ -178,6 +178,41 @@ def view_jobs():
     db.close()
     return render_template('viewJobs.html', results2 = results2, the_user_Id = the_user_Id, current_time = current_time, user_type = user_type)
 
+@app.route('/view_taken_jobs', methods = ['GET', 'POST'])
+def view_taken_jobs():
+
+    db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')
+    cursor = db.cursor()
+
+    if 'username' in session: 
+        username = session['username']
+        user_type = session['user_type']
+
+        sql = "SELECT * FROM users where username ='" + username + "'"
+        cursor.execute(sql)
+        results = cursor.fetchall()
+
+        for row in results:
+            the_user_Id = row[0]
+    else:
+        username = ''
+        the_user_Id = 0
+        user_type = ''
+    
+    session['user_id'] = the_user_Id
+
+    sql2 = "SELECT * FROM jobs INNER JOIN users ON jobs.UserID=users.userId WHERE takerId = '%s' ORDER BY timeStampPosted DESC", (str(the_user_Id))
+    cursor.execute(sql2)
+    results2 = cursor.fetchall()
+    current_time = datetime.datetime.now()
+    for row in results2:
+        session['job_id'] = row[2]
+        elapsed_time = current_time - row[7]
+    
+    cursor.close()
+    db.close()
+    return render_template('viewJobs.html', results2 = results2, the_user_Id = the_user_Id, current_time = current_time, user_type = user_type)
+
 @app.route('/view_job', methods = ['GET', 'POST'])
 def view_job():
     db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')
