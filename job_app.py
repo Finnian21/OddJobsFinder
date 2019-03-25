@@ -214,7 +214,8 @@ def view_job():
 @app.route('/', methods = ['GET', 'POST'])
 def home():
     db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')#db = session['db']
-    session['database'] = db
+    print(db)
+   #  session['database'] = db
 
     if 'username' in session: 
         username = session['username']
