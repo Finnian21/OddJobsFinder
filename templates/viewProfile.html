@@ -24,6 +24,11 @@
           <a href = "/take_job"><button class="btn btn-lg btn-primary btn-block" type="submit" value = "">Saved Jobs</button></a>
           </div>
         </li>
+          <li class="list-group-item d-flex justify-content-between lh-condensed">
+          <div>
+          <a href = "/take_job"><button class="btn btn-lg btn-primary btn-block" type="submit" value = "">Edit Profile</button></a>
+          </div>
+        </li>
       </ul>
     </div>
 {%for row in results%}
@@ -41,7 +46,6 @@
           <h3>Contact Details</h3>
           <b>Phone:</b> {{row[7]}} <b>Email:</b> {{row[8]}}<br>
           <br>
-          <a href = "/edit_profile"><button class="btn btn-sm btn-outline-secondary" type="submit" value = "{{row[0]}}">Edit</button></a>
       </div>
   </div>
 {%endfor%}
