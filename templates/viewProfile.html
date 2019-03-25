@@ -48,7 +48,6 @@
           <strong>$20</strong>
         </li>
       </ul>
-
       <form class="card p-2">
         <div class="input-group">
           <input type="text" class="form-control" placeholder="Promo code">
@@ -59,7 +58,7 @@
       </form>
     </div>
 {%for row in results%}
-<div class="album py-5 bg-light">
+<div class="col-md-8 order-md-1">
     <div class = "a">
         <h3>User Details</h3>
         <b>Full Name:</b> {{row[1]}} {{row[2]}}<br>
