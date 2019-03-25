@@ -410,7 +410,7 @@ def view_profile():
     cursor.execute(sql)
     results = cursor.fetchall()
 
-    if username not in session:
+    if 'username' not in session:
         return redirect("/", code=302)
     
     cursor.close()
