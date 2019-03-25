@@ -11,7 +11,7 @@
             <input type="text" id="firstname" name =  "firstname" class="form-control" value = "{{row[1]}}" required autofocus>
             <br>
             <label for="age" class = "">Age:</label>
-              <input type="text" name="age" id = "age" class = "form-control" min = "1" max = "100" value = "{{row[4]}}"><br>
+              <input type="text" name="age" id = "age" class = "form-control" min = "1" max = "100" value = "{{row[6]}}"><br>
           </div>
           <div class="col2">
           <label for="firstname">Last Name:</label>
@@ -23,18 +23,17 @@
         </div>
         <br>
         <label for="description">Description:</label>
-        <textarea rows="8" cols="40" id = "description" name="description" type = "text" class = "form-control">{{row[5]}}</textarea>
-        <br>
+        <textarea rows="8" cols="40" id = "description" name="description" type = "text" class = "form-control">{{row[5]}}</textarea><br>
         <label for="email">Email:</label>
-        <input type="email"  name = "email" id="email" class="form-control" value = "{{row[8]}}" autofocus>
+        <input type="email"  name = "email" id="email" class="form-control" value = "{{row[8]}}" autofocus><br>
         <label for="phone">Phone Number:</label>
-        <input type="tel" name = "phone" id="phone" class="form-control" value = "{{row[7]}}" autofocus>
+        <input type="tel" name = "phone" id="phone" class="form-control" value = "{{row[7]}}" autofocus><br>
         <label for="street">Street:</label>
-        <input type="text" name = "street" id="street" class="form-control" value = "{{row[9]}}" autofocus>
+        <input type="text" name = "street" id="street" class="form-control" value = "{{row[9]}}" autofocus><br>
         <label for="town">Town:</label>
-        <input type="text" id="town" name = "town" class="form-control" value = "{{row[10]}}" autofocus>
+        <input type="text" id="town" name = "town" class="form-control" value = "{{row[10]}}" autofocus><br>
         <label for="county">County:</label>
-            <select class = "form-control" name = "county" id = "county">
+            <select class = "form-control" name = "county" id = "county"><br>
                 <option class="form-control" value="{{row[11]}}" selected = "selected">{{row[11]}}</option>
                 <option value="Antirm" class = "form-control">Antrim</option>
                 <option value="Armagh" class = "form-control">Armagh</option>
