@@ -181,7 +181,7 @@ def view_jobs():
 def view_job():
 
     db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')
-    cursor = db.cursor(prepared=True)
+    cursor = db.cursor()
 
     if request.method == 'POST':
         job_id = request.form['view_button']
