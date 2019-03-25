@@ -212,10 +212,15 @@ def view_job():
 
 @app.route('/', methods = ['GET', 'POST'])
 def home():
-
+    
     if 'username' in session: 
         username = session['username']
         user_type = session['user_type']
+        sql = "SELECT * FROM users Where username = " + username
+        cursor.execute(sql)
+        results = cursor.fetchall()
+        for row in results:
+            session['user_id'] = row[0]
     else:
         username = ''
         user_type = ''
