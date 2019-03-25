@@ -8,8 +8,6 @@
 {% include "nav3.html" %}
 {%endif%}
 {% block content2 %}
-{%for row in results%}
-<div class="album py-5 bg-light">
   <div class="row">
     <div class="col-md-4 order-md-2 mb-4">
       <h4 class="d-flex justify-content-between align-items-center mb-3">
@@ -60,6 +58,8 @@
         </div>
       </form>
     </div>
+{%for row in results%}
+<div class="album py-5 bg-light">
     <div class = "a">
         <h3>User Details</h3>
         <b>Full Name:</b> {{row[1]}} {{row[2]}}<br>
