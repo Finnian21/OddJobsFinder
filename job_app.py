@@ -399,8 +399,8 @@ def edit_job():
     db.close()
     return render_template('editJob.html', results=results)
 
-@app.route('/view_job', methods = ['GET', 'POST'])
-def view_job():
+@app.route('/view_profile', methods = ['GET', 'POST'])
+def view_profile():
     db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')
     cursor = db.cursor()
 
