@@ -432,14 +432,13 @@ def edit_profile():
         username =  request.form["username"]
         description =  request.form["description"]
         age =  request.form["age"]
-        print(age)
         phone = request.form["phone"]
         email = request.form["email"]    
         street = request.form["street"]
         town = request.form["town"]
         county = request.form["county"]
         
-        cursor.execute("""UPDATE users SET firstname = %s, lastname = %s, username = %s, age = %s, phone = %s, email = %s, street = %s, town = %s, county = %s WHERE userId = %s""", 
+        cursor.execute("""UPDATE users SET firstname = %s, lastname = %s, username = %s, description = %s, age = %s, phone = %s, email = %s, street = %s, town = %s, county = %s WHERE userId = %s""", 
         (firstname, lastname, username, description, age, phone, email, town, county, user_Id))
         db.commit()
 
