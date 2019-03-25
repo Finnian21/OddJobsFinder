@@ -218,7 +218,7 @@ def home():
     if 'username' in session: 
         username = session['username']
         user_type = session['user_type']
-        sql = "SELECT * FROM users Where username = " + username
+        sql = "SELECT * FROM users Where username = '" + username + "'"
         cursor.execute(sql)
         results = cursor.fetchall()
         for row in results:
@@ -226,7 +226,7 @@ def home():
     else:
         username = ''
         user_type = ''
-        
+
     cursor.close()
     db.close()
         
