@@ -187,7 +187,7 @@ def view_taken_jobs():
     if 'username' in session: 
         username = session['username']
         user_type = session['user_type']
-
+        print(username)
         sql = "SELECT * FROM users where username ='" + username + "'"
         cursor.execute(sql)
         results = cursor.fetchall()
