@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+{%if user_type == "Job Poster" or user_type == "Admin"%}
+  {% include "nav.html" %}
+{%elif user_type == "Job Searcher"%}
+  {% include "nav2.html" or user_type == "Admin"%}
+{%else%}
+{% include "nav3.html" %}
+{%endif%}
+{% block content2 %}
+{%for row in results%}
+<div class="album py-5 bg-light">
+    <div class = "a">
+        <h3>User Details</h3>
+        <b>Full Name:</b> {{row[1]}} {{row[2]}}<br>
+        <b>Age:</b> {{row[5]}}<br>
+        <b>Description:</b> {{row[3]}}<br>
+        <b>Type:</b>{{row[]}}<br>
+        <br>
+        <h3>Address</h3>
+        {{row[12]}}, {{row[13]}}, Co. {{row[14]}}<br>
+        <br>
+        <h3>Contact Details</h3>
+        <b>Phone:</b>{{row[12]}},<b>Email:</b>{{row[13]}}<br>
+        <br>
+        <a href = "/edit_profile"><button class="btn btn-sm btn-outline-secondary" type="submit" value = "{{row[0]}}">Edit</button></a>
+    </div>
+</div>
+{%endfor%}
+{% endblock %}
+{% endblock %}

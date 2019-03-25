@@ -399,6 +399,24 @@ def edit_job():
     db.close()
     return render_template('editJob.html', results=results)
 
+@app.route('/view_job', methods = ['GET', 'POST'])
+def view_job():
+    db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')
+    cursor = db.cursor()
+
+    user_id = session['user_id']
+
+    sql = "SELECT * from users where userId = '" + user_id + "'"
+    cursor.execute(sql)
+    results = cursor.fetchall()
+
+    if username not in session:
+        return redirect("/", code=302)
+    
+    cursor.close()
+    db.close()
+    return render_template('viewProfile.html', results = results)
+
 app.secret_key = 'super secret key'
 if __name__ == '__main__':
    app.run(debug = True)
