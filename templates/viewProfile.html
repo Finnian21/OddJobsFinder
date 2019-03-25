@@ -17,12 +17,17 @@
       <ul class="list-group mb-3">
         <li class="list-group-item d-flex lh-condensed">
           <div>
+        {%if user_type == "Job Searcher" or user_type == "Admin"%}
           <a href ="/view_taken_jobs"><button class="btn btn-lg btn-primary btn-block" type="submit" value = "">Taken Jobs</button></a>
+        {%endif%}
+        {%if user_type == "Admin" or user_type == "Job Poster"%}
+          <a href ="/view_taken_jobs"><button class="btn btn-lg btn-primary btn-block" type="submit" value = "">My Jobs</button></a>
+        {%endif%}
           </div>
         </li>
         <li class="list-group-item d-flex justify-content-between lh-condensed">
           <div>
-          <a href ="/saved_jobs"><button class="btn btn-lg btn-primary btn-block" type="submit" value = "">Saved Jobs</button></a>
+          <a href ="/change_password"><button class="btn btn-lg btn-primary btn-block" type="submit" value = "">Change Passowrd</button></a>
           </div>
         </li>
           <li class="list-group-item d-flex justify-content-between lh-condensed">
