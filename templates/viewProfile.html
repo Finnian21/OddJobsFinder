@@ -58,22 +58,24 @@
       </form>
     </div>
 {%for row in results%}
-<div class="col-md-8 order-md-1">
-    <div class = "a">
-        <h3>User Details</h3>
-        <b>Full Name:</b> {{row[1]}} {{row[2]}}<br>
-        <b>Age:</b> {{row[4]}}<br>
-        <b>Description:</b> {{row[5]}}<br>
-        <b>Type:</b> {{row[4]}}<br>
-        <br>
-        <h3>Address</h3>
-        {{row[9]}}, {{row[10]}}, Co. {{row[11]}}<br>
-        <br>
-        <h3>Contact Details</h3>
-        <b>Phone:</b> {{row[7]}} <b>Email:</b> {{row[8]}}<br>
-        <br>
-        <a href = "/edit_profile"><button class="btn btn-sm btn-outline-secondary" type="submit" value = "{{row[0]}}">Edit</button></a>
-    </div>
+<div class="album py-5 bg-light">
+  <div class="col-md-8 order-md-1">
+      <div class = "a">
+          <h3>User Details</h3>
+          <b>Full Name:</b> {{row[1]}} {{row[2]}}<br>
+          <b>Age:</b> {{row[4]}}<br>
+          <b>Description:</b> {{row[5]}}<br>
+          <b>Type:</b> {{row[4]}}<br>
+          <br>
+          <h3>Address</h3>
+          {{row[9]}}, {{row[10]}}, Co. {{row[11]}}<br>
+          <br>
+          <h3>Contact Details</h3>
+          <b>Phone:</b> {{row[7]}} <b>Email:</b> {{row[8]}}<br>
+          <br>
+          <a href = "/edit_profile"><button class="btn btn-sm btn-outline-secondary" type="submit" value = "{{row[0]}}">Edit</button></a>
+      </div>
+  </div>
 </div>
 {%endfor%}
 {% endblock %}
