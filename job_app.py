@@ -201,7 +201,7 @@ def view_taken_jobs():
     
     session['user_id'] = the_user_Id
 
-    sql2 = "SELECT * FROM jobs INNER JOIN users ON jobs.UserID=users.userId WHERE takerId = '%s' ORDER BY timeStampPosted DESC", (str(the_user_Id))
+    sql2 = "SELECT * FROM jobs INNER JOIN users ON jobs.UserID=users.userId WHERE takerId = '" + str(the_user_Id) + "'ORDER BY timeStampPosted DESC"
     cursor.execute(sql2)
     results2 = cursor.fetchall()
     current_time = datetime.datetime.now()
