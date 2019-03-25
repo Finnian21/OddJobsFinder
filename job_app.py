@@ -409,6 +409,7 @@ def view_profile():
     sql = "SELECT * from users where userId = '" + str(user_id) + "'"
     cursor.execute(sql)
     results = cursor.fetchall()
+    print(sql)
 
     if 'username' not in session:
         return redirect("/", code=302)
