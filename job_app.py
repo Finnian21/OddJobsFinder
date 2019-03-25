@@ -369,7 +369,8 @@ def secure_id():
 def edit_job():
     db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')
     cursor = db.cursor()
-    
+    user_type = session['user_type']
+
     if 'username' not in session:
         return redirect("/login", code=302)
 
@@ -407,7 +408,7 @@ def edit_job():
     
     cursor.close()
     db.close()
-    return render_template('editJob.html', results=results)
+    return render_template('editJob.html', results=results, user_type = user_type)
 
 @app.route('/edit_profile', methods = ['GET', 'POST'])
 def edit_profile():
@@ -446,7 +447,7 @@ def edit_profile():
     
     cursor.close()
     db.close()
-    return render_template('editProfile.html', results=results)
+    return render_template('editProfile.html', results=results, user_type = user_type)
 
 @app.route('/view_profile', methods = ['GET', 'POST'])
 def view_profile():
@@ -454,6 +455,7 @@ def view_profile():
     cursor = db.cursor()
 
     user_id = session['user_id']
+    user_type = session['user_type']
 
     sql = "SELECT * from users where userId = '" + str(user_id) + "'"
     cursor.execute(sql)
@@ -464,7 +466,7 @@ def view_profile():
     
     cursor.close()
     db.close()
-    return render_template('viewProfile.html', results = results)
+    return render_template('viewProfile.html', results = results, user_type = user_type)
 
 app.secret_key = 'super secret key'
 if __name__ == '__main__':
