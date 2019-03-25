@@ -58,7 +58,6 @@
       </form>
     </div>
 {%for row in results%}
-<div class="album py-5 bg-light">
   <div class="col-md-8 order-md-1">
       <div class = "a">
           <h3>User Details</h3>
@@ -76,7 +75,6 @@
           <a href = "/edit_profile"><button class="btn btn-sm btn-outline-secondary" type="submit" value = "{{row[0]}}">Edit</button></a>
       </div>
   </div>
-</div>
 {%endfor%}
 {% endblock %}
 {% endblock %}
