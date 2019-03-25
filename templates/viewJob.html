@@ -21,6 +21,10 @@
         <b>Resources Required:</b> {{row[8]}}<br>
         <b>Resources Provided:</b> {{row[9]}}<br>
         <br>
+        {%if user_Id == row{{row[15]}}%}
+        <h3>Contanct Details</h3>
+        <b>Phone:</b> {{row[10]}}<br>
+        <b>Email:</b> {{row[11]}}<br>
         <h3>Address</h3>
         {{row[12]}}, {{row[13]}}, Co. {{row[14]}}<br>
         <br>
