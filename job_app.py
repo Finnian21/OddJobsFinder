@@ -406,7 +406,7 @@ def view_profile():
 
     user_id = session['user_id']
 
-    sql = "SELECT * from users where userId = '" + user_id + "'"
+    sql = "SELECT * from users where userId = '" + str(user_id) + "'"
     cursor.execute(sql)
     results = cursor.fetchall()
 
