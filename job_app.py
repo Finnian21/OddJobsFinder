@@ -420,9 +420,6 @@ def edit_profile():
     username = session['username']
     user_type = session['user_type']
     user_Id = session['user_id']
-
-    if user_type == 'Job Searcher':
-        return redirect("/", code=302)
     
     job_id = session['job_id']
     sql = "SELECT * FROM users WHERE jobId = " + str(user_Id)
