@@ -316,6 +316,7 @@ def decline_user():
     cursor = db.cursor()
 
     job_id = session['job_id']
+    print(job_id)
     user_id = str(session['user_id'])
     job_username = session['job_username']
 
