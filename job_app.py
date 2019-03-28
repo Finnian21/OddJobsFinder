@@ -319,6 +319,13 @@ def decline_user():
     user_id = str(session['user_id'])
     job_username = session['job_username']
 
+    sql2 = "SELECT * FROM jobs where jobId = %s and userId = %s", (job_id, user_id)
+    cursor.execute(sql2)
+    
+    if cursor.fetchone() is not None:
+        return "Error: you cannot decline a user for a job, who you have already accepted"
+
+
     sql = "SELECT * FROM users where userId ='" + user_id + "'"
     cursor.execute(sql)
     results = cursor.fetchall()
@@ -345,6 +352,13 @@ def accept_user():
     job_id = session['job_id']
     user_id = str(session['user_id'])
     job_username = session['job_username']
+
+    sql2 = "SELECT * FROM jobs where jobId = %s and takenFlag = '1'"
+    cursor.execute(sql2)
+    
+    
+    if cursor.fetchone() is not None:
+        return "Error you cannot accept a job that has already been accepted"
 
     sql = "SELECT * FROM users where userId ='" + user_id + "'"
     cursor.execute(sql)
