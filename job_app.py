@@ -363,7 +363,7 @@ def accept_user():
     results2 = cursor.fetchall()
 
     for row in results2:
-        print(row)
+        print(row[1])
 
     cursor.close()
     db.close()
