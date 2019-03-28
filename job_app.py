@@ -376,7 +376,7 @@ def accept_user():
 
             msg = Message('Declined', sender = 'oddjobsfinder@gmail.com', recipients = [email])
             msg.body = "Hi, you have been accepted."
-            msg.html = render_template("/decline.html", title = title, job_username = job_username, firstname=firstname)
+            msg.html = render_template("/declineEmail.html", title = title, job_username = job_username, firstname=firstname)
             mail.send(msg)
 
     cursor.close()
