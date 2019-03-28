@@ -30,6 +30,7 @@
         <h3>Address</h3>
         {{row[12]}}, {{row[13]}}, Co. {{row[14]}}<br>
         <br>
+        {{take_count}}
         {%if user_type != "Job Poster" and user_Id != row[15] and take_count == 'None' or user_type == "Admin"%}
             <a href = "/take_job"><button class="btn btn-sm btn-outline-secondary" type="submit" value = "{{row[0]}}">Take Job</button></a>    
         {%endif%}
