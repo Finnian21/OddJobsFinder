@@ -320,7 +320,8 @@ def decline_user():
     job_username = session['job_username']
 
     sql2 = "SELECT * FROM jobs where jobId = %s and userId = %s", (job_id, user_id)
-    cursor.execute("SELECT * FROM jobs where jobId = %s and userId = %s", (job_id, user_id))
+    
+    cursor.execute("SELECT * FROM jobs where jobId = %s and takerId = %s", (job_id, user_id))
     
     if cursor.fetchone() is not None:
         return "Error: you cannot decline a user for a job, who you have already accepted"
