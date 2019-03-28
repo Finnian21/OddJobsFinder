@@ -358,7 +358,13 @@ def accept_user():
 
     cursor.execute("UPDATE jobs SET takerId = %s, takenFlag = '1' WHERE JobID = %s", (user_id, job_id))
     db.commit()
-    
+
+    cursor.execute("SELECT * FROM jobRequests WHERE userId != %s AND jobId = %s"), (user_id, job_id)
+    results2 = cursor.fetchall()
+
+    for row in results2:
+        print(row)
+
     cursor.close()
     db.close()
     return redirect("/", code=302)
