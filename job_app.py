@@ -293,12 +293,17 @@ def take_job():
         msg.body = "Hi, your job titled " + title + " has been taken by " + username + "."
         msg.html = render_template("/email.html", title = title, username = username, firstname=firstname)
         mail.send(msg)
+
+        cursor.execute("INSERT INTO jobs (jobID, userId) VALUES (%s, %s)", (job_id, user_id))
+        db.commit()
         
     else:
         session['route'] = 'take_job'
         return redirect("/login", code=302)
+        
     cursor.close()
     db.close()
+
     return render_template('takeJob.html', results = results)
 
 @app.route('/decline_user', methods = ['GET', 'POST'])
