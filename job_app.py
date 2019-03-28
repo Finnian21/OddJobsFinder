@@ -367,7 +367,8 @@ def accept_user():
 
     cursor.close()
     db.close()
-    return redirect("/", code=302)
+    return "sent"
+    #redirect("/", code=302)
 
 @app.route('/log_out', methods = ['GET', 'POST'])
 def log_out():
