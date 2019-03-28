@@ -240,7 +240,7 @@ def view_job():
             user_Id = 0
             user_type = ""
         
-        sql = "SELECT * FROM jobRequests WHERE jobId = %s and userId %s",(job_id, user_Id)
+        sql = "SELECT * FROM jobRequests WHERE jobId = %s and userId = %s", (job_id, user_Id)
         cursor.execute(sql)
         print(cursor.rowcount())
 
