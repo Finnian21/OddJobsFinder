@@ -365,7 +365,7 @@ def accept_user():
     for row in results2:
         decline_user_id = row[2]
 
-        sql = "SELECT * FROM users where userId ='" + decline_user_id + "'"
+        sql = "SELECT * FROM users where userId ='" + str(decline_user_id) + "'"
         cursor.execute(sql)
         results3 = cursor.fetchall()
         title = session['title']
@@ -374,7 +374,7 @@ def accept_user():
             email = row[8]
             firstname = row[1]
 
-            msg = Message('Job Taken', sender = 'oddjobsfinder@gmail.com', recipients = [email])
+            msg = Message('Declined', sender = 'oddjobsfinder@gmail.com', recipients = [email])
             msg.body = "Hi, you have been accepted."
             msg.html = render_template("/decline.html", title = title, job_username = job_username, firstname=firstname)
             mail.send(msg)
