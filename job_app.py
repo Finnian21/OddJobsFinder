@@ -241,7 +241,6 @@ def view_job():
             user_type = ""
         
         cursor.execute("SELECT * FROM jobRequests WHERE userId = %s AND jobId = %s", (str(user_Id), str(job_id))
-        cursor.execute(sql)
         print(cursor.rowcount())
 
         return render_template('viewJob.html' , results = results, user_type = user_type, user_Id = user_Id)
