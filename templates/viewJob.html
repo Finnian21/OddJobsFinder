@@ -44,7 +44,8 @@
 <div class="album py-5 bg-light">
     <div class = "a">
     <h3>Comments</h3>
-    {%user_type == "Admin" || user_type == "Job Searcher"%}
+    {% if user_type == "Admin" || user_type == "Job Searcher"%}
     <h3> Leave a Comment</h3>
+    {%endif%}
 {% endblock %}
 {% endblock %}
