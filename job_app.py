@@ -240,6 +240,7 @@ def view_job():
         else:
             user_Id = 0
             user_type = ""
+            username = ""
         
         cursor.execute("SELECT * FROM jobRequests WHERE userId = %s AND jobId = %s", (user_Id, job_id))
         take_count = cursor.fetchone()
