@@ -222,7 +222,8 @@ def comment():
         print(user_id)
         print(job_id)
 
-        return redirect("/", code=302 )
+        return "hold up"
+        #return redirect("/", code=302 )
 
 @app.route('/view_job', methods = ['GET', 'POST'])
 def view_job():
