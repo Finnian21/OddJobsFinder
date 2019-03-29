@@ -205,6 +205,7 @@ def view_taken_jobs():
     cursor.execute(sql2)
     results2 = cursor.fetchall()
     current_time = datetime.datetime.now()
+    
     for row in results2:
         session['job_id'] = row[2]
         elapsed_time = current_time - row[7]
@@ -215,6 +216,7 @@ def view_taken_jobs():
 
 @app.route('/secure_job_id', methods = ['GET', 'POST'])
 def secure_job_id():
+    
     if request.method == 'POST':
         job_id = request.form['view_button']
         session['job_id'] = job_id
@@ -247,6 +249,14 @@ def view_job():
     
     cursor.execute("SELECT * FROM jobRequests WHERE userId = %s AND jobId = %s", (user_Id, job_id))
     take_count = cursor.fetchone()
+
+    if request.method == 'POST':
+        body =  request.form["comment"]
+        time_stamp_posted = datetime.datetime.now()
+
+        cursor.execute("""INSERT INTO comments (userId, jobId, body, timePosted) 
+        VALUES (%s, %s, %s, %s)""", (user_Id, job_id, body, time_stamp_posted))
+        db.commit()
     
     cursor.close()
     db.close()
