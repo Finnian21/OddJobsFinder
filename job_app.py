@@ -23,7 +23,7 @@ def login():
     db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')
     error = None
     cursor = db.cursor()
-
+    flash("Registered")
     if 'username' in session:
         return redirect("/", code=302)
 
