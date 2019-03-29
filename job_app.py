@@ -222,7 +222,7 @@ def comment():
         job_id = session['job_id']
         time_stamp_posted = datetime.datetime.now()
 
-        cursor.execute("""INSERT INTO comments (userId, jobId, body, timestamp) 
+        cursor.execute("""INSERT INTO comments (userId, jobId, body, timesPosted) 
         VALUES (%s, %s, %s, %s)""", (user_id, job_id, comment, time_stamp_posted))
         db.commit()
 
