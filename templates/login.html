@@ -2,6 +2,9 @@
 {% block content %}
 {% include "nav3.html" %}
 {% block content2 %}
+{%if registered == 'True'%}
+  <script>alert("You have registered");</script>
+{%endif%}
    <h2  class="h2">Login</h2>
       <form class="form-signin" method = "POST" action = "" class = "form-control"><br>
         {% if error %}

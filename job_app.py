@@ -24,6 +24,9 @@ def login():
     error = None
     cursor = db.cursor()
 
+    registered = session['registered']
+    print(registered)
+
     if 'username' in session:
         return redirect("/", code=302)
 
@@ -57,7 +60,7 @@ def login():
             return redirect("/", code=302)
     cursor.close()
     db.close()
-    return render_template('login.html', error=error)
+    return render_template('login.html', error=error, registered = registered)
 
 @app.route('/post_job', methods = ['GET', 'POST'])
 def post_job():
@@ -434,10 +437,12 @@ def register():
         cursor.execute("SELECT salt from users Where username = '" + username + "'")
         
         if cursor.fetchone() is not None:
-            error = 'Please enter a different username'
+            error = 'Credentials invalid, please enter different credentials.'
         else:
             cursor.execute("INSERT INTO users (firstName, lastName, username, userType, description, age, phone, email, street, town, county, password, salt) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (firstname, lastname, username, user_type, description, age, phone, email, street, town, county, password, the_salt))
             db.commit()
+            session['registered'] = True
+            print(session['registered'])
 
             return redirect("/login", code=302)
 
