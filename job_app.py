@@ -217,7 +217,7 @@ def view_taken_jobs():
 def secure_job_id():
     if request.method == 'POST':
         job_id = request.form['view_button']
-        session['job_id']
+        session['job_id'] = job_id
         return redirect("/view_job", code = 302)
 
 @app.route('/view_job', methods = ['GET', 'POST'])
