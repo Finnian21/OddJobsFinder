@@ -45,6 +45,8 @@
 <div class = "contianer">
   <div class="jumbotron">
   <h3>Comments</h3>
+  </div>
+</div>
   {% if user_type == "Admin" or user_type == "Job Searcher"%}
   <form method = "POST" action = "/secure_id">
   <b>{{username}}</b>
@@ -53,7 +55,5 @@
       <button class="btn btn-primary my-2" type ="submit">Submit</button>
   </form>
   {%endif%}
-  </div>
-</div>
 {% endblock %}
 {% endblock %}
