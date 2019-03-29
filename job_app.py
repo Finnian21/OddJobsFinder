@@ -149,7 +149,7 @@ def view_jobs():
     db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')
     cursor = db.cursor()
 
-    if 'username' in session: 
+    if 'username' in session:
         username = session['username']
         user_type = session['user_type']
 
@@ -212,6 +212,17 @@ def view_taken_jobs():
     cursor.close()
     db.close()
     return render_template('viewTakenJobs.html', results2 = results2, the_user_Id = the_user_Id, current_time = current_time, user_type = user_type)
+@app.route('/comment', methods = ['GET', 'POST'])
+def comment():
+    if request.method == 'POST':
+        comment = request.form['comment']
+        user_id = session['user_id']
+        job_id = session['job_id']
+
+        print(user_id)
+        print(job_id)
+
+        return redirect("/", code=302 )
 
 @app.route('/view_job', methods = ['GET', 'POST'])
 def view_job():
