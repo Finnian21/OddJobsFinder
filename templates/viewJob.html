@@ -52,6 +52,9 @@
       <button class="btn btn-primary my-2" type ="submit">Submit</button>
   </form>
   <h3>Comments</h3>
+  {%for row in results2%}
+  <b>{{row[8]}}:<b>{{row[3]}}
+  {%endfor%}
   </div>
 </div>
   {%endif%}

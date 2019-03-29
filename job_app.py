@@ -260,13 +260,12 @@ def view_job():
     
     sql2 = "SELECT * FROM comments INNER JOIN users ON comments.UserID=users.userId WHERE jobId = '" + str(job_id) + "'ORDER BY timePosted DESC"
     cursor.execute(sql2)
-    print(sql2)
     results2 = cursor.fetchall()
 
     cursor.close()
     db.close()
 
-    return render_template('viewJob.html' , results = results, user_type = user_type, user_Id = user_Id, take_count = take_count, username = username)
+    return render_template('viewJob.html' , results=results, results2=results2, user_type = user_type, user_Id = user_Id, take_count = take_count, username = username)
 
 @app.route('/', methods = ['GET', 'POST'])
 def home():
