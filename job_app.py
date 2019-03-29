@@ -57,7 +57,7 @@ def login():
             return redirect("/", code=302)
     cursor.close()
     db.close()
-    return render_template('login.html', error=error, registered = registered)
+    return render_template('login.html', error=error)
 
 @app.route('/post_job', methods = ['GET', 'POST'])
 def post_job():
