@@ -41,11 +41,13 @@
     </div>
 </div>
 {%endfor%}
-<div class="album py-5 bg-light">
-    <div class = "a">
+<div class="container">
+  <div class="jumbotron">
     <h3>Comments</h3>
     {% if user_type == "Admin" or user_type == "Job Searcher"%}
     <h3> Leave a Comment</h3>
+  </div>
+</div>
     {%endif%}
 {% endblock %}
 {% endblock %}
