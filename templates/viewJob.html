@@ -44,7 +44,6 @@
 {%endfor%}
 <div class = "contianer">
   <div class="jumbotron">
-  <h3>Comments</h3>
   {% if user_type == "Admin" or user_type == "Job Searcher"%}
   <form method = "POST" action = "/view_job">
   <b>{{username}}</b>
@@ -52,6 +51,7 @@
       <textarea rows="4" cols="60" id = "comment" name="comment" type = "text" class = "form-control"></textarea>
       <button class="btn btn-primary my-2" type ="submit">Submit</button>
   </form>
+  <h3>Comments</h3>
   </div>
 </div>
   {%endif%}
