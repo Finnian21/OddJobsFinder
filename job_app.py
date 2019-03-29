@@ -213,7 +213,7 @@ def view_taken_jobs():
     db.close()
     return render_template('viewTakenJobs.html', results2 = results2, the_user_Id = the_user_Id, current_time = current_time, user_type = user_type)
 
-@app.route('/secur_job_id', methods = ['GET', 'POST'])
+@app.route('/secure_job_id', methods = ['GET', 'POST'])
 def secure_job_id():
     if request.method == 'POST':
         job_id = request.form['view_button']
