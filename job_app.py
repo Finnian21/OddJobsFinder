@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, escape, request, redirect, session
+from flask import Flask, render_template, url_for, escape, request, redirect, session, flash
 from flask_mail import Mail, Message
 import datetime
 import pymysql
@@ -23,9 +23,6 @@ def login():
     db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')
     error = None
     cursor = db.cursor()
-
-    registered = session['registered']
-    print(registered)
 
     if 'username' in session:
         return redirect("/", code=302)
@@ -441,8 +438,7 @@ def register():
         else:
             cursor.execute("INSERT INTO users (firstName, lastName, username, userType, description, age, phone, email, street, town, county, password, salt) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (firstname, lastname, username, user_type, description, age, phone, email, street, town, county, password, the_salt))
             db.commit()
-            session['registered'] = True
-            print(session['registered'])
+            flash("Registered")
 
             return redirect("/login", code=302)
 
