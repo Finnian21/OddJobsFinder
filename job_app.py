@@ -430,6 +430,7 @@ def register():
         
         the_salt = crypt.mksalt(crypt.METHOD_SHA256)
         password = hashlib.sha256(password.encode()+ the_salt.encode()).hexdigest()
+        
         cursor.execute("SELECT salt from users Where username = '" + username + "'")
         
         if cursor.fetchone() is not None:
@@ -440,7 +441,7 @@ def register():
             db.commit()
 
             return redirect("/login", code=302)
-            
+
     cursor.close()
     db.close()
     return render_template('register.html')
