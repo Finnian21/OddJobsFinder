@@ -258,6 +258,11 @@ def view_job():
         VALUES (%s, %s, %s, %s)""", (user_Id, job_id, body, time_stamp_posted))
         db.commit()
     
+    sql2 = "SELECT * FROM comments INNER JOIN users ON comments.UserID=users.userId WHERE jobId = '" + str(job_id) + "'ORDER BY timeSPosted DESC"
+    cursor.execute(sql2)
+    print(sql2)
+    results2 = cursor.fetchall()
+
     cursor.close()
     db.close()
 
