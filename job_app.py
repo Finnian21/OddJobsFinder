@@ -234,6 +234,7 @@ def view_job():
         session['results'] = results
 
         if 'username' in session:
+            username = session['username']
             user_Id = session['user_id']
             user_type = session['user_type']
         else:
@@ -243,7 +244,7 @@ def view_job():
         cursor.execute("SELECT * FROM jobRequests WHERE userId = %s AND jobId = %s", (user_Id, job_id))
         take_count = cursor.fetchone()
 
-        return render_template('viewJob.html' , results = results, user_type = user_type, user_Id = user_Id, take_count = take_count)
+        return render_template('viewJob.html' , results = results, user_type = user_type, user_Id = user_Id, take_count = take_count, username = username)
     
     cursor.close()
     db.close()
