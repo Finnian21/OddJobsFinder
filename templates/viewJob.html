@@ -45,11 +45,8 @@
 <div class = "contianer">
   <div class="jumbotron">
   <h3>Comments</h3>
-  <h3>Comments</h3>
-  <h3>Comments</h3>
-  <h3>Comments</h3>
   {% if user_type == "Admin" or user_type == "Job Searcher"%}
-  <form method = "POST" action = "/secure_id">
+  <form method = "POST" action = "/comment">
   <b>{{username}}</b>
       <label for="comment">leave a comment below:</label>
       <textarea rows="4" cols="60" id = "comment" name="comment" type = "text" class = "form-control"></textarea>
