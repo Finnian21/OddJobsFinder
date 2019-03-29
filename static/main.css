@@ -118,14 +118,14 @@ div.a {
 }
 
 .jumbotron {
-  padding-top: 0px;
+  padding-top: 0;
   padding-bottom: 3rem;
   margin-bottom: 0;
   background-color: #fff;
 }
 @media (min-width: 768px) {
   .jumbotron {
-    padding-top: 0px;
+    padding-top: 0p;
     padding-bottom: 6rem;
   }
 }
