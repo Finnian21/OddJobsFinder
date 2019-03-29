@@ -218,12 +218,13 @@ def comment():
         comment = request.form['comment']
         user_id = session['user_id']
         job_id = session['job_id']
+        time_stamp_posted = datetime.datetime.now()
 
-        print(user_id)
-        print(job_id)
+        cursor.execute("""INSERT INTO jobs (user_id, job_id, body, timestamp) 
+        VALUES (%s, %s, %s, %s)""", (user_id, job_id, comment, time_stamp_posted))
+        db.commit()
 
-        return "hold up"
-        #return redirect("/", code=302 )
+        return redirect("/view_job", code = 302)
 
 @app.route('/view_job', methods = ['GET', 'POST'])
 def view_job():
