@@ -117,6 +117,13 @@ div.a {
   text-align: center;
 }
 
+.jumbotron{
+  padding-top: 0;
+  padding-bottom: 3rem;
+  margin-bottom: 0;
+  background-color: #fff;
+}
+
 .view_comments_jumbotron {
   padding-top: 0;
   padding-bottom: 3rem;
