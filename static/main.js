@@ -24,3 +24,8 @@ function myFunction2()
         text.style.display = "none";
     }
 }
+
+function alertRegisteration()
+{
+    alert("You have registered successfully");
+}

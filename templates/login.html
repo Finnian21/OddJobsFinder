@@ -20,15 +20,5 @@
         <a href="/register">Register</a><br>
         <p class="mt-5 mb-3 text-muted">&copy; 2019</p>
       </form>
-      {% with messages = get_flashed_messages() %}
-	      {% if messages %}
-          {% for message in messages %}
-            <div class="alert alert-warning alert-dismissible" role="alert">
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-              {{message}}
-            </div>
-        {% endfor %}
-	    {% endif %}
-	{% endwith %}
 {% endblock %}
 {% endblock %}
