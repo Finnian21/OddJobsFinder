@@ -46,9 +46,11 @@
   <div class="jumbotron">
   {% if user_type == "Admin" or user_type == "Job Searcher"%}
      <b>{{username}}</b>
-      <label for="comment">Leave a comment below:</label>
+  <form method = "POST" action = "/secure_id">
+      <label for="comment">leave a comment below:</label>
       <textarea rows="4" cols="60" id = "comment" name="comment" type = "text" class = "form-control"></textarea>
       <button class="btn btn-primary my-2" type ="submit">Submit</button>
+  </form>
   {%endif%}
     <h3>Comments</h3>
   </div>
