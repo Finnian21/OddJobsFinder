@@ -412,6 +412,7 @@ def log_out():
 def register():
     db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')
     cursor = db.cursor()
+    error = None
 
     if request.method == 'POST':
         firstname =  request.form["firstname"]
@@ -429,11 +430,17 @@ def register():
         
         the_salt = crypt.mksalt(crypt.METHOD_SHA256)
         password = hashlib.sha256(password.encode()+ the_salt.encode()).hexdigest()
+        cursor.execute("SELECT salt from users Where username = '" + username + "'")
+        
+        if cursor.fetchone() is not None:
+            error = 'Please enter a different username'
 
-        cursor.execute("INSERT INTO users (firstName, lastName, username, userType, description, age, phone, email, street, town, county, password, salt) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (firstname, lastname, username, user_type, description, age, phone, email, street, town, county, password, the_salt))
-        db.commit()
+        else:
+            cursor.execute("INSERT INTO users (firstName, lastName, username, userType, description, age, phone, email, street, town, county, password, salt) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (firstname, lastname, username, user_type, description, age, phone, email, street, town, county, password, the_salt))
+            db.commit()
 
-        return redirect("/login", code=302)
+            return redirect("/login", code=302)
+            
     cursor.close()
     db.close()
     return render_template('register.html')
