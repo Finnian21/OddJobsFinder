@@ -214,6 +214,8 @@ def view_taken_jobs():
     return render_template('viewTakenJobs.html', results2 = results2, the_user_Id = the_user_Id, current_time = current_time, user_type = user_type)
 @app.route('/comment', methods = ['GET', 'POST'])
 def comment():
+    db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')
+    cursor = db.cursor()
     if request.method == 'POST':
         comment = request.form['comment']
         user_id = session['user_id']
