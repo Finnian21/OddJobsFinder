@@ -212,20 +212,12 @@ def view_taken_jobs():
     cursor.close()
     db.close()
     return render_template('viewTakenJobs.html', results2 = results2, the_user_Id = the_user_Id, current_time = current_time, user_type = user_type)
-@app.route('/comment', methods = ['GET', 'POST'])
-def comment():
-    db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')
-    cursor = db.cursor()
+
+@app.route('/secur_job_id', methods = ['GET', 'POST'])
+def secure_job_id():
     if request.method == 'POST':
-        comment = request.form['comment']
-        user_id = session['user_id']
-        job_id = session['job_id']
-        time_stamp_posted = datetime.datetime.now()
-
-        cursor.execute("""INSERT INTO comments (userId, jobId, body, timePosted) 
-        VALUES (%s, %s, %s, %s)""", (user_id, job_id, comment, time_stamp_posted))
-        db.commit()
-
+        job_id = request.form['view_button']
+        session['job_id']
         return redirect("/view_job", code = 302)
 
 @app.route('/view_job', methods = ['GET', 'POST'])
@@ -233,38 +225,33 @@ def view_job():
     db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')
     cursor = db.cursor()
 
-    if request.method == 'POST':
-        job_id = request.form['view_button']
+    job_id = session['job_id']
+    sql = "SELECT * FROM jobs INNER JOIN users ON jobs.UserID=users.userId WHERE jobId = " + job_id
+    cursor.execute(sql)
+    results = cursor.fetchall()
 
-        session['job_id'] = job_id
+    for row in results:
+        session['firstname'] = row[18]
+        session['job_username'] = row[20]
 
-        sql = "SELECT * FROM jobs INNER JOIN users ON jobs.UserID=users.userId WHERE jobId = " + job_id
-        cursor.execute(sql)
-        results = cursor.fetchall()
+    session['results'] = results
 
-        for row in results:
-            session['firstname'] = row[18]
-            session['job_username'] = row[20]
-
-        session['results'] = results
-
-        if 'username' in session:
-            username = session['username']
-            user_Id = session['user_id']
-            user_type = session['user_type']
-        else:
-            user_Id = 0
-            user_type = ""
-            username = ""
-        
-        cursor.execute("SELECT * FROM jobRequests WHERE userId = %s AND jobId = %s", (user_Id, job_id))
-        take_count = cursor.fetchone()
-
-        return render_template('viewJob.html' , results = results, user_type = user_type, user_Id = user_Id, take_count = take_count, username = username)
+    if 'username' in session:
+        username = session['username']
+        user_Id = session['user_id']
+        user_type = session['user_type']
+    else:
+        user_Id = 0
+        user_type = ""
+        username = ""
+    
+    cursor.execute("SELECT * FROM jobRequests WHERE userId = %s AND jobId = %s", (user_Id, job_id))
+    take_count = cursor.fetchone()
     
     cursor.close()
     db.close()
-    return render_template('viewJob.html')
+
+    return render_template('viewJob.html' , results = results, user_type = user_type, user_Id = user_Id, take_count = take_count, username = username)
 
 @app.route('/', methods = ['GET', 'POST'])
 def home():
