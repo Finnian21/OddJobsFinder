@@ -198,11 +198,11 @@ def view_taken_jobs():
 
         for row in results:
             the_user_Id = row[0]
-    else:
-        username = ''
-        the_user_Id = 0
-        user_type = ''
     
+    else:
+        session['url'] = '/view_taken_jobs'
+        return redirect("/login", code=302)
+        
     session['user_id'] = the_user_Id
 
     sql2 = "SELECT * FROM jobs INNER JOIN users ON jobs.UserID=users.userId WHERE takerId = '" + str(the_user_Id) + "'ORDER BY timeStampPosted DESC"
