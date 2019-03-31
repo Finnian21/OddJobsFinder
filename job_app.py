@@ -54,6 +54,9 @@ def login():
             for row in results:
                 session['user_type'] = row[0]
 
+            if 'url' in session:
+                return redirect(session['url'], code=302)
+
             return redirect("/", code=302)
     cursor.close()
     db.close()
@@ -296,6 +299,9 @@ def take_job():
     db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')#db = session['db']
     cursor = db.cursor()
 
+    if session['user_type'] == 'Job Poster':
+        return redirect('/', code=302)
+
     if 'username' in  session:
         results = session['results']
         job_id = session['job_id']
@@ -322,7 +328,7 @@ def take_job():
         db.commit()
         
     else:
-        session['route'] = 'take_job'
+        session['url'] = '/take_job'
         return redirect("/login", code=302)
 
     cursor.close()
