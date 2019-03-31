@@ -29,7 +29,7 @@
                 </p>
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
-                  <form method = "POST" action = "/view_job">
+                  <form method = "POST" action = "/secure_job_id">
                     <button type="submit"class="btn btn-sm btn-outline-secondary" name = "view_button" value = "{{row[0]}}">View</button>
                   </form>
                     {%if the_user_Id == row[2] or user_type == 'Admin'%}
