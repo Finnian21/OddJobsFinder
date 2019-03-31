@@ -190,7 +190,7 @@ def view_taken_jobs():
     if 'username' in session: 
         username = session['username']
         user_type = session['user_type']
-        print(username)
+        
         sql = "SELECT * FROM users where username ='" + username + "'"
         cursor.execute(sql)
         results = cursor.fetchall()
@@ -343,7 +343,6 @@ def decline_user():
     cursor = db.cursor()
 
     job_id = session['job_id']
-    print(job_id)
     user_id = str(session['user_id'])
     job_username = session['job_username']
 
@@ -392,6 +391,8 @@ def accept_user():
     cursor.execute(sql)
     results = cursor.fetchall()
     title = session['title']
+
+    print(sql)
 
     for row in results:
         email = row[8]
