@@ -232,7 +232,7 @@ def view_job():
     cursor = db.cursor()
 
     job_id = session['job_id']
-    sql = "SELECT * FROM jobs INNER JOIN users ON jobs.UserID=users.userId WHERE jobId = " + job_id
+    sql = "SELECT * FROM jobs INNER JOIN users ON jobs.UserID=users.userId WHERE jobId = " + str(job_id)
     cursor.execute(sql)
     results = cursor.fetchall()
 
