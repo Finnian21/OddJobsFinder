@@ -47,12 +47,13 @@ def login():
             error = 'Invalid Credentials. Please try again.'
         else:
             session['username'] = username
-            sql2 = "SELECT userType from users where username='" + username + "'"
+            sql2 = "SELECT userId, userType from users where username='" + username + "'"
             cursor.execute(sql2)
             results = cursor.fetchall()
             
             for row in results:
-                session['user_type'] = row[0]
+                session['user_type'] = row[1]
+                session['user_id'] = row[0]
 
             if 'url' in session:
                 return redirect(session['url'], code=302)
