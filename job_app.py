@@ -398,6 +398,8 @@ def accept_user():
     results = cursor.fetchall()
     title = session['title']
 
+    print(sql)
+
     for row in results:
         email = row[8]
         firstname = row[1]
