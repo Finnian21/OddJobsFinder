@@ -314,6 +314,13 @@ def take_job():
         user_id = str(session['user_id'])
         firstname = session['firstname']
         job_username = session['job_username']
+
+        
+        cursor.execute("SELECT * FROM jobRequests WHERE userId = %s AND jobId = %s", (user_Id, job_id))
+        take_count = cursor.fetchone()
+
+        if take_count is not None:
+            return redirect("/view_jobs", code = 302)
         
         sql = "SELECT * FROM jobs where jobId ='" + str(job_id) + "'"
         cursor.execute(sql)
