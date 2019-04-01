@@ -195,19 +195,20 @@ def view_taken_jobs():
         sql = "SELECT * FROM users where username ='" + username + "'"
         cursor.execute(sql)
         results = cursor.fetchall()
-            
-        for row in results2:
-            session['job_id'] = row[2]
-            elapsed_time = current_time - row[7]
 
-            for row in results:
-                the_user_Id = row[0]
+        for row in results:
+            the_user_Id = row[0]
         
         session['user_id'] = the_user_Id
 
         sql2 = "SELECT * FROM jobs INNER JOIN users ON jobs.UserID=users.userId WHERE takerId = '" + str(the_user_Id) + "'ORDER BY timeStampPosted DESC"
         cursor.execute(sql2)
         results2 = cursor.fetchall()
+        
+        for row in results2:
+            session['job_id'] = row[2]
+            elapsed_time = current_time - row[7]
+
         current_time = datetime.datetime.now()
 
         return render_template('viewTakenJobs.html', results2 = results2, the_user_Id = the_user_Id, current_time = current_time, user_type = user_type)
