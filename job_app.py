@@ -204,7 +204,7 @@ def view_taken_jobs():
         sql2 = "SELECT * FROM jobs INNER JOIN users ON jobs.UserID=users.userId WHERE takerId = '" + str(the_user_Id) + "'ORDER BY timeStampPosted DESC"
         cursor.execute(sql2)
         results2 = cursor.fetchall()
-        
+
         for row in results2:
             session['job_id'] = row[2]
             elapsed_time = current_time - row[7]
@@ -444,6 +444,7 @@ def accept_user():
 @app.route('/log_out', methods = ['GET', 'POST'])
 def log_out():
         session.pop('username', None)
+        session.pop('url', None)
         return redirect("/", code=302)
 
 @app.route('/register', methods = ['GET', 'POST'])
