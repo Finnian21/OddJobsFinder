@@ -316,7 +316,7 @@ def take_job():
         job_username = session['job_username']
 
         
-        cursor.execute("SELECT * FROM jobRequests WHERE userId = %s AND jobId = %s", (user_Id, job_id))
+        cursor.execute("SELECT * FROM jobRequests WHERE userId = %s AND jobId = %s", (user_id, job_id))
         take_count = cursor.fetchone()
 
         if take_count is not None:
