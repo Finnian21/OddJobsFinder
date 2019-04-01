@@ -31,7 +31,7 @@
         {{row[12]}}, {{row[13]}}, Co. {{row[14]}}<br>
         <br>
         {{row[15]}}: {{user_Id}}
-        {%if user_type != "Job Poster" or user_type == '' and user_Id != row[15] and take_count == None%}
+        {%if user_type != "Job Poster" or user_type == '' and take_count == None%}
             <a href = "/take_job"><button class="btn btn-sm btn-outline-secondary" type="submit" value = "{{row[0]}}">Take Job</button></a>    
         {%endif%}
         {%if user_Id == row[2] or user_type == "Admin"%}
