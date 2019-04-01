@@ -271,6 +271,8 @@ def view_job():
     cursor.close()
     db.close()
 
+    print(type(user_Id))
+
     return render_template('viewJob.html' , results=results, results2=results2, user_type = user_type, user_Id = int(user_Id), take_count = take_count, username = username)
 
 @app.route('/', methods = ['GET', 'POST'])
