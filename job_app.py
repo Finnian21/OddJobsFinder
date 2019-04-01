@@ -392,13 +392,13 @@ def accept_user():
     job_id = session['job_id']
     user_id = str(session['user_id'])
     job_username = session['job_username']
-
+    """
     sql2 = "SELECT * FROM jobs where jobId = %s AND takenFlag = '1'",(job_id)
     cursor.execute("SELECT * FROM jobs where jobId = %s AND takenFlag = '1'",(job_id))
     
     if cursor.fetchone() is not None:
       return "Error you cannot accept a job that has already been accepted"
-
+    """
     sql = "SELECT * FROM users where userId ='" + user_id + "'"
     cursor.execute(sql)
     results = cursor.fetchall()
