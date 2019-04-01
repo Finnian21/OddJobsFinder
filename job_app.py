@@ -358,14 +358,6 @@ def decline_user():
     user_id = str(session['user_id'])
     job_username = session['job_username']
 
-    sql2 = "SELECT * FROM jobs where jobId = %s and userId = %s", (job_id, user_id)
-    
-    cursor.execute("SELECT * FROM jobs where jobId = %s and takerId = %s", (job_id, user_id))
-    
-    if cursor.fetchone() is not None:
-        return "Error: you cannot decline a user for a job, who you have already accepted"
-
-
     sql = "SELECT * FROM users where userId ='" + user_id + "'"
     cursor.execute(sql)
     results = cursor.fetchall()
@@ -393,25 +385,30 @@ def accept_user():
     user_id = str(session['user_id'])
     job_username = session['job_username']
 
-    sql = "SELECT * FROM users where userId ='" + user_id + "'"
+    sql = "SELECT * FROM users where userId ='" + str(user_id) + "'"
     cursor.execute(sql)
     results = cursor.fetchall()
     title = session['title']
 
-    print(sql)
-
     for row in results:
         email = row[8]
         firstname = row[1]
+        print(firstname)
+        print(title)
+        print(email)
 
-    msg = Message('Job Taken', sender = 'oddjobsfinder@gmail.com', recipients = [email])
-    msg.body = "Hi, you have been accepted."
-    msg.html = render_template("/acceptEmail.html", title = title, job_username = job_username, firstname=firstname)
-    mail.send(msg)
+        msg = Message('Accepted', sender = 'oddjobsfinder@gmail.com', recipients = [email])
+        msg.html = render_template("/acceptEmail.html", title = title, job_username = job_username, firstname=firstname)
+        mail.send(msg)
 
     cursor.execute("UPDATE jobs SET takerId = %s, takenFlag = '1' WHERE JobID = %s", (user_id, job_id))
     db.commit()
 
+    cursor.close()
+    db.close()
+
+    return "sent"
+"""
     cursor.execute("SELECT * FROM jobRequests WHERE userId != %s AND jobId = %s", (user_id, job_id))
     results2 = cursor.fetchall()
 
@@ -431,10 +428,7 @@ def accept_user():
             msg.body = "Hi, you have been accepted."
             msg.html = render_template("/declineEmail.html", title = title, job_username = job_username, firstname=firstname)
             mail.send(msg)
-
-    cursor.close()
-    db.close()
-    return "sent"
+"""
     #redirect("/", code=302)
 
 @app.route('/log_out', methods = ['GET', 'POST'])
