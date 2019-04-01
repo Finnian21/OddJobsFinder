@@ -204,12 +204,12 @@ def view_taken_jobs():
         sql2 = "SELECT * FROM jobs INNER JOIN users ON jobs.UserID=users.userId WHERE takerId = '" + str(the_user_Id) + "'ORDER BY timeStampPosted DESC"
         cursor.execute(sql2)
         results2 = cursor.fetchall()
+        
+        current_time = datetime.datetime.now()
 
         for row in results2:
             session['job_id'] = row[2]
             elapsed_time = current_time - row[7]
-
-        current_time = datetime.datetime.now()
 
         return render_template('viewTakenJobs.html', results2 = results2, the_user_Id = the_user_Id, current_time = current_time, user_type = user_type)
     
@@ -393,9 +393,6 @@ def accept_user():
     for row in results:
         email = row[8]
         firstname = row[1]
-        print(firstname)
-        print(title)
-        print(email)
 
         msg = Message('Accepted', sender = 'oddjobsfinder@gmail.com', recipients = [email])
         msg.html = render_template("/acceptEmail.html", title = title, job_username = job_username, firstname=firstname)
