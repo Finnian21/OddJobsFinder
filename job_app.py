@@ -407,8 +407,6 @@ def accept_user():
     cursor.close()
     db.close()
 
-    return "sent"
-"""
     cursor.execute("SELECT * FROM jobRequests WHERE userId != %s AND jobId = %s", (user_id, job_id))
     results2 = cursor.fetchall()
 
@@ -428,7 +426,8 @@ def accept_user():
             msg.body = "Hi, you have been accepted."
             msg.html = render_template("/declineEmail.html", title = title, job_username = job_username, firstname=firstname)
             mail.send(msg)
-"""
+    
+    return "sent"
     #redirect("/", code=302)
 
 @app.route('/log_out', methods = ['GET', 'POST'])
