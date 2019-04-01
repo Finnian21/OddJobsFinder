@@ -315,7 +315,7 @@ def take_job():
         firstname = session['firstname']
         job_username = session['job_username']
         
-        sql = "SELECT * FROM jobs where jobId ='" + job_id + "'"
+        sql = "SELECT * FROM jobs where jobId ='" + str(job_id) + "'"
         cursor.execute(sql)
         results = cursor.fetchall()
         
