@@ -400,6 +400,9 @@ def accept_user():
 
     cursor.execute("UPDATE jobs SET takerId = %s, takenFlag = '1' WHERE JobID = %s", (user_id, job_id))
     db.commit()
+
+    session.pop('job_id', None)
+    session.pop('user_id', None)
         
     cursor.close()
     db.close()
