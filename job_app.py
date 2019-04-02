@@ -385,6 +385,8 @@ def accept_user():
     user_id = str(session['user_id'])
     job_username = session['job_username']
 
+    print(user_id)
+
     sql = "SELECT * FROM users where userId ='" + user_id + "'"
     cursor.execute(sql)
     results = cursor.fetchall()
