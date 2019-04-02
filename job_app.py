@@ -341,6 +341,7 @@ def take_job():
         db.commit()
 
         session['user_id'] = user_id
+        print(session['user_id'])
         
     else:
         session['url'] = '/take_job'
