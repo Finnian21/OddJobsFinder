@@ -381,9 +381,9 @@ def accept_user():
     db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')#db = session['db']
     cursor = db.cursor()
     
-    job_id = session['job_id']
     user_id = str(session['user_id'])
     job_username = session['job_username']
+    job_id = session['job_id']
 
     sql = "SELECT * FROM users where userId ='" + user_id + "'"
     cursor.execute(sql)
