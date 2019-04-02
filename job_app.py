@@ -339,6 +339,8 @@ def take_job():
 
         cursor.execute("INSERT INTO jobRequests (jobID, userId) VALUES (%s, %s)", (job_id, user_id))
         db.commit()
+
+        session['user_id'] = user_id
         
     else:
         session['url'] = '/take_job'
@@ -357,6 +359,7 @@ def decline_user():
     job_id = session['job_id']
     user_id = str(session['user_id'])
     job_username = session['job_username']
+    print(user_id)
 
     sql = "SELECT * FROM users where userId ='" + user_id + "'"
     cursor.execute(sql)
