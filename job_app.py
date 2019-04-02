@@ -400,6 +400,9 @@ def accept_user():
 
     cursor.execute("UPDATE jobs SET takerId = %s, takenFlag = '1' WHERE JobID = %s", (user_id, job_id))
     db.commit()
+        
+    cursor.close()
+    db.close()
     """
     cursor.execute("SELECT * FROM jobRequests WHERE userId != %s AND jobId = %s", (user_id, job_id))
     results2 = cursor.fetchall()
