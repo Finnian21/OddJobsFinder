@@ -165,10 +165,10 @@ def view_jobs():
             the_user_Id = row[0]
     else:
         username = ''
-        the_user_Id = 0
+        #the_user_Id = 0
         user_type = ''
     
-    session['user_id'] = the_user_Id
+    #session['user_id'] = the_user_Id
 
     sql2 = "SELECT * FROM jobs INNER JOIN users ON jobs.UserID=users.userId WHERE takenFlag != '1' ORDER BY timeStampPosted DESC"
     cursor.execute(sql2)
@@ -251,7 +251,7 @@ def view_job():
         user_Id = session['user_id']
         user_type = session['user_type']
     else:
-        user_Id = 0
+        #user_Id = 0
         user_type = ""
         username = ""
     
@@ -341,6 +341,8 @@ def take_job():
         db.commit()
 
         session['user_id'] = user_id
+        session['job_id'] = job_id
+        print(session['job_id'])
         print(session['user_id'])
         
     else:
@@ -360,7 +362,6 @@ def decline_user():
     job_id = session['job_id']
     user_id = str(session['user_id'])
     job_username = session['job_username']
-    print(user_id)
 
     sql = "SELECT * FROM users where userId ='" + user_id + "'"
     cursor.execute(sql)
@@ -388,8 +389,6 @@ def accept_user():
     job_id = session['job_id']
     user_id = str(session['user_id'])
     job_username = session['job_username']
-
-    print(user_id)
 
     sql = "SELECT * FROM users where userId ='" + user_id + "'"
     cursor.execute(sql)
