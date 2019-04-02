@@ -380,12 +380,12 @@ def decline_user():
 def accept_user():
     db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')#db = session['db']
     cursor = db.cursor()
-
+    
     job_id = session['job_id']
     user_id = str(session['user_id'])
     job_username = session['job_username']
 
-    sql = "SELECT * FROM users where userId ='" + str(user_id) + "'"
+    sql = "SELECT * FROM users where userId ='" + user_id + "'"
     cursor.execute(sql)
     results = cursor.fetchall()
     title = session['title']
@@ -394,13 +394,13 @@ def accept_user():
         email = row[8]
         firstname = row[1]
 
-        msg = Message('Accepted', sender = 'oddjobsfinder@gmail.com', recipients = [email])
-        msg.html = render_template("/acceptEmail.html", title = title, job_username = job_username, firstname=firstname)
-        mail.send(msg)
+    msg = Message('Job Taken', sender = 'oddjobsfinder@gmail.com', recipients = [email])
+    msg.html = render_template("/acceptEmail.html", title = title, job_username = job_username, firstname=firstname)
+    mail.send(msg)
 
     cursor.execute("UPDATE jobs SET takerId = %s, takenFlag = '1' WHERE JobID = %s", (user_id, job_id))
     db.commit()
-
+    """
     cursor.execute("SELECT * FROM jobRequests WHERE userId != %s AND jobId = %s", (user_id, job_id))
     results2 = cursor.fetchall()
 
@@ -417,12 +417,12 @@ def accept_user():
             firstname = row[1]
 
             msg = Message('Declined', sender = 'oddjobsfinder@gmail.com', recipients = [email])
-            msg.body = "Hi, you have been accepted."
             msg.html = render_template("/declineEmail.html", title = title, job_username = job_username, firstname=firstname)
             mail.send(msg)
     
     cursor.close()
     db.close()
+    """
     return "sent"
     #redirect("/", code=302)
 
