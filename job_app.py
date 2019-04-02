@@ -403,6 +403,7 @@ def accept_user():
 
     session.pop('job_id', None)
     session.pop('user_id', None)
+    session.pop('job_username', None)
         
     cursor.close()
     db.close()
