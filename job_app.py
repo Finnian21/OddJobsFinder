@@ -340,11 +340,6 @@ def take_job():
         cursor.execute("INSERT INTO jobRequests (jobID, userId) VALUES (%s, %s)", (job_id, user_id))
         db.commit()
 
-        session['user_id'] = user_id
-        session['job_id'] = job_id
-        print(session['job_id'])
-        print(session['user_id'])
-        
     else:
         session['url'] = '/take_job'
         return redirect("/login", code=302)
@@ -587,6 +582,14 @@ def view_profile():
     cursor.close()
     db.close()
     return render_template('viewProfile.html', results = results, user_type = user_type)
+
+@app.after_request
+def add_header(r):
+    r.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    r.headers["Pragma"] = "no-cache"
+    r.headers["Expires"] = "0"
+    r.headers['Cache-Control'] = 'public, max-age=0'
+    return r
 
 app.secret_key = 'super secret key'
 if __name__ == '__main__':
