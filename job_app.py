@@ -165,7 +165,7 @@ def view_jobs():
             the_user_Id = row[0]
     else:
         username = ''
-        #the_user_Id = 0
+        the_user_Id = 0
         user_type = ''
     
     #session['user_id'] = the_user_Id
@@ -251,7 +251,7 @@ def view_job():
         user_Id = session['user_id']
         user_type = session['user_type']
     else:
-        #user_Id = 0
+        user_Id = 0
         user_type = ""
         username = ""
     
@@ -334,7 +334,7 @@ def take_job():
 
         msg = Message('Job Taken', sender = 'oddjobsfinder@gmail.com', recipients = [email])
         msg.body = "Hi, your job titled " + title + " has been taken by " + username + "."
-        msg.html = render_template("/email.html", title = title, username = username, firstname=firstname)
+        msg.html = render_template("/email.html", title=title, username=username, firstname=firstname, job_id=job_id, user_id=user_id)
         mail.send(msg)
 
         cursor.execute("INSERT INTO jobRequests (jobID, userId) VALUES (%s, %s)", (job_id, user_id))
@@ -380,19 +380,9 @@ def decline_user():
 def accept_user():
     db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')#db = session['db']
     cursor = db.cursor()
+
     
-    user_id = str(session['user_id'])
-    job_username = session['job_username']
-    job_id = session['job_id']
-
-    sql = "SELECT * FROM users where userId ='" + user_id + "'"
-    cursor.execute(sql)
-    results = cursor.fetchall()
-    title = session['title']
-
-    for row in results:
-        email = row[8]
-        firstname = row[1]
+    """
 
     msg = Message('Job Taken', sender = 'oddjobsfinder@gmail.com', recipients = [email])
     msg.html = render_template("/acceptEmail.html", title = title, job_username = job_username, firstname=firstname)
@@ -407,7 +397,7 @@ def accept_user():
         
     cursor.close()
     db.close()
-    """
+
     cursor.execute("SELECT * FROM jobRequests WHERE userId != %s AND jobId = %s", (user_id, job_id))
     results2 = cursor.fetchall()
 
