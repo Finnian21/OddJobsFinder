@@ -381,9 +381,12 @@ def accept_user():
     db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')#db = session['db']
     cursor = db.cursor()
 
+    if request.method == 'POST':
+        button_value = request.form['acceptButton']
+    
+    print(button_value)
     
     """
-
     msg = Message('Job Taken', sender = 'oddjobsfinder@gmail.com', recipients = [email])
     msg.html = render_template("/acceptEmail.html", title = title, job_username = job_username, firstname=firstname)
     mail.send(msg)
