@@ -384,8 +384,7 @@ def accept_user():
     if request.method == 'POST':
         button_value = request.form['acceptButton']
     
-    print(button_value)
-    
+        print(button_value)
     """
     msg = Message('Job Taken', sender = 'oddjobsfinder@gmail.com', recipients = [email])
     msg.html = render_template("/acceptEmail.html", title = title, job_username = job_username, firstname=firstname)
