@@ -241,7 +241,7 @@ def view_my_jobs():
         
         session['user_id'] = the_user_Id
 
-        sql2 = "SELECT * FROM jobs INNER JOIN users ON jobs.UserID=users.userId WHERE userId = '" + str(the_user_Id) + "'ORDER BY timeStampPosted DESC"
+        sql2 = "SELECT * FROM jobs INNER JOIN users ON jobs.UserID=users.userId WHERE userId = jobs." + str(the_user_Id) + " 'ORDER BY timeStampPosted DESC"
         print(sql2)
         cursor.execute(sql2)
         results2 = cursor.fetchall()
