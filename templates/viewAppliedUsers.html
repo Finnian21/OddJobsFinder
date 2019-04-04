@@ -21,14 +21,12 @@
             <img src ="{{ url_for('static', filename = 'image.png') }}" width="100%" height="200">
               <div class="card-body">
                 <p class="card-text">
-                  <b>User Name:</b>{{row[19]}}<br>
+                  <b>User Name:</b>{{row[6]}}<br>
                 </p>
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
-                    {%if the_user_Id == row[2] or user_type == 'Admin'%}
                     <form method = "POST" action = "/secure_id">
                     <button type="submit" class="btn btn-sm btn-outline-secondary" name = "accept_button" value = "{{row[0]}}">Accept</button>
-                    {% endif %}
                   </form>
                   </div>
                 </div>
