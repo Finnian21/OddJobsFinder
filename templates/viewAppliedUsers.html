@@ -8,7 +8,7 @@
 {% include "nav3.html" %}
 {%endif%}
 {% block content2 %}
-  <title>View Jobs</title>
+  <title>View Applicants</title>
     <main role="main">
     <br><br>
     <div class="album py-5 bg-light">
@@ -25,7 +25,7 @@
                 </p>
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
-                    <form method = "POST" action = "/secure_id">
+                    <form method = "POST" action = "/accept_user">
                     <button type="submit" class="btn btn-sm btn-outline-secondary" name = "accept_button" value = "{{row[0]}}">Accept</button>
                   </form>
                   </div>
