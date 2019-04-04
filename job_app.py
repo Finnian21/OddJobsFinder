@@ -423,6 +423,7 @@ def accept_user():
     cursor = db.cursor()
     user_id = request.form['accept_button']
     job_id = session['job_id']
+    print(job_id)
     return "sent"
 
 @app.route('/log_out', methods = ['GET', 'POST'])
