@@ -434,7 +434,7 @@ def accept_user():
         firstname = row[1]
 
     sql2 = "SELECT * FROM jobs where jobId ='" + str(job_id) + "'"
-    cursor.execute(sq2l)
+    cursor.execute(sql2)
     results = cursor.fetchall()
 
     for row in results2:
