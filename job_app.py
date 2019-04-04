@@ -425,6 +425,8 @@ def accept_user():
     job_id = session['job_id']
 
     print(session['username'])
+
+    return "sent"
 """
     sql = "SELECT * FROM jobs where jobId ='" + str(job_id) + "'"
     cursor.execute(sql)
@@ -437,8 +439,6 @@ def accept_user():
     msg.html = render_template("/acceptEmail", title=title, username=username, firstname=firstname)
     mail.send(msg)
 """
-
-    return "sent"
 
 @app.route('/log_out', methods = ['GET', 'POST'])
 def log_out():
