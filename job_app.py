@@ -477,7 +477,7 @@ def secure_id():
     return redirect("/edit_job", code=302)
 
 @app.route('/secure_job_id_applied', methods = ['GET', 'POST'])
-def secure_id():
+def secure_id_applied():
     job_id = request.form['applied_button']
     session['job_id'] = job_id
     return redirect("/view_applied_users", code=302)
