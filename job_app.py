@@ -468,7 +468,7 @@ def accept_user():
     cursor.close()
     db.close()
 
-    return "sent"
+    return redirect("/view_my_jobs", code=302)
 
 @app.route('/log_out', methods = ['GET', 'POST'])
 def log_out():
