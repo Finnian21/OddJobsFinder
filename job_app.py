@@ -222,6 +222,46 @@ def view_taken_jobs():
 
     return render_template('viewTakenJobs.html')
 
+@app.route('/view_my_jobs', methods = ['GET', 'POST'])
+def view_my_jobs():
+
+    db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')
+    cursor = db.cursor()
+
+    if 'username' in session: 
+        username = session['username']
+        user_type = session['user_type']
+        
+        sql = "SELECT * FROM users where username ='" + username + "'"
+        cursor.execute(sql)
+        results = cursor.fetchall()
+
+        for row in results:
+            the_user_Id = row[0]
+        
+        session['user_id'] = the_user_Id
+
+        sql2 = "SELECT * FROM jobs INNER JOIN users ON jobs.UserID=users.userId WHERE userId = '" + str(the_user_Id) + "'ORDER BY timeStampPosted DESC"
+        cursor.execute(sql2)
+        results2 = cursor.fetchall()
+        
+        current_time = datetime.datetime.now()
+
+        for row in results2:
+            session['job_id'] = row[2]
+            elapsed_time = current_time - row[7]
+
+        return render_template('viewMyJobs.html', results2 = results2, the_user_Id = the_user_Id, current_time = current_time, user_type = user_type)
+    
+    else:
+        session['url'] = '/view_my_jobs'
+        return redirect("/login", code=302)
+
+    cursor.close()
+    db.close()
+
+    return render_template('viewMyJobs.html')
+
 @app.route('/secure_job_id', methods = ['GET', 'POST'])
 def secure_job_id():
     
@@ -349,81 +389,12 @@ def take_job():
 
     return render_template('takeJob.html', results = results)
 
-@app.route('/decline_user', methods = ['GET', 'POST'])
-def decline_user():
-    db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')#db = session['db']
-    cursor = db.cursor()
-
-    job_id = session['job_id']
-    user_id = str(session['user_id'])
-    job_username = session['job_username']
-
-    sql = "SELECT * FROM users where userId ='" + user_id + "'"
-    cursor.execute(sql)
-    results = cursor.fetchall()
-    title = session['title']
-
-    for row in results:
-        email = row[8]
-        firstname = row[1]
-
-    msg = Message('Job Taken', sender = 'oddjobsfinder@gmail.com', recipients = [email])
-    msg.html = render_template("/declineEmail.html", title = title, job_username = job_username, firstname=firstname)
-    mail.send(msg)
-
-    cursor.close()
-    db.close()
-
-    return redirect("/", code=302)
-
 @app.route('/accept_user', methods = ['GET', 'POST'])
 def accept_user():
     db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')#db = session['db']
     cursor = db.cursor()
 
-    if request.method == 'POST':
-        button_value = request.form['acceptButton']
-    
-        print(button_value)
-    """
-    msg = Message('Job Taken', sender = 'oddjobsfinder@gmail.com', recipients = [email])
-    msg.html = render_template("/acceptEmail.html", title = title, job_username = job_username, firstname=firstname)
-    mail.send(msg)
-
-    cursor.execute("UPDATE jobs SET takerId = %s, takenFlag = '1' WHERE JobID = %s", (user_id, job_id))
-    db.commit()
-
-    session.pop('job_id', None)
-    session.pop('user_id', None)
-    session.pop('job_username', None)
-        
-    cursor.close()
-    db.close()
-
-    cursor.execute("SELECT * FROM jobRequests WHERE userId != %s AND jobId = %s", (user_id, job_id))
-    results2 = cursor.fetchall()
-
-    for row in results2:
-        decline_user_id = row[2]
-
-        sql = "SELECT * FROM users where userId ='" + str(decline_user_id) + "'"
-        cursor.execute(sql)
-        results3 = cursor.fetchall()
-        title = session['title']
-
-        for row in results3:
-            email = row[8]
-            firstname = row[1]
-
-            msg = Message('Declined', sender = 'oddjobsfinder@gmail.com', recipients = [email])
-            msg.html = render_template("/declineEmail.html", title = title, job_username = job_username, firstname=firstname)
-            mail.send(msg)
-    
-    cursor.close()
-    db.close()
-    """
     return "sent"
-    #redirect("/", code=302)
 
 @app.route('/log_out', methods = ['GET', 'POST'])
 def log_out():
