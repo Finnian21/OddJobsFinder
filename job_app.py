@@ -384,7 +384,6 @@ def take_job():
         firstname = session['firstname']
         job_username = session['job_username']
 
-        
         cursor.execute("SELECT * FROM jobRequests WHERE userId = %s AND jobId = %s", (user_id, job_id))
         take_count = cursor.fetchone()
 
@@ -419,11 +418,26 @@ def take_job():
 
 @app.route('/accept_user', methods = ['GET', 'POST'])
 def accept_user():
+
     db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')#db = session['db']
     cursor = db.cursor()
-    user_id = request.form['accept_button']
+    applicant_id = request.form['accept_button']
     job_id = session['job_id']
-    print(session['title'])
+
+    print(session['username'])
+"""
+    sql = "SELECT * FROM jobs where jobId ='" + str(job_id) + "'"
+    cursor.execute(sql)
+    results = cursor.fetchall()
+
+    for row in results:
+        title = row[1]
+    
+    msg = Message('Accepted', sender = 'oddjobsfinder@gmail.com', recipients = [email])
+    msg.html = render_template("/acceptEmail", title=title, username=username, firstname=firstname)
+    mail.send(msg)
+"""
+
     return "sent"
 
 @app.route('/log_out', methods = ['GET', 'POST'])
