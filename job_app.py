@@ -423,22 +423,25 @@ def accept_user():
     cursor = db.cursor()
     applicant_id = request.form['accept_button']
     job_id = session['job_id']
+    owner_username = session['username']
 
-    print(session['username'])
-
-    return "sent"
-"""
-    sql = "SELECT * FROM jobs where jobId ='" + str(job_id) + "'"
+    sql = "SELECT * FROM users where jobId ='" + str(applicant_id) + "'"
     cursor.execute(sql)
     results = cursor.fetchall()
 
-    for row in results:
-        title = row[1]
+    for row in results2:
+        email = row[8]
+        firstname = row[1]
+
+    sql = "SELECT * FROM jobs where jobId ='" + str(job_id) + "'"
+    cursor.execute(sql)
+    results = cursor.fetchall()
     
     msg = Message('Accepted', sender = 'oddjobsfinder@gmail.com', recipients = [email])
-    msg.html = render_template("/acceptEmail", title=title, username=username, firstname=firstname)
+    msg.html = render_template("/acceptEmail", title=title, owner_username=owner_username, firstname=firstname)
     mail.send(msg)
-"""
+
+    return "sent"
 
 @app.route('/log_out', methods = ['GET', 'POST'])
 def log_out():
