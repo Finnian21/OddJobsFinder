@@ -432,6 +432,13 @@ def accept_user():
     for row in results:
         email = row[8]
         firstname = row[1]
+
+    sql2 = "SELECT * FROM jobs where jobId ='" + str(job_id) + "'"
+    cursor.execute(sq2l)
+    results = cursor.fetchall()
+
+    for row in results2:
+        title = row[1]
     
     msg = Message('Accepted', sender = 'oddjobsfinder@gmail.com', recipients = [email])
     msg.html = render_template("/acceptEmail", title=title, owner_username=owner_username, firstname=firstname)
