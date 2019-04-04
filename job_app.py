@@ -447,6 +447,27 @@ def accept_user():
     cursor.execute("UPDATE jobs SET takenFlag = '1', takerId = %s WHERE jobId = %s", (applicant_id, job_id))
     db.commit()
 
+    sql3 = "SELECT * FROM jobRequests where jobId ='" + str(job_id) + "'AND userID != '" + str(applicant_id) + "'"
+    cursor.execute(sql2)
+    results3 = cursor.fetchall()
+
+    for row in results3:
+
+        sql4 = "SELECT * FROM users where userId ='" + row[2] + "'"
+        cursor.execute(sql4)
+        results4 = cursor.fetchall()
+
+        for row in results4:
+            email = row[8]
+            firstname = row[9]
+            
+        msg = Message('Declined', sender = 'oddjobsfinder@gmail.com', recipients = [email])
+        msg.html = render_template("/declineEmail.html", title=title, owner_username=owner_username, firstname=firstname)
+        mail.send(msg)
+
+    cursor.close()
+    db.close()
+
     return "sent"
 
 @app.route('/log_out', methods = ['GET', 'POST'])
