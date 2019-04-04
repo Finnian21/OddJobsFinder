@@ -444,6 +444,9 @@ def accept_user():
     msg.html = render_template("/acceptEmail.html", title=title, owner_username=owner_username, firstname=firstname)
     mail.send(msg)
 
+    cursor.execute("UPDATE jobs SET takenFlag = '1', takerId = %s WHERE jobId = %s", (applicant_id, job_id))
+    db.commit()
+
     return "sent"
 
 @app.route('/log_out', methods = ['GET', 'POST'])
