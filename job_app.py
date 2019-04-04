@@ -448,7 +448,7 @@ def accept_user():
     db.commit()
 
     sql3 = "SELECT * FROM jobRequests where jobId ='" + str(job_id) + "'AND userID != '" + str(applicant_id) + "'"
-    cursor.execute(sql2)
+    cursor.execute(sql3)
     results3 = cursor.fetchall()
 
     for row in results3:
@@ -460,7 +460,7 @@ def accept_user():
         for row in results4:
             email = row[8]
             firstname = row[9]
-            
+
         msg = Message('Declined', sender = 'oddjobsfinder@gmail.com', recipients = [email])
         msg.html = render_template("/declineEmail.html", title=title, owner_username=owner_username, firstname=firstname)
         mail.send(msg)
