@@ -435,7 +435,7 @@ def accept_user():
 
     sql2 = "SELECT * FROM jobs where jobId ='" + str(job_id) + "'"
     cursor.execute(sql2)
-    results = cursor.fetchall()
+    results2 = cursor.fetchall()
 
     for row in results2:
         title = row[1]
