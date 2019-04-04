@@ -441,7 +441,7 @@ def accept_user():
         title = row[1]
     
     msg = Message('Accepted', sender = 'oddjobsfinder@gmail.com', recipients = [email])
-    msg.html = render_template("/acceptEmail", title=title, owner_username=owner_username, firstname=firstname)
+    msg.html = render_template("/acceptEmail.html", title=title, owner_username=owner_username, firstname=firstname)
     mail.send(msg)
 
     return "sent"
