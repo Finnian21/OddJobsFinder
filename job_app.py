@@ -440,7 +440,7 @@ def accept_user():
     msg = Message('Accepted', sender = 'oddjobsfinder@gmail.com', recipients = [email])
     msg.html = render_template("/acceptEmail", title=title, owner_username=owner_username, firstname=firstname)
     mail.send(msg)
-    
+
     return "sent"
 
 @app.route('/log_out', methods = ['GET', 'POST'])
