@@ -453,7 +453,7 @@ def accept_user():
 
     for row in results3:
 
-        sql4 = "SELECT * FROM users where userId ='" + row[2] + "'"
+        sql4 = "SELECT * FROM users where userId ='" + str(row[2]) + "'"
         cursor.execute(sql4)
         results4 = cursor.fetchall()
 
