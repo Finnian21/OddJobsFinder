@@ -276,7 +276,6 @@ def view_applied_users():
         job_id = str(session['job_id'])
 
         sql2 = "SELECT * FROM jobRequests INNER JOIN users ON jobRequests.userID=users.userId WHERE jobRequests.jobId = '" + job_id + "'"
-        print(sql2)
         cursor.execute(sql2)
         results2 = cursor.fetchall()
 
