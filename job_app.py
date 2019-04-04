@@ -263,6 +263,34 @@ def view_my_jobs():
 
     return render_template('viewMyJobs.html')
 
+@app.route('/view_applied_users', methods = ['GET', 'POST'])
+def view_applied_users():
+
+    db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')
+    cursor = db.cursor()
+
+    if 'username' in session: 
+        username = session['username']
+        user_type = session['user_type']
+        user_id = str(session['user_id'])
+        job_id = str(session['job_id'])
+
+        sql2 = "SELECT * FROM jobRequests INNER JOIN users ON jobRequests.userID=users.userId WHERE jobRequests.jobId = '" + job_id + "'"
+        print(sql2)
+        cursor.execute(sql2)
+        results2 = cursor.fetchall()
+
+        return render_template('viewAppliedUsers.html', results2 = results2)
+    
+    else:
+        session['url'] = '/view_applied_users'
+        return redirect("/login", code=302)
+
+    cursor.close()
+    db.close()
+
+    return render_template('viewAppliedUsers.html')
+
 @app.route('/secure_job_id', methods = ['GET', 'POST'])
 def secure_job_id():
     
@@ -447,6 +475,12 @@ def secure_id():
     session['job_id'] = job_id
 
     return redirect("/edit_job", code=302)
+
+@app.route('/secure_job_id_applied', methods = ['GET', 'POST'])
+def secure_id():
+    job_id = request.form['applied_button']
+    session['job_id'] = job_id
+    return redirect("/view_applied_users", code=302)
 
 @app.route('/edit_job', methods = ['GET', 'POST'])
 def edit_job():
