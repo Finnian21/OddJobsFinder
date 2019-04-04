@@ -422,7 +422,7 @@ def accept_user():
     db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')#db = session['db']
     cursor = db.cursor()
     user_id = request.form['accept_button']
-    print(user_id)
+    job_id = session['job_id']
     return "sent"
 
 @app.route('/log_out', methods = ['GET', 'POST'])
