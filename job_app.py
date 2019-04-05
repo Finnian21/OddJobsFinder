@@ -657,13 +657,13 @@ def view_applicant():
         body =  request.form["feedback"]
         time_stamp_posted = datetime.datetime.now()
 
-        cursor.execute("""INSERT INTO feedback (userId, jobId, body, timePosted) 
-        VALUES (%s, %s, %s, %s)""", (user_Id, job_id, body, time_stamp_posted))
+        cursor.execute("""INSERT INTO feedback (senderId, receiverId, body, timePosted, rating)
+        VALUES (%s, %s, %s, %s)""", (user_Id, applicant_id, body, time_stamp_posted, rating))
         db.commit()
 
         return redirect("/view_applicant", code = 302)
 
-    sql2 = "SELECT * FROM comments INNER JOIN users ON comments.UserID=users.userId WHERE jobId = '" + str(job_id) + "'ORDER BY timePosted DESC"
+    sql2 = "SELECT * FROM feedback INNER JOIN users ON feedback.senderId=users.userId WHERE applicantId = '" + str(applicant_id) + "'ORDER BY timePosted DESC"
     cursor.execute(sql2)
     results2 = cursor.fetchall()
 
