@@ -648,7 +648,7 @@ def view_applicant():
     cursor = db.cursor()
 
     applincant_id = session['applicant_id']
-    userId = session['user_id']
+    user_id = session['user_id']
     username = session['username']
 
     sql = "SELECT * from users where userId = '" + str(applincant_id) + "'"
@@ -662,7 +662,7 @@ def view_applicant():
         time_stamp_posted = datetime.datetime.now()
 
         cursor.execute("""INSERT INTO feedback (senderId, receiverId, body, timePosted, rating)
-        VALUES (%s, %s, %s, %s, %s)""", (user_Id, applicant_id, body, time_stamp_posted, rate))
+        VALUES (%s, %s, %s, %s, %s)""", (user_id, applicant_id, body, time_stamp_posted, rate))
         db.commit()
 
         return redirect("/view_applicant", code = 302)
