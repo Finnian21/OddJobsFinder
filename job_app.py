@@ -512,7 +512,7 @@ def register():
         if cursor.fetchone() is not None:
             error = 'Credentials invalid, please enter different credentials.'
         else:
-            cursor.execute("""INSERT INTO users (firstName, lastName, username, userType, description, age, phone, email, street, town, county, password, salt) 
+            cursor.execute("""INSERT INTO users (firstName, lastName, username, userType, description, age, phone, email, street, town, county, password, salt, publicOnApply) 
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
             ,(firstname, lastname, username, user_type, description, age, phone, email, street, town, county, password, the_salt, public_on_apply))
             db.commit()
