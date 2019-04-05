@@ -9,6 +9,7 @@
 {%endif%}
 {% block content2 %}
 <h3>View Applicant</h3>
+<br><br>
 <div class="container">
 {%for row in results%}
     <div class="col-md-8 order-md-1">
@@ -33,5 +34,30 @@
   </div>
 </div>
 {%endfor%}
+<div class = "contianer">
+  <div class="jumbotron">
+<div class = "contianer">
+  <div class="jumbotron">
+  {% if user_type == "Admin" or user_type == "Job Searcher"%}
+  <form method = "POST" action = "/view_job">
+  <b>{{username}}</b>
+      <label for="comment">leave a feeback below:</label>
+      <textarea rows="4" cols="60" id = "comment" name="comment" type = "text" class = "form-control"></textarea>
+      <button class="btn btn-primary my-2" type ="submit">Submit</button>
+  </form>
+  {%endif%}
+  <h3>Feedback</h3>
+  {%for row in results2%}
+  <b>{{row[8]}}:</b> {{row[3]}}<br>
+  {%endfor%}
+  </div>
+</div>
+  {%endif%}
+  <h3>Comments</h3>
+  {%for row in results2%}
+  <b>{{row[8]}}:</b> {{row[3]}}<br>
+  {%endfor%}
+  </div>
+</div>
 {% endblock %}
 {% endblock %}
