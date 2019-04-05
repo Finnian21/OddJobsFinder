@@ -648,6 +648,7 @@ def view_applicant():
     cursor = db.cursor()
 
     applincant_id = session['applicant_id']
+    userId = session['userId']
 
     sql = "SELECT * from users where userId = '" + str(applincant_id) + "'"
     cursor.execute(sql)
@@ -655,10 +656,11 @@ def view_applicant():
 
     if request.method == 'POST':
         body =  request.form["feedback"]
+        rate =  request.form["rate"]
         time_stamp_posted = datetime.datetime.now()
 
         cursor.execute("""INSERT INTO feedback (senderId, receiverId, body, timePosted, rating)
-        VALUES (%s, %s, %s, %s)""", (user_Id, applicant_id, body, time_stamp_posted, rating))
+        VALUES (%s, %s, %s, %s, %s)""", (user_Id, applicant_id, body, time_stamp_posted, rate))
         db.commit()
 
         return redirect("/view_applicant", code = 302)
@@ -672,7 +674,7 @@ def view_applicant():
     
     cursor.close()
     db.close()
-    return render_template('viewApplicant.html', results = results, results2=results2)
+    return render_template('viewApplicant.html', results = results, results2=results2, username = username)
 
 @app.after_request
 def add_header(r):
