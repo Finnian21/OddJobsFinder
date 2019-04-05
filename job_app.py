@@ -650,7 +650,7 @@ def view_applicant():
 
     applincant_id = session['applicant_id']
 
-    sql = "SELECT * from users where userId = '" + str(applicant_id) + "'"
+    sql = "SELECT * from users where userId = '" + str(applincant_id) + "'"
     cursor.execute(sql)
     results = cursor.fetchall()
 
