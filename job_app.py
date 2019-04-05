@@ -638,7 +638,7 @@ def view_profile():
     return render_template('viewProfile.html', results = results, user_type = user_type)
 
 @app.route('/secure_applicant_id', methods = ['GET', 'POST'])
-def secure_id_applied():
+def secure_applicant_id():
     applicant_id = request.form['applicant_button']
     session['applicant_id'] = applicant_id
     return redirect("/view_applicant", code=302)
