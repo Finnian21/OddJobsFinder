@@ -637,6 +637,30 @@ def view_profile():
     db.close()
     return render_template('viewProfile.html', results = results, user_type = user_type)
 
+@app.route('/secure_applicant_id', methods = ['GET', 'POST'])
+def secure_id_applied():
+    applicant_id = request.form['applicant_button']
+    session['applicant_id'] = applicant_id
+    return redirect("/view_applicant", code=302)
+
+@app.route('/view_applicant', methods = ['GET', 'POST'])
+def view_applicant():
+    db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')
+    cursor = db.cursor()
+
+    applincant_id = session['applicant_id']
+
+    sql = "SELECT * from users where userId = '" + str(applicant_id) + "'"
+    cursor.execute(sql)
+    results = cursor.fetchall()
+
+    if 'username' not in session:
+        return redirect("/", code=302)
+    
+    cursor.close()
+    db.close()
+    return render_template('viewApplicant.html', results = results, user_type = user_type)
+
 @app.after_request
 def add_header(r):
     r.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
