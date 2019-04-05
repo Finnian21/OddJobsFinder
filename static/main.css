@@ -208,10 +208,6 @@ footer p {
 
 .lh-condensed { line-height: 1.25; }
 
-*{
-  margin: 0;
-  padding: 0;
-}
 .rate {
   float: left;
   height: 46px;
