@@ -282,7 +282,6 @@ def view_applied_users():
         return render_template('viewAppliedUsers.html', results2 = results2)
     
     else:
-        session['url'] = '/view_applied_users'
         return redirect("/login", code=302)
 
     cursor.close()
@@ -654,12 +653,26 @@ def view_applicant():
     cursor.execute(sql)
     results = cursor.fetchall()
 
+    if request.method == 'POST':
+        body =  request.form["feedback"]
+        time_stamp_posted = datetime.datetime.now()
+
+        cursor.execute("""INSERT INTO feedback (userId, jobId, body, timePosted) 
+        VALUES (%s, %s, %s, %s)""", (user_Id, job_id, body, time_stamp_posted))
+        db.commit()
+
+        return redirect("/view_applicant", code = 302)
+
+    sql2 = "SELECT * FROM comments INNER JOIN users ON comments.UserID=users.userId WHERE jobId = '" + str(job_id) + "'ORDER BY timePosted DESC"
+    cursor.execute(sql2)
+    results2 = cursor.fetchall()
+
     if 'username' not in session:
         return redirect("/", code=302)
     
     cursor.close()
     db.close()
-    return render_template('viewApplicant.html', results = results)
+    return render_template('viewApplicant.html', results = results, results2=results2)
 
 @app.after_request
 def add_header(r):
