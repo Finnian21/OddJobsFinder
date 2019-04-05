@@ -489,12 +489,9 @@ def register():
         user_type =  request.form["userType"]
         
         checked = request.form.getlist("publicOnApply")
-        print(checked)
         if checked == ['on']:
-            print(True)
             public_on_apply = "Yes"
         else:
-            print("No")
             public_on_apply = "No"
 
         description = request.form['description']
