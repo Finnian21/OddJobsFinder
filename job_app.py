@@ -490,8 +490,8 @@ def register():
         
         checked = request.form.getlist("publicOnApply")
         if checked == ['on']:
+            print(True)
             public_on_apply = "Yes"
-            print(public_on_apply)
         else:
             public_on_apply = "No"
 
