@@ -215,7 +215,7 @@ footer p {
 }
 .rate:not(:checked) > input {
   position:absolute;
-  top:auto;
+  left:-999px;
 }
 .rate:not(:checked) > label {
   float:right;
