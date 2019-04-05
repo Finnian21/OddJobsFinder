@@ -487,6 +487,14 @@ def register():
         lastname =  request.form["lastname"]
         username =  request.form["username"]
         user_type =  request.form["userType"]
+        
+        checked = request.form.getlist("publicOnApply")
+        if checked == ['on']:
+            public_on_apply = "Yes"
+            print(public_on_apply)
+        else:
+            public_on_apply = "No"
+
         description = request.form['description']
         age =  request.form["age"]
         phone =  request.form["phone"]
@@ -504,10 +512,10 @@ def register():
         if cursor.fetchone() is not None:
             error = 'Credentials invalid, please enter different credentials.'
         else:
-            cursor.execute("INSERT INTO users (firstName, lastName, username, userType, description, age, phone, email, street, town, county, password, salt) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (firstname, lastname, username, user_type, description, age, phone, email, street, town, county, password, the_salt))
+            cursor.execute("""INSERT INTO users (firstName, lastName, username, userType, description, age, phone, email, street, town, county, password, salt) 
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+            (firstname, lastname, username, user_type, description, age, phone, email, street, town, county, password, the_salt, publicOnApply))
             db.commit()
-            flash("Registered")
-
             return redirect("/login", code=302)
 
     cursor.close()
