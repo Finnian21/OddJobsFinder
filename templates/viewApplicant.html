@@ -36,11 +36,9 @@
 {%endfor%}
 <div class = "contianer">
   <div class="jumbotron">
-<div class = "contianer">
-  <div class="jumbotron">
   <form method = "POST" action = "/view_job">
   <b>{{username}}</b>
-      <label for="feedback">leave a feeback below:</label>
+      <label for="feedback">Leave a feeback below:</label>
       <textarea rows="4" cols="60" id = "feedback" name="feedback" type = "textarea" class = "form-control"></textarea>
       <label for="feedback">Rating</label>
       <div class="rate">
@@ -55,19 +53,13 @@
         <input type="radio" id="star1" name="rate" value="1" />
         <label for="star1" title="text">1 star</label>
       </div>
-
+      <br><br>
       <button class="btn btn-primary my-2" type ="submit">Submit</button>
   </form>
   <h3>Feedback</h3>
-  {%for row in results2%}
-  <b>{{row[8]}}:</b> {{row[3]}}<br>
-  {%endfor%}
-  </div>
-</div>
-  <h3>Comments</h3>
-  {%for row in results2%}
-  <b>{{row[8]}}:</b> {{row[3]}}<br>
-  {%endfor%}
+    {%for row in results2%}
+    <b>{{row[8]}}:</b> {{row[3]}}<br>
+    {%endfor%}
   </div>
 </div>
 {% endblock %}
