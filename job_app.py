@@ -514,7 +514,7 @@ def register():
         else:
             cursor.execute("""INSERT INTO users (firstName, lastName, username, userType, description, age, phone, email, street, town, county, password, salt) 
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
-            (firstname, lastname, username, user_type, description, age, phone, email, street, town, county, password, the_salt, publicOnApply))
+            (firstname, lastname, username, user_type, description, age, phone, email, street, town, county, password, the_salt, public_on_apply))
             db.commit()
             return redirect("/login", code=302)
 
