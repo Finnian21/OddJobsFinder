@@ -38,7 +38,6 @@
   <div class="jumbotron">
 <div class = "contianer">
   <div class="jumbotron">
-  {% if user_type == "Admin" or user_type == "Job Searcher"%}
   <form method = "POST" action = "/view_job">
   <b>{{username}}</b>
       <label for="feedback">leave a feeback below:</label>
@@ -56,10 +55,9 @@
         <input type="radio" id="star1" name="rate" value="1" />
         <label for="star1" title="text">1 star</label>
       </div>
-      
+
       <button class="btn btn-primary my-2" type ="submit">Submit</button>
   </form>
-  {%endif%}
   <h3>Feedback</h3>
   {%for row in results2%}
   <b>{{row[8]}}:</b> {{row[3]}}<br>
