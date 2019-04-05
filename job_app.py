@@ -658,6 +658,7 @@ def view_applicant():
     if request.method == 'POST':
         body =  request.form["feedback"]
         rate =  request.form["rate"]
+        print(rate)
         time_stamp_posted = datetime.datetime.now()
 
         cursor.execute("""INSERT INTO feedback (senderId, receiverId, body, timePosted, rating)
