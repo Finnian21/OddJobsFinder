@@ -493,6 +493,7 @@ def register():
             print(True)
             public_on_apply = "Yes"
         else:
+            print("No")
             public_on_apply = "No"
 
         description = request.form['description']
