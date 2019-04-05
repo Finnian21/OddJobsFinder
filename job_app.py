@@ -648,7 +648,7 @@ def view_applicant():
     cursor = db.cursor()
 
     applincant_id = session['applicant_id']
-    userId = session['userId']
+    userId = session['user_id']
 
     sql = "SELECT * from users where userId = '" + str(applincant_id) + "'"
     cursor.execute(sql)
