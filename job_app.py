@@ -663,7 +663,7 @@ def view_applicant():
 
         return redirect("/view_applicant", code = 302)
 
-    sql2 = "SELECT * FROM feedback INNER JOIN users ON feedback.senderId=users.userId WHERE applicantId = '" + str(applicant_id) + "'ORDER BY timePosted DESC"
+    sql2 = "SELECT * FROM feedback INNER JOIN users ON feedback.senderId=users.userId WHERE applicantId = '" + str(applincant_id) + "'ORDER BY timePosted DESC"
     cursor.execute(sql2)
     results2 = cursor.fetchall()
 
