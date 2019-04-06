@@ -632,7 +632,7 @@ def view_profile():
     if 'username' not in session:
         return redirect("/", code=302)
 
-    sql2 = "SELECT * FROM Feedback INNER JOIN users ON Feedback.senderId=users.userId WHERE receiverId = '" + str(applicant_id) + "'ORDER BY timePosted DESC"
+    sql2 = "SELECT * FROM Feedback INNER JOIN users ON Feedback.senderId=users.userId WHERE receiverId = '" + str(user_id) + "'ORDER BY timePosted DESC"
     cursor.execute(sql2)
     results2 = cursor.fetchall()
 
