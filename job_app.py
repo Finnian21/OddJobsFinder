@@ -674,12 +674,13 @@ def view_applicant():
     if 'username' not in session:
         return redirect("/", code=302)
     
+    count = 0
     for row in results2:
-        rating = int(row[5])
-    
-    rating_list = []
-    for i in range(0, rating):
-        rating_list.append(i)
+        count += 1
+        rating = row[5]
+        total_rating = rating + total_rating
+        average_rating = total_rating / count
+    print(average_rating)
 
     cursor.close()
     db.close()
