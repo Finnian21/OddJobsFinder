@@ -303,7 +303,7 @@ def view_applied_users():
         cursor.execute(sqlx)
         is_taken = cursor.fetchone()
 
-        return render_template('viewAppliedUsers.html', results2=results2, is_taken=is_taken)
+        return render_template('viewAppliedUsers.html', results2=results2, is_taken=is_taken, title=title)
     
     else:
         return redirect("/login", code=302)
@@ -311,7 +311,7 @@ def view_applied_users():
     cursor.close()
     db.close()
 
-    return render_template('viewAppliedUsers.html', title=title)
+    return render_template('viewAppliedUsers.html')
 
 @app.route('/secure_job_id', methods = ['GET', 'POST'])
 def secure_job_id():
