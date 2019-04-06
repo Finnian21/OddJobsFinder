@@ -278,6 +278,13 @@ def view_applied_users():
         cursor.execute(sql2)
         results2 = cursor.fetchall()
 
+        
+        sqlx = "SELECT * from jobs where jobId = '" + job_id + "' AND takenFlag = '1'"
+        cursor.execute(sqlx)
+        print(sqlx)
+        is_taken = cursor.fetchone()
+        print(is_taken)
+
         return render_template('viewAppliedUsers.html', results2 = results2)
     
     else:
@@ -674,12 +681,6 @@ def view_applicant():
     sql = "SELECT * from users where userId = '" + str(applicant_id) + "'"
     cursor.execute(sql)
     results = cursor.fetchall()
-
-    sqlx = "SELECT * from jobs where jobId = '" + job_id + "' AND takenFlag = '1'"
-    cursor.execute(sqlx)
-    print(sqlx)
-    is_taken = cursor.fetchone()
-    print(is_taken)
 
     if request.method == 'POST':
         body =  request.form["feedback"]
