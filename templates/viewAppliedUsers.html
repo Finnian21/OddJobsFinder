@@ -26,7 +26,7 @@
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
                   {{is_taken}}
-                  {%if is_taken is None%}
+                  {%if is_taken == 'None'%}
                     <form method = "POST" action = "/accept_user">
                       <button type="submit" class="btn btn-sm btn-outline-secondary" name = "accept_button" value = "{{row[2]}}">Accept</button>
                     </form>
