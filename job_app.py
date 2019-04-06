@@ -677,7 +677,7 @@ def view_applicant():
 
     sqlx = "SELECT * from jobs where jobId = '" + job_id + "' AND takenFlag = '1'"
     cursor.execute(sqlx)
-    print(sql)
+    print(sqlx)
     is_taken = cursor.fetchone()
     print(is_taken)
 
