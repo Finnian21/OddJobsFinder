@@ -655,7 +655,7 @@ def view_profile():
     
     cursor.close()
     db.close()
-    return render_template('viewProfile.html', results = results, user_type = user_type)
+    return render_template('viewProfile.html', results = results, results2=results2, user_type = user_type)
 
 @app.route('/secure_applicant_id', methods = ['GET', 'POST'])
 def secure_applicant_id():
