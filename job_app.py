@@ -633,6 +633,7 @@ def view_profile():
         return redirect("/", code=302)
 
     sql2 = "SELECT * FROM Feedback INNER JOIN users ON Feedback.senderId=users.userId WHERE receiverId = '" + str(user_id) + "'ORDER BY timePosted DESC"
+    print(sql2)
     cursor.execute(sql2)
     results2 = cursor.fetchall()
 
