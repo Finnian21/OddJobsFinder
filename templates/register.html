@@ -10,12 +10,11 @@
           <label for="firstname">First Name:</label>
           <input type="text" id="firstname" name = "firstname" class="form-control" required autofocus><br>
           <label for="age">Age:</label>
+          <label for="lastname" class = "">Last Name</label>
+          <input type="text" name="lastname" id = "lastname" class = "form-control" min = "1" max = "500"><br>
           <input type="number" name="age" id = "age" class = "form-control"><br>
-          <label for="password">Password:</label>
-          <label for="street">Street:</label>
-          <input type="text" name = "street" id="street" class="form-control" autofocus><br>
-          <label for="town">Town:</label>
-          <input type="text" id="town" name = "town" class="form-control" autofocus><br>
+          <label for="username" class = "">Username</label>
+          <input type="text" name="username" id = "username" class = "form-control" min = "1" max = "500"><br>
           <input type="password"  name = "password" id="psw" class="form-control"
           pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
           title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" 
@@ -27,14 +26,14 @@
             <p id="number" class="invalid">A <b>number</b></p>
             <p id="length" class="invalid">Minimum <b>8 characters</b></p>
           </div>
-          <label for="lastname" class = "">Last Name</label>
-          <input type="text" name="lastname" id = "lastname" class = "form-control" min = "1" max = "500"><br>
-          <label for="phone">Phone Number:</label>
-          <input type="tel" name ="phone" id="phone" class="form-control" autofocus><br>
-          <label for="username" class = "">Username</label>
-          <input type="text" name="username" id = "username" class = "form-control" min = "1" max = "500"><br>
           <label for="email">Email:</label>
           <input type="email"  name = "email" id="email" class="form-control" autofocus><br>
+          <label for="phone">Phone Number:</label>
+          <input type="tel" name ="phone" id="phone" class="form-control" autofocus><br>
+          <label for="street">Street:</label>
+          <input type="text" name = "street" id="street" class="form-control" autofocus><br>
+          <label for="town">Town:</label>
+          <input type="text" id="town" name = "town" class="form-control" autofocus><br>
           <label for="county">County:</label>
           <select class = "form-control" name = "county" id = "county">
               <option value="Antirm" class = "form-control">Antrim</option>
