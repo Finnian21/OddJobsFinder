@@ -283,7 +283,7 @@ footer p {
 
 .valid:before {
   position: relative;
-  left: -20px;
+  left: -18px;
   content: "✔";
 }
 
@@ -294,7 +294,7 @@ footer p {
 
 .invalid:before {
   position: relative;
-  left: -20px;
+  left: -18px;
   content: "✖";
 }
 
