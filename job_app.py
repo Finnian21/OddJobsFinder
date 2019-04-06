@@ -676,6 +676,7 @@ def view_applicant():
     
     count = 0
     total_rating = 0
+    
     for row in results2:
         count += 1
         rating = row[5]
@@ -685,7 +686,7 @@ def view_applicant():
 
     cursor.close()
     db.close()
-    return render_template('viewApplicant.html', results = results, results2=results2, username=username, rating=rating)
+    return render_template('viewApplicant.html', results = results, results2=results2, username=username, rating=rating, average_rating=average_rating)
 
 @app.after_request
 def add_header(r):
