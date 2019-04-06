@@ -267,9 +267,8 @@ def view_my_jobs():
         current_time = datetime.datetime.now()
 
         for row in results2:
-            session['job_id'] = row[2]
+            #session['job_id'] = row[2]
             session['title'] = row[1]
-            print(row[2])
             elapsed_time = current_time - row[7]
 
         return render_template('viewMyJobs.html', results2 = results2, the_user_Id = the_user_Id, current_time = current_time, user_type = user_type)
@@ -294,7 +293,7 @@ def view_applied_users():
         user_type = session['user_type']
         user_id = str(session['user_id'])
         job_id = str(session['job_id'])
-        print(job_id)
+        title = session['title']
 
         sql2 = "SELECT * FROM jobRequests INNER JOIN users ON jobRequests.userID=users.userId WHERE jobRequests.jobId = '" + job_id + "'"
         cursor.execute(sql2)
@@ -312,7 +311,7 @@ def view_applied_users():
     cursor.close()
     db.close()
 
-    return render_template('viewAppliedUsers.html')
+    return render_template('viewAppliedUsers.html', title=title)
 
 @app.route('/secure_job_id', methods = ['GET', 'POST'])
 def secure_job_id():
