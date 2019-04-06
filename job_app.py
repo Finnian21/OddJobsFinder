@@ -294,6 +294,7 @@ def view_applied_users():
         user_type = session['user_type']
         user_id = str(session['user_id'])
         job_id = str(session['job_id'])
+        print(job_id)
 
         sql2 = "SELECT * FROM jobRequests INNER JOIN users ON jobRequests.userID=users.userId WHERE jobRequests.jobId = '" + job_id + "'"
         cursor.execute(sql2)
