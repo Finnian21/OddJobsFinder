@@ -10,7 +10,7 @@
 {% block content2 %}
 <div class="container">
   <div class="row">
-    <div class="">
+    <div class="right">
       <h4 class="d-flex justify-content-between align-items-center mb-3">
         <span class="text-muted">Options</span><br>
       </h4>
@@ -41,6 +41,7 @@
         </li>
       </ul>
   </div>
+</div>
 {%for row in results%}
     <div class="col-md-8 order-md-1">
       <div class = "a">
@@ -59,7 +60,6 @@
           <br>
       </div>
     </div>
-  </div>
 </div>
 {%if user_type == "Job Searcher" or user_type == "Admin"%}
   <div class = "contianer">
