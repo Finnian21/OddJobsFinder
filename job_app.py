@@ -675,6 +675,7 @@ def view_applicant():
         return redirect("/", code=302)
     
     count = 0
+    total_rating = 0
     for row in results2:
         count += 1
         rating = row[5]
