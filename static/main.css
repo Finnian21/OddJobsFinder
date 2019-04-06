@@ -272,7 +272,7 @@ footer p {
 }
 
 #message p {
-  padding: 15px;
+  padding: 10px;
   font-size: 18px;
 }
 
@@ -296,4 +296,9 @@ footer p {
   position: relative;
   left: -35px;
   content: "✖";
+}
+
+.big
+{
+  font-size: 20px;
 }
