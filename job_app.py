@@ -680,10 +680,10 @@ def view_applicant():
     rating_list = []
     for i in range(0, rating):
         rating_list.append(i)
-        
+
     cursor.close()
     db.close()
-    return render_template('viewApplicant.html', results = results, results2=results2, username = username)
+    return render_template('viewApplicant.html', results = results, results2=results2, username = username, rating_list)
 
 @app.after_request
 def add_header(r):
