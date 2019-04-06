@@ -268,7 +268,8 @@ def view_my_jobs():
 
         for row in results2:
             session['job_id'] = row[2]
-            print(row[1])
+            session['title'] = row[1]
+            print(row[2])
             elapsed_time = current_time - row[7]
 
         return render_template('viewMyJobs.html', results2 = results2, the_user_Id = the_user_Id, current_time = current_time, user_type = user_type)
