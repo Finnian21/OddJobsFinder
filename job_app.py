@@ -242,7 +242,6 @@ def view_my_jobs():
         session['user_id'] = the_user_Id
 
         sql2 = "SELECT * FROM jobs INNER JOIN users ON jobs.UserID=users.userId WHERE jobs.userId = '" + str(the_user_Id) + "' ORDER BY timeStampPosted DESC"
-        print(sql2)
         cursor.execute(sql2)
         results2 = cursor.fetchall()
         
@@ -633,7 +632,6 @@ def view_profile():
         return redirect("/", code=302)
 
     sql2 = "SELECT * FROM Feedback INNER JOIN users ON Feedback.senderId=users.userId WHERE receiverId = '" + str(user_id) + "'ORDER BY timePosted DESC"
-    print(sql2)
     cursor.execute(sql2)
     results2 = cursor.fetchall()
 
@@ -679,12 +677,11 @@ def view_applicant():
 
     cursor.execute("SELECT * from jobs where jobId = '" + job_id + "' AND takenFlag = '1'")
     is_taken = cursor.fetchone()
-    print(is_taken)
+    print(cursor.fetchone())
 
     if request.method == 'POST':
         body =  request.form["feedback"]
         rate =  request.form["rate"]
-        print(rate)
         time_stamp_posted = datetime.datetime.now()
 
         cursor.execute("""INSERT INTO Feedback (senderId, receiverId, body, timePosted, rating)
