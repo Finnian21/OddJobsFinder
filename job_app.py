@@ -661,7 +661,7 @@ def view_applicant():
         print(rate)
         time_stamp_posted = datetime.datetime.now()
 
-        cursor.execute("""INSERT INTO feedback (senderId, receiverId, body, timePosted, rating)
+        cursor.execute("""INSERT INTO Feedback (senderId, receiverId, body, timePosted, rating)
         VALUES (%s, %s, %s, %s, %s)""", (user_id, applicant_id, body, time_stamp_posted, rate))
         db.commit()
 
