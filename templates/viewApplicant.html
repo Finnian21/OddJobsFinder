@@ -20,6 +20,7 @@
           <b>Email:</b> {{row[8]}}<br>
           <br>
           <b>Average Rating:</b> {%for i in range(0, the_average_rating)%}<span class="fa fa-star checked"></span>{%endfor%}
+          {{is_taken}}
           {%if is_taken == 'None'%}
             <form method = "POST" action = "/accept_user">
             <br>
