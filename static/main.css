@@ -247,3 +247,8 @@ footer p {
 .checked {
   color: yellow;
 }
+
+.left
+{
+  float: left;
+}
