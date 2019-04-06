@@ -671,10 +671,15 @@ def view_applicant():
     applicant_id = session['applicant_id']
     user_id = session['user_id']
     username = session['username']
+    job_id = session['job_id']
 
     sql = "SELECT * from users where userId = '" + str(applicant_id) + "'"
     cursor.execute(sql)
     results = cursor.fetchall()
+
+    cursor.execute("SELECT * from jobs where jobId = '" + job_id + "' AND takenFlag = '1'")
+    is_taken = cursor.fetchone()
+    print(is_taken)
 
     if request.method == 'POST':
         body =  request.form["feedback"]
