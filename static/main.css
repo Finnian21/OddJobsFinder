@@ -248,6 +248,10 @@ footer p {
   color: yellow;
 }
 
+.warning {
+  color: orangered;
+}
+
 .left
 {
   float: left;
