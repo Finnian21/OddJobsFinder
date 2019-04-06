@@ -38,7 +38,7 @@
                     </form>
                     {% endif %}
                     {%if user_type == 'Admin'%}
-                      <form method = "POST" action = "">
+                      <form method = "POST" action = "delete_job">
                       <button type="submit" class="btn btn-sm btn-outline-secondary" name = "delete_button" value = "{{row[0]}}">Delete</button>
                       </form>
                     {% endif %}

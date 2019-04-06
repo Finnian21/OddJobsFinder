@@ -167,8 +167,6 @@ def view_jobs():
         username = ''
         the_user_Id = 0
         user_type = ''
-    
-    #session['user_id'] = the_user_Id
 
     sql2 = "SELECT * FROM jobs INNER JOIN users ON jobs.UserID=users.userId WHERE takenFlag != '1' ORDER BY timeStampPosted DESC"
     cursor.execute(sql2)
@@ -182,6 +180,27 @@ def view_jobs():
     db.close()
     return render_template('viewJobs.html', results2 = results2, the_user_Id = the_user_Id, current_time = current_time, user_type = user_type)
 
+@app.route('/delete_job', methods = ['GET', 'POST'])
+def delete_job():
+    
+    db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')
+    cursor = db.cursor()
+    if request.method == 'POST':
+
+        job_id = request.form['delete_button']
+        session['job_id'] = job_id
+
+        sql = "DELETE jobs WHERE jobId = '" + job_id + "'"
+        cursor.execute(sql)
+        db.commit()
+        
+        cursor.close()
+        db.close()
+        return redirect("/view_jobs", code = 302)
+    
+    else:
+        return redirect("/view_jobs", code = 302)
+        
 @app.route('/view_taken_jobs', methods = ['GET', 'POST'])
 def view_taken_jobs():
 
@@ -280,7 +299,6 @@ def view_applied_users():
         
         sqlx = "SELECT * from jobs where jobId = '" + job_id + "' AND takenFlag = '1'"
         cursor.execute(sqlx)
-        print(sqlx)
         is_taken = cursor.fetchone()
 
         return render_template('viewAppliedUsers.html', results2=results2, is_taken=is_taken)
