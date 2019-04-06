@@ -683,7 +683,7 @@ def view_applicant():
 
     cursor.close()
     db.close()
-    return render_template('viewApplicant.html', results = results, results2=results2, username=username, rating_list=rating_list)
+    return render_template('viewApplicant.html', results = results, results2=results2, username=username, rating=rating)
 
 @app.after_request
 def add_header(r):
