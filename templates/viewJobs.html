@@ -37,7 +37,7 @@
                     <button type="submit" class="btn btn-sm btn-outline-secondary" name = "edit_button" value = "{{row[0]}}">Edit</button>
                     </form>
                     {% endif %}
-                    {%if tuser_type == 'Admin'%}
+                    {%if user_type == 'Admin'%}
                       <form method = "POST" action = "">
                       <button type="submit" class="btn btn-sm btn-outline-secondary" name = "delete_button" value = "{{row[0]}}">Delete</button>
                       </form>
