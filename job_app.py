@@ -277,15 +277,12 @@ def view_applied_users():
         sql2 = "SELECT * FROM jobRequests INNER JOIN users ON jobRequests.userID=users.userId WHERE jobRequests.jobId = '" + job_id + "'"
         cursor.execute(sql2)
         results2 = cursor.fetchall()
-
         
         sqlx = "SELECT * from jobs where jobId = '" + job_id + "' AND takenFlag = '1'"
         cursor.execute(sqlx)
-        print(sqlx)
         is_taken = cursor.fetchone()
-        print(is_taken)
 
-        return render_template('viewAppliedUsers.html', results2 = results2)
+        return render_template('viewAppliedUsers.html', results2=results2, is_taken=is_taken)
     
     else:
         return redirect("/login", code=302)

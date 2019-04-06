@@ -25,12 +25,16 @@
                 </p>
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
+                  {%if is_taken is 'None'%}
                     <form method = "POST" action = "/accept_user">
                       <button type="submit" class="btn btn-sm btn-outline-secondary" name = "accept_button" value = "{{row[2]}}">Accept</button>
                     </form>
+                  {%endif%}
+                  {%if row[19] == "Yes"%}
                       <form method = "POST" action = "/secure_applicant_id">
                     <button type="submit" class="btn btn-sm btn-outline-secondary" name = "applicant_button" value = "{{row[3]}}">View</button>
                   </form>
+                  {%endif%}
                   </div>
                 </div>
               </div>
