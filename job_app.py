@@ -647,11 +647,11 @@ def view_applicant():
     db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')
     cursor = db.cursor()
 
-    applincant_id = session['applicant_id']
+    applicant_id = session['applicant_id']
     user_id = session['user_id']
     username = session['username']
 
-    sql = "SELECT * from users where userId = '" + str(applincant_id) + "'"
+    sql = "SELECT * from users where userId = '" + str(applicant_id) + "'"
     cursor.execute(sql)
     results = cursor.fetchall()
 
@@ -667,7 +667,7 @@ def view_applicant():
 
         return redirect("/view_applicant", code = 302)
 
-    sql2 = "SELECT * FROM Feedback INNER JOIN users ON Feedback.senderId=users.userId WHERE receiverId = '" + str(applincant_id) + "'ORDER BY timePosted DESC"
+    sql2 = "SELECT * FROM Feedback INNER JOIN users ON Feedback.senderId=users.userId WHERE receiverId = '" + str(applicant_id) + "'ORDER BY timePosted DESC"
     cursor.execute(sql2)
     results2 = cursor.fetchall()
 
