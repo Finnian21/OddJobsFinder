@@ -25,7 +25,6 @@
           <b>Phone:</b> {{row[7]}}<br>
           <b>Email:</b> {{row[8]}}<br>
           <br>
-          {{the_average_rating}}
           <b>Average Rating:</b> {%for i in range(0, the_average_rating)%}<span class="fa fa-star checked"></span>{%endfor%}
           <form method = "POST" action = "/accept_user">
           <br>
@@ -41,7 +40,7 @@
   <form method = "POST" action = "/view_applicant">
   <b>{{username}}</b>
       <label for="feedback">leave feeback below:</label>
-      <textarea rows="4" cols="60" id = "feedback" name="feedback" type = "textarea" class = "form-control"></textarea><br>
+      <textarea rows="4" cols="60" id = "feedback" name="feedback" type = "textarea" class = "form-control" requierd></textarea><br>
       <b>Rating:</b><br>
       <div class="rate">
         <input type="radio" id="star5" name="rate" value="5" />
