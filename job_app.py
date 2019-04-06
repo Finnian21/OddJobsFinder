@@ -684,7 +684,7 @@ def view_applicant():
         average_rating = total_rating / count
     
     the_average_rating = int(average_rating)
-
+    print(the_average_rating)
     cursor.close()
     db.close()
     return render_template('viewApplicant.html', results = results, results2=results2, username=username, rating=rating, the_average_rating=the_average_rating)
