@@ -631,6 +631,26 @@ def view_profile():
 
     if 'username' not in session:
         return redirect("/", code=302)
+
+    sql2 = "SELECT * FROM Feedback INNER JOIN users ON Feedback.senderId=users.userId WHERE receiverId = '" + str(applicant_id) + "'ORDER BY timePosted DESC"
+    cursor.execute(sql2)
+    results2 = cursor.fetchall()
+
+    if 'username' not in session:
+        return redirect("/", code=302)
+    
+    count = 0
+    total_rating = 0
+    average_rating = 0
+    rating = 0
+    
+    for row in results2:
+        count += 1
+        rating = row[5]
+        total_rating = rating + total_rating
+        average_rating = total_rating / count
+    
+    the_average_rating = int(average_rating)
     
     cursor.close()
     db.close()
@@ -686,7 +706,7 @@ def view_applicant():
         average_rating = total_rating / count
     
     the_average_rating = int(average_rating)
-    print(the_average_rating)
+
     cursor.close()
     db.close()
     return render_template('viewApplicant.html', results = results, results2=results2, username=username, rating=rating, the_average_rating=the_average_rating)
