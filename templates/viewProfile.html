@@ -14,57 +14,54 @@
       <h4 class="d-flex justify-content-between align-items-center mb-3">
         <span class="text-muted">Options</span><br>
       </h4>
-      <ul class="list-group mb-3">
-      {%if user_type == "Job Searcher" or user_type == "Admin"%}
-        <li class="list-group-item d-flex lh-condensed">
-          <div>
-            <a href ="/view_taken_jobs"><button class="btn btn-lg btn-primary btn-block" type="submit" value = "">My Taken Jobs</button></a>
-          </div>
-        </li>
-      {%endif%}
-      {%if user_type == "Admin" or user_type == "Job Poster"%}
-      <li class="list-group-item d-flex lh-condensed">
-        <div>
-          <a href ="/view_my_jobs"><button class="btn btn-lg btn-primary btn-block" type="submit" value = "">My Jobs</button></a>
-        </div>
-      </li>
-      {%endif%}
-        <li class="list-group-item d-flex lh-condensed">
-          <div>
-          <a href ="/change_password"><button class="btn btn-lg btn-primary btn-block" type="submit" value = "">Change Password</button></a>
-          </div>
-        </li>
+          <ul class="list-group mb-3">
+          {%if user_type == "Job Searcher" or user_type == "Admin"%}
+            <li class="list-group-item d-flex lh-condensed">
+              <div>
+                <a href ="/view_taken_jobs"><button class="btn btn-lg btn-primary btn-block" type="submit" value = "">My Taken Jobs</button></a>
+              </div>
+            </li>
+          {%endif%}
+          {%if user_type == "Admin" or user_type == "Job Poster"%}
           <li class="list-group-item d-flex lh-condensed">
-          <div>
-          <a href ="/edit_profile"><button class="btn btn-lg btn-primary btn-block" type="submit" value = "">Edit Profile</button></a>
-          </div>
-        </li>
-      </ul>
+            <div>
+              <a href ="/view_my_jobs"><button class="btn btn-lg btn-primary btn-block" type="submit" value = "">My Jobs</button></a>
+            </div>
+          </li>
+          {%endif%}
+            <li class="list-group-item d-flex lh-condensed">
+              <div>
+              <a href ="/change_password"><button class="btn btn-lg btn-primary btn-block" type="submit" value = "">Change Password</button></a>
+              </div>
+            </li>
+              <li class="list-group-item d-flex lh-condensed">
+              <div>
+              <a href ="/edit_profile"><button class="btn btn-lg btn-primary btn-block" type="submit" value = "">Edit Profile</button></a>
+              </div>
+            </li>
+          </ul>
       </div>
   </div>
-</div>
-<!--
-{%for row in results%}
-    <div class="col-md-8 order-md-1">
-      <div class = "a">
-          <h3>User Details</h3><br>
-          <b>Full Name:</b> {{row[1]}} {{row[2]}}<br>
-          <b>Age:</b> {{row[6]}}<br>
-          <b>Description:</b> {{row[5]}}<br>
-          <b>Type:</b> {{row[4]}}<br>
-          <br>
-          <h3>Address</h3>
-          {{row[9]}}, {{row[10]}}, Co. {{row[11]}}<br>
-          <br>
-          <h3>Contact Details</h3>
-          <b>Phone:</b> {{row[7]}}<br>
-          <b>Email:</b> {{row[8]}}<br>
-          <br>
+  {%for row in results%}
+      <div class="col-md-8 order-md-1">
+        <div class = "a">
+            <h3>User Details</h3><br>
+            <b>Full Name:</b> {{row[1]}} {{row[2]}}<br>
+            <b>Age:</b> {{row[6]}}<br>
+            <b>Description:</b> {{row[5]}}<br>
+            <b>Type:</b> {{row[4]}}<br>
+            <br>
+            <h3>Address</h3>
+            {{row[9]}}, {{row[10]}}, Co. {{row[11]}}<br>
+            <br>
+            <h3>Contact Details</h3>
+            <b>Phone:</b> {{row[7]}}<br>
+            <b>Email:</b> {{row[8]}}<br>
+            <br>
+        </div>
       </div>
-    </div>
-</div>
--->
-{%if user_type == "Job Searcher" or user_type == "Admin"%}
+  </div>
+{%if user_type == "Job Poster" or user_type == "Admin"%}
   <div class = "contianer">
     <div class="jumbotron">
       <div class = ""><h3>Feedback</h3></div><br><br>
