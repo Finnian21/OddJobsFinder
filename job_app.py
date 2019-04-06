@@ -675,9 +675,11 @@ def view_applicant():
     cursor.execute(sql)
     results = cursor.fetchall()
 
-    cursor.execute("SELECT * from jobs where jobId = '" + job_id + "' AND takenFlag = '1'")
+    sqlx = "SELECT * from jobs where jobId = '" + job_id + "' AND takenFlag = '1'"
+    cursor.execute(sqlx)
+    print(sql)
     is_taken = cursor.fetchone()
-    print(cursor.fetchone())
+    print(is_taken)
 
     if request.method == 'POST':
         body =  request.form["feedback"]
