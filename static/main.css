@@ -296,6 +296,7 @@ footer p {
   position: relative;
   left: -18px;
   content: "✖";
+  color: red;
 }
 
 .big
