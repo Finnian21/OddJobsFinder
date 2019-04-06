@@ -190,7 +190,7 @@ def delete_job():
         job_id = request.form['delete_button']
         session['job_id'] = job_id
 
-        sql = "DELETE jobs WHERE jobId = '" + job_id + "'"
+        sql = "DELETE from jobs WHERE jobId = '" + job_id + "'"
         cursor.execute(sql)
         db.commit()
         
@@ -200,7 +200,7 @@ def delete_job():
     
     else:
         return redirect("/view_jobs", code = 302)
-        
+
 @app.route('/view_taken_jobs', methods = ['GET', 'POST'])
 def view_taken_jobs():
 
