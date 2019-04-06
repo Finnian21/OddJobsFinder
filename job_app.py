@@ -676,6 +676,7 @@ def view_applicant():
     
     count = 0
     total_rating = 0
+    average_rating = 0
     
     for row in results2:
         count += 1
