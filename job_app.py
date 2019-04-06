@@ -682,11 +682,12 @@ def view_applicant():
         rating = row[5]
         total_rating = rating + total_rating
         average_rating = total_rating / count
-    print(average_rating)
+    
+    the_average_rating = int(average_rating)
 
     cursor.close()
     db.close()
-    return render_template('viewApplicant.html', results = results, results2=results2, username=username, rating=rating, average_rating=average_rating)
+    return render_template('viewApplicant.html', results = results, results2=results2, username=username, rating=rating, the_average_rating=the_average_rating)
 
 @app.after_request
 def add_header(r):
