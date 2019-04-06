@@ -674,6 +674,13 @@ def view_applicant():
     if 'username' not in session:
         return redirect("/", code=302)
     
+    for row in results2:
+        rating = int(row[5])
+    
+    rating_list = []
+    for i in range(0, rating):
+        rating_list.append(i)
+        
     cursor.close()
     db.close()
     return render_template('viewApplicant.html', results = results, results2=results2, username = username)
