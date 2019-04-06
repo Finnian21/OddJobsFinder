@@ -268,11 +268,11 @@ footer p {
   position: relative;
   padding: 20px;
   margin-top: 10px;
-  background-color: #ccc;
+  background-color: rgb(231, 223, 223);
 }
 
 #message p {
-  padding: 10px 35px;
+  padding: 0px;
   font-size: 18px;
 }
 
