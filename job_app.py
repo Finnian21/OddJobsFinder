@@ -267,7 +267,7 @@ def view_my_jobs():
         current_time = datetime.datetime.now()
 
         for row in results2:
-            #session['job_id'] = row[2]
+            session['job_id'] = row[0]
             session['title'] = row[1]
             elapsed_time = current_time - row[7]
 
