@@ -25,7 +25,7 @@
           <b>Phone:</b> {{row[7]}}<br>
           <b>Email:</b> {{row[8]}}<br>
           <br>
-          <b>Average Rating:</b> {%for i in range(0, the_average_rating)%}<span class="fa fa-star checked"></span>{%endfor%}<br>
+          <b>Average Rating:</b> {%for i in range(0, the_average_rating)%}<span class="fa fa-star checked"></span>{%endfor%}<br><br>
           <form method = "POST" action = "/accept_user">
             <button type="submit" class="btn btn-sm btn-outline-secondary" name = "accept_button" value = "{{row[2]}}">Accept</button>
           </form>
