@@ -44,7 +44,7 @@
 {%endfor%}
 <div class = "contianer">
   <div class="jumbotron">
-  {% if user_type == "Admin" or user_type == "Job Searcher"%}
+  {% if user_type == "Admin" or user_type == "Job Searcher" or user_type == "Job Poster"%}
   <form method = "POST" action = "/view_job">
   <b>{{username}}</b>
       <label for="comment">leave a comment below:</label>
