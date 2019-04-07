@@ -531,7 +531,7 @@ def register():
         cursor.execute("SELECT salt from users Where username = '" + username + "'")
         
         if cursor.fetchone() is not None:
-            error = 'Credentials invalid, please enter different credentials.'
+            error = 'Credentials invalid, please enter different username.'
         else:
             cursor.execute("""INSERT INTO users (firstName, lastName, username, userType, description, age, phone, email, street, town, county, password, salt, publicOnApply) 
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
