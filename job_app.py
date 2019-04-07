@@ -292,7 +292,6 @@ def view_applied_users():
         user_type = session['user_type']
         user_id = str(session['user_id'])
         job_id = str(session['job_id'])
-        title = session['title']
 
         sql2 = "SELECT * FROM jobRequests INNER JOIN users ON jobRequests.userID=users.userId WHERE jobRequests.jobId = '" + job_id + "'"
         cursor.execute(sql2)
@@ -302,7 +301,7 @@ def view_applied_users():
         cursor.execute(sqlx)
         is_taken = cursor.fetchone()
 
-        return render_template('viewAppliedUsers.html', results2=results2, is_taken=is_taken, title=title)
+        return render_template('viewAppliedUsers.html', results2=results2, is_taken=is_taken)
     
     else:
         return redirect("/login", code=302)
