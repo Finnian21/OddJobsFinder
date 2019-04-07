@@ -480,7 +480,7 @@ def accept_user():
 
         for row in results4:
             email = row[8]
-            firstname = row[9]
+            firstname = row[1]
 
         msg = Message('Declined', sender = 'oddjobsfinder@gmail.com', recipients = [email])
         msg.html = render_template("/declineEmail.html", title=title, owner_username=owner_username, firstname=firstname)
