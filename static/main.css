@@ -309,4 +309,5 @@ footer p {
   font-size: 24px;
   font-family: inherit;
   margin-left: 12%;
+  white-space: pre;
 }
