@@ -420,7 +420,7 @@ def take_job():
             title = row[1]
         session['title'] = title
 
-        msg = Message('Job Taken', sender = 'oddjobsfinder@gmail.com', recipients = [email])
+        msg = Message('Job Application', sender = 'oddjobsfinder@gmail.com', recipients = [email])
         msg.body = "Hi, your job titled " + title + " has been taken by " + username + "."
         msg.html = render_template("/email.html", title=title, username=username, firstname=firstname, job_id=job_id, user_id=user_id)
         mail.send(msg)
