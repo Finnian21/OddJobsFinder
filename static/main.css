@@ -248,6 +248,11 @@ footer p {
   color: yellow;
 }
 
+.starColour
+{
+  color: #c59b08;
+}
+
 .warning {
   color: orangered;
 }
