@@ -697,7 +697,8 @@ def secure_applicant_id():
 
 @app.route('/view_applicant', methods = ['GET', 'POST'])
 def view_applicant():
-    db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')
+    db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', 
+    passwd='Rathdrum21', db = 'oddjobsfinder$default')
     cursor = db.cursor()
 
     applicant_id = session['applicant_id']
