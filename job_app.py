@@ -33,32 +33,36 @@ def login():
         password = request.form['password']
 
         cursor.execute("SELECT salt from users Where username = '" + username + "'")
-        results = cursor.fetchall()
-
-        for row in results:
-            the_salt = row[0]
-
-        password = hashlib.sha256(password.encode()+ the_salt.encode()).hexdigest()
-
-        sql = "SELECT * from users where username='" + username + "' and password='" + password + "'"
-        cursor.execute(sql)
-
         if cursor.fetchone() is None:
             error = 'Invalid Credentials. Please try again.'
+
         else:
-            session['username'] = username
-            sql2 = "SELECT userId, userType from users where username='" + username + "'"
-            cursor.execute(sql2)
             results = cursor.fetchall()
-            
             for row in results:
-                session['user_type'] = row[1]
-                session['user_id'] = row[0]
+                the_salt = row[0]
 
-            if 'url' in session:
-                return redirect(session['url'], code=302)
+            password = hashlib.sha256(password.encode()+ the_salt.encode()).hexdigest()
 
-            return redirect("/", code=302)
+            sql = "SELECT * from users where username='" + username + "' and password='" + password + "'"
+            cursor.execute(sql)
+
+            if cursor.fetchone() is None:
+                error = 'Invalid Credentials. Please try again.'
+            else:
+                session['username'] = username
+                sql2 = "SELECT userId, userType from users where username='" + username + "'"
+                cursor.execute(sql2)
+                results = cursor.fetchall()
+                
+                for row in results:
+                    session['user_type'] = row[1]
+                    session['user_id'] = row[0]
+
+                if 'url' in session:
+                    return redirect(session['url'], code=302)
+
+                return redirect("/", code=302)
+                
     cursor.close()
     db.close()
     return render_template('login.html', error=error)
