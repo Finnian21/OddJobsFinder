@@ -32,12 +32,14 @@ def login():
         username = request.form['username']
         password = request.form['password']
 
-        cursor.execute("SELECT salt from users Where username = '" + username + "'")
+        cursor.execute("SELECT * from users Where username = '" + username + "'")
         if cursor.fetchone() is None:
             error = 'Invalid Credentials. Please try again.'
 
         else:
+            cursor.execute("SELECT salt from users Where username = '" + username + "'")
             results = cursor.fetchall()
+            
             for row in results:
                 the_salt = row[0]
 
@@ -62,7 +64,7 @@ def login():
                     return redirect(session['url'], code=302)
 
                 return redirect("/", code=302)
-                
+
     cursor.close()
     db.close()
     return render_template('login.html', error=error)
