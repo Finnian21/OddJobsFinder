@@ -9,8 +9,6 @@ import crypt
 app = Flask(__name__)
 mail=Mail(app)
 
-#db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')
-
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USERNAME'] = 'oddjobsfinder@gmail.com'
@@ -20,7 +18,8 @@ mail = Mail(app)
         
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
-    db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')
+    db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', 
+    passwd='Rathdrum21', db = 'oddjobsfinder$default')
     error = None
     cursor = db.cursor()
 
@@ -29,17 +28,16 @@ def login():
 
     if request.method == 'POST':
 
-        username = request.form['username']
-        password = request.form['password']
+        username=request.form['username']
+        password=request.form['password']
 
         cursor.execute("SELECT * from users Where username = '" + username + "'")
         if cursor.fetchone() is None:
             error = 'Invalid Credentials. Please try again.'
-
         else:
             cursor.execute("SELECT salt from users Where username = '" + username + "'")
             results = cursor.fetchall()
-            
+
             for row in results:
                 the_salt = row[0]
 
@@ -71,14 +69,15 @@ def login():
 
 @app.route('/post_job', methods = ['GET', 'POST'])
 def post_job():
-    db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')
+    db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', 
+    user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')
     cursor = db.cursor()
     
     if 'username' not in session:
         return redirect("/login", code=302)
 
-    username = session['username']
-    user_type = session['user_type']
+    username=session['username']
+    user_type=session['user_type']
 
     if user_type == 'Job Searcher':
         return redirect("/", code=302)
@@ -87,27 +86,27 @@ def post_job():
     cursor.execute(sql)
     results = cursor.fetchall()
 
-    user_Id = ''
+    user_Id=''
 
     for row in results:
-        user_Id = row[0]
+        user_Id=row[0]
 
-    the_user_Id = str(user_Id)
+    the_user_Id=str(user_Id)
 
     if request.method == 'POST':
-        title =  request.form["inputTitle"]
-        description =  request.form["description"]
-        duration =  request.form["duration"]
-        pay =  request.form["pay"]
-        catagory =  request.form["catagory"]
-        resources_provided = request.form["resourcesProvided"]
-        resources_required = request.form["resourcesRequired"]
+        title=request.form["inputTitle"]
+        description=request.form["description"]
+        duration=request.form["duration"]
+        pay=request.form["pay"]
+        catagory=request.form["catagory"]
+        resources_provided=request.form["resourcesProvided"]
+        resources_required=request.form["resourcesRequired"]
 
-        phone = ""
-        email = ""
-        street = ""
-        town = ""
-        county = ""
+        phone=""
+        email=""
+        street=""
+        town=""
+        county=""
 
         checked = request.form.getlist('differentContacts')
         checked2 = request.form.getlist('differentAddress')
