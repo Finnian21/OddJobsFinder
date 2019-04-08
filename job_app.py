@@ -112,21 +112,21 @@ def post_job():
         checked2 = request.form.getlist('differentAddress')
 
         if checked == ['on']:
-            phone = request.form["phone"]
-            email = request.form["email"]    
+            phone=request.form["phone"]
+            email=request.form["email"]    
         else:
-            sql1 = "SELECT * FROM users where userId =" + the_user_Id
+            sql1="SELECT * FROM users where userId =" + the_user_Id
             cursor.execute(sql)
             results2 = cursor.fetchall()
             
             for row in results2:
-                phone = row[7]
-                email = row[8]
+                phone=row[7]
+                email=row[8]
 
         if checked2 == ['on']:
-            street = request.form["street"]
-            town = request.form["town"]
-            county = request.form["county"] 
+            street=request.form["street"]
+            town=request.form["town"]
+            county=request.form["county"] 
 
         else:
             sql2 = "SELECT street, town, county FROM users where userId =" + the_user_Id
@@ -134,13 +134,17 @@ def post_job():
             results3 = cursor.fetchall()
             
             for row in results3:
-                street = row[0]
-                town = row[1]
-                county = row[2]
+                street=row[0]
+                town=row[1]
+                county=row[2]
 
-        time_stamp_posted = datetime.datetime.now()
+        time_stamp_posted=datetime.datetime.now()
 
-        cursor.execute("INSERT INTO jobs (title, UserID, description, duration, pay, catagory, timeStampPosted, resourcesProvided, resourcesRequired, email, phone, street, town, county) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (title, the_user_Id, description, duration, pay, catagory, time_stamp_posted, resources_provided, resources_required, email, phone, street, town, county))
+        cursor.execute("""INSERT INTO jobs (title, UserID, description, duration, pay, catagory, timeStampPosted, 
+        resourcesProvided, resourcesRequired, email, phone, street, town, county) 
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)""", 
+        (title, the_user_Id, description, duration, pay, catagory, time_stamp_posted, resources_provided, 
+        resources_required, email, phone, street, town, county))
         db.commit()
 
         cursor.execute("UPDATE users SET JobsPosted = JobsPosted + 1 WHERE userID = %s", (the_user_Id))
@@ -155,7 +159,8 @@ def post_job():
 @app.route('/view_jobs', methods = ['GET', 'POST'])
 def view_jobs():
 
-    db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')
+    db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', 
+    passwd='Rathdrum21', db = 'oddjobsfinder$default')
     cursor = db.cursor()
 
     if 'username' in session:
@@ -188,7 +193,8 @@ def view_jobs():
 @app.route('/delete_job', methods = ['GET', 'POST'])
 def delete_job():
     
-    db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')
+    db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', 
+    passwd='Rathdrum21', db = 'oddjobsfinder$default')
     cursor = db.cursor()
     if request.method == 'POST':
 
