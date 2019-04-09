@@ -267,6 +267,11 @@ footer p {
   float: right;
 }
 
+.border
+{
+  border: 1px #000;
+}
+
 #message {
   display:none;
   color: #000;
