@@ -500,6 +500,37 @@ def accept_user():
     cursor.close()
     db.close()
 
+@app.route('/decline_user', methods = ['GET', 'POST'])
+def decline_user():
+
+    db = pymysql.connect(host='oddjobsfinder.mysql.pythonanywhere-services.com', user='oddjobsfinder', passwd='Rathdrum21', db = 'oddjobsfinder$default')#db = session['db']
+    cursor = db.cursor()
+    applicant_id = request.form['decline_button']
+    job_id = session['job_id']
+    owner_username = session['username']
+
+    sql = "SELECT * FROM users where userId ='" + str(applicant_id) + "'"
+    cursor.execute(sql)
+    results = cursor.fetchall()
+
+    for row in results:
+        email = row[8]
+        firstname = row[1]
+
+    sql2 = "SELECT * FROM jobs where jobId ='" + str(job_id) + "'"
+    cursor.execute(sql2)
+    results2 = cursor.fetchall()
+
+    for row in results2:
+        title = row[1]
+    
+        msg = Message('Declined', sender = 'oddjobsfindernew@gmail.com', recipients = [email])
+        msg.html = render_template("/declineEmail.html", title=title, owner_username=owner_username, firstname=firstname)
+        mail.send(msg)
+
+    cursor.close()
+    db.close()
+
     return redirect("/view_my_jobs", code=302)
 
 @app.route('/log_out', methods = ['GET', 'POST'])
