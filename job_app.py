@@ -479,7 +479,7 @@ def accept_user():
     cursor.execute("UPDATE jobs SET takenFlag = '1', takerId = %s WHERE jobId = %s", (applicant_id, job_id))
     db.commit()
 
-    sql3 = "SELECT * FROM jobRequests where jobId ='" + str(job_id) + "'AND userID != '" + str(applicant_id) + "'"
+    sql3 = "SELECT * FROM jobRequests where jobId ='" + str(job_id) + "'AND userID != '" + str(applicant_id) + "' AND declined != 1"
     cursor.execute(sql3)
     results3 = cursor.fetchall()
 
@@ -523,10 +523,13 @@ def decline_user():
 
     for row in results2:
         title = row[1]
-    
-        msg = Message('Declined', sender = 'oddjobsfindernew@gmail.com', recipients = [email])
-        msg.html = render_template("/declineEmail.html", title=title, owner_username=owner_username, firstname=firstname)
-        mail.send(msg)
+
+    msg = Message('Declined', sender = 'oddjobsfindernew@gmail.com', recipients = [email])
+    msg.html = render_template("/declineEmail.html", title=title, owner_username=owner_username, firstname=firstname)
+    mail.send(msg)
+
+    cursor.execute("UPDATE jobRequests SET declined = '1' WHERE userId = %s AND jobId = %s", (applicant_id, job_id))
+    db.commit()
 
     cursor.close()
     db.close()
