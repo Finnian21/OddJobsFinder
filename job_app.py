@@ -500,6 +500,7 @@ def accept_user():
     cursor.close()
     db.close()
 
+    return redirect("/view_my_jobs", code=302)
 @app.route('/decline_user', methods = ['GET', 'POST'])
 def decline_user():
 
