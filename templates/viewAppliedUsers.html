@@ -14,7 +14,9 @@
     <div class="album py-5 bg-light">
     <h2  class="h2">View Applicants</h2><br>
         {%if is_taken != None%}
-            <p class = "warning a"> You have already accepted an applicant for this job!</p>
+        <div class = "a">
+            <p class = "warning"> You have already accepted an applicant for this job!</p>
+        </div>
         {%endif%}
       <div class="container">
         <div class="row">
