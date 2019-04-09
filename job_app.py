@@ -11,7 +11,7 @@ mail=Mail(app)
 
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
-app.config['MAIL_USERNAME'] = 'oddjobsfinder@gmail.com'
+app.config['MAIL_USERNAME'] = 'oddjobsfindernew@gmail.com'
 app.config['MAIL_PASSWORD'] = 'Rathdrum21'
 app.config['MAIL_USE_TLS'] = True
 mail = Mail(app)
@@ -431,7 +431,7 @@ def take_job():
             title = row[1]
         session['title'] = title
 
-        msg = Message('Job Application', sender = 'oddjobsfinder@gmail.com', recipients = [email])
+        msg = Message('Job Application', sender = 'oddjobsfindernew@gmail.com', recipients = [email])
         msg.body = "Hi, your job titled " + title + " has been taken by " + username + "."
         msg.html = render_template("/email.html", title=title, username=username, firstname=firstname, job_id=job_id, user_id=user_id)
         mail.send(msg)
@@ -472,7 +472,7 @@ def accept_user():
     for row in results2:
         title = row[1]
     
-    msg = Message('Accepted', sender = 'oddjobsfinder@gmail.com', recipients = [email])
+    msg = Message('Accepted', sender = 'oddjobsfindernew@gmail.com', recipients = [email])
     msg.html = render_template("/acceptEmail.html", title=title, owner_username=owner_username, firstname=firstname)
     mail.send(msg)
 
@@ -493,7 +493,7 @@ def accept_user():
             email = row[8]
             firstname = row[1]
 
-        msg = Message('Declined', sender = 'oddjobsfinder@gmail.com', recipients = [email])
+        msg = Message('Declined', sender = 'oddjobsfindernew@gmail.com', recipients = [email])
         msg.html = render_template("/declineEmail.html", title=title, owner_username=owner_username, firstname=firstname)
         mail.send(msg)
 
