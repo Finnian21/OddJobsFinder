@@ -13,11 +13,11 @@
     <br><br>
     <div class="album py-5 bg-light">
     <h2  class="h2">View Applicants</h2><br>
-    {%if is_taken != None%}
-    <p class = "warning"> You have already accepted an applicant for this job!</p>
-    {%endif%}
       <div class="container">
         <div class="row">
+          {%if is_taken != None%}
+            <p class = "warning"> You have already accepted an applicant for this job!</p>
+          {%endif%}
           {%for row in results2%}
           <div class="col-md-4">
             <div class="card mb-4 shadow-sm">
