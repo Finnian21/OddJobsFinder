@@ -43,12 +43,12 @@
 <br>
 {%endfor%}
 <div class = "contianer">
-  <div class="jumbotron">
+  <div class="jumbotron wordWrap">
   {% if user_type == "Admin" or user_type == "Job Searcher" or user_type == "Job Poster"%}
   <form method = "POST" action = "/view_job">
   <b>{{username}}</b>
       <label for="comment">leave a comment below:</label>
-      <textarea rows="4" cols="60" id = "comment" name="comment" type = "text" class = "form-control"></textarea>
+      <textarea rows="4" cols="60" id = "comment" name="comment" type = "text" class = "form-control"  maxLength = "200"></textarea>
       <button class="btn btn-primary my-2" type ="submit">Submit</button>
   </form>
   {%endif%}

@@ -58,7 +58,7 @@
   </div>
 {%if user_type == "Job Searcher" or user_type == "Admin"%}
   <div class = "contianer">
-    <div class="jumbotron">
+    <div class="jumbotron wordWrap">
       <div class = "left"><h3>Feedback</h3></div><br><br>
       {%for row in results2%}
       <b>{{row[9]}}:</b> {{row[3]}} <b>Rating:</b> {%for i in range(0, row[5])%}<span class="fa fa-star checked"></span>{%endfor%}<br>
