@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
-{% include "nav.html" %}
+{%if user_type == "Job Poster" or user_type == "Admin"%}
+  {% include "nav.html" %}
+{%elif user_type == "Job Searcher"%}
+  {% include "nav2.html" or user_type == "Admin"%}
+{%else%}
+{% include "nav3.html" %}
+{%endif%}
 {% block content2 %}
    <h2  class="h2">Edit Profile</h2>
       <form class="form-signin" method = "POST" action = "/edit_profile" class = "form-control"><br>
